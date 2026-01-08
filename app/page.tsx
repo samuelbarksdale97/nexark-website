@@ -4,7 +4,7 @@ import { Problem } from "@/components/sections/Problem";
 import { Solution } from "@/components/sections/Solution";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 // import { RealityEngineering } from "@/components/sections/RealityEngineering"; // Now integrated into HowItWorks
-import { Proof } from "@/components/sections/Proof";
+// import { Proof } from "@/components/sections/Proof"; // Removed per user request
 import { Offerings } from "@/components/sections/Offerings";
 import { FounderStory } from "@/components/sections/FounderStory";
 import { FinalCTA } from "@/components/sections/FinalCTA";
