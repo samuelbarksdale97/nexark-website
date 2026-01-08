@@ -63,8 +63,8 @@ export function HowItWorks() {
           transition={{ duration: 0.8 }}
           className="mb-20 md:mb-32"
         >
-          <span className="inline-flex items-center gap-3 text-sm font-medium tracking-wide text-slate mb-6">
-            <span className="w-8 h-px bg-gradient-to-r from-white/40 to-transparent" />
+          <span className="inline-flex items-center gap-3 text-base font-semibold tracking-wide text-white/90 uppercase mb-6">
+            <span className="w-8 h-px bg-gradient-to-r from-white/60 to-transparent" />
             The Process
           </span>
           <h2 className="font-display text-display-lg font-bold text-white">

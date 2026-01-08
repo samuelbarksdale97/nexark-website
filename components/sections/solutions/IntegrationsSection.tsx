@@ -23,7 +23,7 @@ export function IntegrationsSection() {
             transition={{ duration: 0.8 }}
             className="mb-16 text-center"
           >
-            <span className="inline-flex items-center gap-3 text-sm font-medium tracking-wide text-slate mb-6">
+            <span className="inline-flex items-center gap-3 text-base font-semibold tracking-wide text-white/90 uppercase mb-6">
               <span className="w-8 h-px bg-gradient-to-r from-blue-400 to-transparent" />
               Integrations Done Right
             </span>

@@ -55,10 +55,10 @@ export function Problem() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-20 md:mb-32"
+          className="mb-12 md:mb-16"
         >
-          <span className="inline-flex items-center gap-3 text-sm font-medium tracking-wide text-slate">
-            <span className="w-8 h-px bg-gradient-to-r from-white/40 to-transparent" />
+          <span className="inline-flex items-center gap-3 text-base font-semibold tracking-wide text-white/90 uppercase">
+            <span className="w-8 h-px bg-gradient-to-r from-white/60 to-transparent" />
             The Problem
           </span>
         </motion.div>

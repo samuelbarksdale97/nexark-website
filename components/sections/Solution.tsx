@@ -46,7 +46,7 @@ export function Solution() {
             transition={{ duration: 0.6 }}
             className="mb-6"
           >
-            <span className="inline-flex items-center gap-3 text-sm font-medium tracking-wide text-slate">
+            <span className="inline-flex items-center gap-3 text-base font-semibold tracking-wide text-white/90 uppercase">
               <span className="w-8 h-px bg-gradient-to-r from-indigo to-transparent" />
               What We Build
             </span>
