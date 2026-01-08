@@ -8,15 +8,15 @@ import { Check } from "lucide-react";
 
 const useCases = [
   {
-    eyebrow: "Revenue Operations",
-    title: "Close deals faster",
-    headline: "Turn chaos into predictable growth",
-    subhead: "Custom CRM + Pipeline Automation + Revenue Intelligence",
+    eyebrow: "Operations Excellence",
+    title: "Run like a machine",
+    headline: "Transform chaos into seamless operations",
+    subhead: "Custom CRM + Sales Automation + Team Coordination",
     features: [
       "Sales pipeline that updates itself from email, calendar, and conversations",
-      "Automated follow-ups that feel personal, not robotic",
-      "Revenue forecasting dashboard showing exactly where you'll land",
-      "Deal alerts when prospects go quiet or opportunities heat up",
+      "Automated follow-ups that keep deals moving forward",
+      "Real-time dashboards showing exactly where every deal stands",
+      "Smart alerts when action is needed or opportunities arise",
       "Integration with your existing tools (Gmail, Slack, QuickBooks)",
     ],
     cta: "See How It Works",
@@ -152,8 +152,11 @@ export function Offerings() {
           <h2 className="font-display text-display-xl font-bold text-white mb-4">
             The Next Arc for Your Business
           </h2>
-          <p className="text-xl text-slate max-w-2xl mx-auto">
+          <p className="text-xl text-slate max-w-2xl mx-auto mb-3">
             Real use cases. Real outcomes. Built with Reality Engineering.
+          </p>
+          <p className="text-base text-slate/60 max-w-xl mx-auto italic">
+            These are just a few examples. We build custom technology for any business challenge—from workflow automation to data infrastructure to customer experiences.
           </p>
         </motion.div>
 
@@ -170,7 +173,7 @@ export function Offerings() {
               <TiltCard color={tier.color}>
                 {/* Badge for most popular */}
                 {tier.badge && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20">
                     <span className="inline-block px-4 py-1 rounded-full bg-emerald text-navy text-xs font-bold tracking-wider">
                       {tier.badge}
                     </span>
@@ -178,7 +181,7 @@ export function Offerings() {
                 )}
 
                 {/* Eyebrow */}
-                <span className={`${tier.color === "indigo" ? "text-indigo" : tier.color === "emerald" ? "text-emerald" : "text-purple"} text-sm font-medium tracking-wider`}>
+                <span className={`${tier.color === "indigo" ? "text-indigo" : tier.color === "emerald" ? "text-emerald" : "text-purple"} text-sm font-medium tracking-wider ${tier.badge ? "mt-3 inline-block" : ""}`}>
                   {tier.eyebrow}
                 </span>
 
