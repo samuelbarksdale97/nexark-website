@@ -168,55 +168,59 @@ export function RealityEngineering() {
           </p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="max-w-5xl mx-auto space-y-12 md:space-y-16">
+        {/* Steps - Card Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 60 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.7 + index * 0.1 }}
-              className="relative"
+              className="relative group"
             >
-              <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-start">
-                {/* Number */}
-                <div className="md:col-span-2">
-                  <span className="font-display text-6xl md:text-7xl font-bold text-white/5">
-                    {step.number}
-                  </span>
-                </div>
+              <div className="relative h-full p-8 lg:p-10 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent overflow-hidden transition-all duration-300">
+                {/* Giant background number */}
+                <span className="absolute -right-4 -top-8 font-display text-[180px] font-bold text-white/[0.02] select-none leading-none">
+                  {step.number}
+                </span>
 
                 {/* Content */}
-                <div className="md:col-span-10">
-                  <div className="mb-6">
-                    <h4 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
-                      {step.title}
-                    </h4>
-                    <p className="text-lg text-slate/80 mb-4">
-                      {step.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {step.bullets.map((bullet, i) => (
-                        <li key={i} className="flex items-start gap-3 text-slate/70">
-                          <span className="text-indigo mt-1.5">•</span>
-                          <span className="text-base">{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="relative z-10">
+                  {/* Number label */}
+                  <span className="text-sm font-medium tracking-wider text-indigo mb-4 block">
+                    {step.number}
+                  </span>
+
+                  {/* Title */}
+                  <h3 className="font-display text-3xl lg:text-4xl font-bold text-white mb-3">
+                    {step.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-lg text-slate/80 mb-6">
+                    {step.description}
+                  </p>
+
+                  {/* Bullets */}
+                  <ul className="space-y-2 mb-6">
+                    {step.bullets.map((bullet, i) => (
+                      <li key={i} className="flex items-start gap-3 text-slate/70">
+                        <span className="text-indigo mt-1.5">•</span>
+                        <span className="text-sm">{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
 
                   {/* Why this matters */}
-                  <div className="p-4 rounded-lg bg-navy-light border border-white/5">
-                    <p className="text-sm font-semibold text-indigo mb-2">Why this matters:</p>
+                  <div className="p-4 rounded-lg bg-navy-light/50 border border-white/5">
+                    <p className="text-xs font-semibold text-indigo mb-2">Why this matters:</p>
                     <p className="text-sm text-slate/80 leading-relaxed">{step.why}</p>
                   </div>
                 </div>
-              </div>
 
-              {/* Connector line (except last) */}
-              {index < steps.length - 1 && (
-                <div className="absolute left-[7%] md:left-[8.5%] top-full h-12 w-px bg-gradient-to-b from-white/10 to-transparent" />
-              )}
+                {/* Animated bottom line on hover */}
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-indigo via-purple to-transparent group-hover:w-full transition-all duration-500 ease-out" />
+              </div>
             </motion.div>
           ))}
         </div>

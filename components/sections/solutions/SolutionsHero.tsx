@@ -38,16 +38,16 @@ export function SolutionsHero() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-display text-display-xl font-bold text-white mb-6"
           >
-            As Simple or As Complex
+            Success isn&apos;t an accident;
           </motion.h1>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-display-xl font-bold text-white/40 mb-10"
+            className="font-display text-display-xl font-bold text-gradient mb-10"
           >
-            As You Need
+            it&apos;s engineered.
           </motion.h1>
 
           {/* Subheadline */}
@@ -55,7 +55,16 @@ export function SolutionsHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-xl md:text-2xl text-slate leading-relaxed max-w-3xl mx-auto mb-12"
+            className="text-xl md:text-2xl text-white/60 leading-relaxed max-w-3xl mx-auto mb-4"
+          >
+            This is where you engineer it.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="text-lg text-slate leading-relaxed max-w-3xl mx-auto mb-12"
           >
             We build custom technology for any business challenge. From a simple website to complex agentic workflows. From workflow automation to data infrastructure to customer experiences.
           </motion.p>
