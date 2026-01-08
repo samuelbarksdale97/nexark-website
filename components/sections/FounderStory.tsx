@@ -20,35 +20,6 @@ export function FounderStory() {
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
       <div className="container mx-auto px-6 lg:px-12">
-        {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-16 md:mb-24"
-        >
-          <span className="inline-flex items-center gap-3 text-sm font-medium tracking-wide text-slate">
-            <span className="w-8 h-px bg-gradient-to-r from-gold to-transparent" />
-            The Proof
-          </span>
-        </motion.div>
-
-        {/* Pull quote - massive stat */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.1 }}
-          className="max-w-5xl mb-20 md:mb-32"
-        >
-          <div className="font-display text-display-xl font-bold leading-none">
-            <span className="text-gradient">266 scripts.</span>
-            <br />
-            <span className="text-white/60">One business.</span>
-            <br />
-            <span className="text-white/60">All custom-built.</span>
-          </div>
-        </motion.div>
-
         {/* Story content - asymmetric layout */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Story text */}
