@@ -65,7 +65,7 @@ export function FinalCTA() {
                 ✓ Satisfaction guaranteed • We&apos;ll make it right or refund you
               </p>
               <p className="text-lg text-white/80">
-                ✓ BUILD Excellence Standard • Secure, scalable, production-grade
+                ✓ Secure, scalable, production-ready
               </p>
             </motion.div>
 

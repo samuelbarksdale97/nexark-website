@@ -43,7 +43,7 @@ const steps = [
     title: "Build Technology",
     description: "Deploy the custom software that closes the gap",
     bullets: [
-      "Built to BUILD Excellence Standard (secure, scalable, production-grade)",
+      "Secure, scalable, production-ready",
       "AI-native development = 30-50% faster delivery",
       "Not just 'a tool'—the technology that makes your dream feasible",
     ],

@@ -7,9 +7,8 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { href: "/#methodology", label: "Methodology" },
-  { href: "/offerings/personal", label: "myNexark" },
-  { href: "/offerings/business", label: "For Business" },
+  { href: "/methodology", label: "Methodology" },
+  { href: "/solutions", label: "Solutions" },
 ];
 
 export function Header() {
