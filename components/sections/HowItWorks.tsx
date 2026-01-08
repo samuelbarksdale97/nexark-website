@@ -95,8 +95,6 @@ export function HowItWorks() {
                 relative h-full p-8 lg:p-10 rounded-2xl border overflow-hidden
                 ${phase.aesthetic === "wireframe"
                   ? "border-white/10 bg-gradient-to-br from-white/5 to-transparent"
-                  : phase.aesthetic === "terminal"
-                  ? "border-white/20 bg-gradient-to-br from-white/10 to-transparent"
                   : "border-purple/20 bg-gradient-to-br from-purple/5 to-transparent"
                 }
               `}>
@@ -116,14 +114,6 @@ export function HowItWorks() {
                       </defs>
                       <rect width="100%" height="100%" fill="url(#blueprint-grid)" />
                     </svg>
-                  </div>
-                )}
-
-                {phase.aesthetic === "terminal" && (
-                  <div className="absolute top-4 right-4 flex gap-1.5 opacity-30">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
                   </div>
                 )}
 
@@ -163,14 +153,10 @@ export function HowItWorks() {
                   <div className="space-y-3">
                     {phase.bullets.map((bullet, i) => (
                       <div key={i} className="flex items-center gap-3">
-                        {phase.aesthetic === "terminal" ? (
-                          <span className="text-white font-mono text-sm">$</span>
-                        ) : (
-                          <span className={`w-1.5 h-1.5 rounded-full ${
-                            phase.color === "slate" ? "bg-white/60" : phase.color === "white" ? "bg-white" : "bg-purple"
-                          }`} />
-                        )}
-                        <span className={`text-sm ${phase.aesthetic === "terminal" ? "font-mono text-white/70" : "text-white/80"}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${
+                          phase.color === "slate" ? "bg-white/60" : phase.color === "white" ? "bg-white" : "bg-purple"
+                        }`} />
+                        <span className="text-sm text-white/80">
                           {bullet}
                         </span>
                       </div>
