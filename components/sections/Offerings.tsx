@@ -6,53 +6,53 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 
-const pricingTiers = [
+const useCases = [
   {
-    eyebrow: "Single System",
-    title: "$5K - $15K",
-    headline: "One focused tool or integration",
-    subhead: "30-day delivery",
+    eyebrow: "Revenue Operations",
+    title: "Close deals faster",
+    headline: "Turn chaos into predictable growth",
+    subhead: "Custom CRM + Pipeline Automation + Revenue Intelligence",
     features: [
-      "Custom CRM, dashboard, or agentic workflow",
-      "AI-powered features included",
-      "Built to BUILD Excellence Standard",
-      "30 days post-launch support",
-      "Full source code ownership",
+      "Sales pipeline that updates itself from email, calendar, and conversations",
+      "Automated follow-ups that feel personal, not robotic",
+      "Revenue forecasting dashboard showing exactly where you'll land",
+      "Deal alerts when prospects go quiet or opportunities heat up",
+      "Integration with your existing tools (Gmail, Slack, QuickBooks)",
     ],
-    cta: "Start Your Project",
+    cta: "See How It Works",
     href: "#apply",
     color: "indigo" as const,
   },
   {
-    eyebrow: "Integrated Platform",
-    title: "$25K - $50K",
-    headline: "Multiple systems working together",
-    subhead: "60-90 day delivery",
+    eyebrow: "Client Delivery",
+    title: "Deliver with confidence",
+    headline: "Professional systems that wow clients",
+    subhead: "Client Portal + Project Management + Automated Workflows",
     features: [
-      "Complete sales ops or project management platform",
-      "Client portal + CRM + billing integration",
-      "Agentic workflows throughout",
-      "90 days post-launch support",
-      "Performance guarantee included",
+      "Branded client portal where everything lives in one place",
+      "Project dashboards that show progress in real-time",
+      "Automated status updates, invoices, and contract renewals",
+      "File sharing and approval workflows that actually get used",
+      "Integration with Stripe, DocuSign, and your project tools",
     ],
-    cta: "Start Your Project",
+    cta: "See How It Works",
     href: "#apply",
     color: "emerald" as const,
     badge: "MOST POPULAR",
   },
   {
-    eyebrow: "Full Tech Stack",
-    title: "$100K+",
-    headline: "Complete business operations platform",
-    subhead: "6-12 month partnership",
+    eyebrow: "Business Intelligence",
+    title: "Make data-driven decisions",
+    headline: "See the full picture of your business",
+    subhead: "Custom Dashboards + Analytics + Reporting Automation",
     features: [
-      "Everything automated and connected",
-      "Continuous sprint cycles",
-      "Embedded technology partnership",
-      "Quarterly strategic planning",
-      "Priority feature development",
+      "Executive dashboard with all your KPIs in one place",
+      "Automated reports that write themselves every week",
+      "Real-time alerts when metrics move (good or bad)",
+      "Data pulled from everywhere: sales, marketing, operations, finance",
+      "Beautiful visualizations your team will actually look at",
     ],
-    cta: "Schedule Consultation",
+    cta: "See How It Works",
     href: "#apply",
     color: "purple" as const,
   },
@@ -147,19 +147,19 @@ export function Offerings() {
         >
           <span className="inline-flex items-center gap-3 text-sm font-medium tracking-wide text-slate mb-6">
             <span className="w-8 h-px bg-gradient-to-r from-purple to-transparent" />
-            Transparent Pricing
+            What We Build
           </span>
           <h2 className="font-display text-display-xl font-bold text-white mb-4">
             The Next Arc for Your Business
           </h2>
           <p className="text-xl text-slate max-w-2xl mx-auto">
-            Three tiers. Fixed-price proposals. Satisfaction guaranteed.
+            Real use cases. Real outcomes. Built with Reality Engineering.
           </p>
         </motion.div>
 
-        {/* Three-column pricing grid */}
+        {/* Three-column use case grid */}
         <div className="grid lg:grid-cols-3 gap-8 items-start" style={{ perspective: "1000px" }}>
-          {pricingTiers.map((tier, index) => (
+          {useCases.map((tier, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
