@@ -155,7 +155,7 @@ export function Offerings() {
           <p className="text-xl text-slate max-w-2xl mx-auto mb-3">
             Real use cases. Real outcomes. Built with Reality Engineering.
           </p>
-          <p className="text-base text-slate/60 max-w-xl mx-auto italic">
+          <p className="text-lg text-white/80 max-w-2xl mx-auto font-medium">
             These are just a few examples. We build custom technology for any business challenge—from workflow automation to data infrastructure to customer experiences.
           </p>
         </motion.div>
