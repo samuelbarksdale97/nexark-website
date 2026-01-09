@@ -11,7 +11,7 @@ const painPoints = [
     detail: (
       <>
         Generic SaaS makes you bend your business to their limitations.{" "}
-        <span className="text-white font-medium">You need software that fits YOU.</span>
+        <span className="text-purple-400 font-medium">You need software that fits YOU.</span>
       </>
     ),
     align: "left" as const,
@@ -22,7 +22,7 @@ const painPoints = [
     detail: (
       <>
         Hours spent on tasks that should take minutes. Missed opportunities because your systems can't keep up. Revenue left on the table.{" "}
-        <span className="text-white font-medium">Custom automation would eliminate the bottleneck.</span>
+        <span className="text-purple-400 font-medium">Custom automation would eliminate the bottleneck.</span>
       </>
     ),
     align: "right" as const,
@@ -33,7 +33,7 @@ const painPoints = [
     detail: (
       <>
         Zapier integrations that break. Manual workarounds filling gaps.{" "}
-        <span className="text-white font-medium">One custom solution would replace it all.</span>
+        <span className="text-purple-400 font-medium">One custom solution would replace it all.</span>
       </>
     ),
     align: "left" as const,
