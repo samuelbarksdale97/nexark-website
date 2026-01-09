@@ -59,7 +59,7 @@ export function Proof() {
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <span className="inline-flex items-center gap-3 text-sm font-medium tracking-wide text-slate">
+          <span className="inline-flex items-center gap-3 text-sm font-medium tracking-wide text-slate-200">
             <span className="w-8 h-px bg-gradient-to-r from-emerald to-transparent" />
             The Proof
           </span>
@@ -88,7 +88,7 @@ export function Proof() {
                     suffix={stat.suffix}
                   />
                 </div>
-                <p className="text-sm text-slate">{stat.label}</p>
+                <p className="text-sm text-slate-200">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -129,7 +129,7 @@ export function Proof() {
               <p className="font-display font-semibold text-white">
                 {featuredTestimonial.author}
               </p>
-              <p className="text-slate text-sm">{featuredTestimonial.role}</p>
+              <p className="text-slate-200 text-sm">{featuredTestimonial.role}</p>
             </div>
           </div>
         </motion.div>

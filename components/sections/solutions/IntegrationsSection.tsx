@@ -33,7 +33,7 @@ export function IntegrationsSection() {
             <h2 className="font-display text-display-lg font-bold text-white/40 mb-8">
               So You Don't Have To
             </h2>
-            <p className="text-xl text-slate leading-relaxed">
+            <p className="text-xl text-slate-200 leading-relaxed">
               Integrations are where most projects fail. API changes, vendor communication, technical debt. We handle all of it.
             </p>
           </motion.div>
@@ -52,7 +52,7 @@ export function IntegrationsSection() {
                   <h3 className="font-display text-xl font-bold text-white mb-2">
                     We Talk to Their Teams
                   </h3>
-                  <p className="text-slate leading-relaxed">
+                  <p className="text-slate-200 leading-relaxed">
                     Need to integrate with Stripe, Salesforce, QuickBooks, or a custom vendor API? We'll coordinate with their technical teams, navigate their documentation, and handle the implementation. You stay focused on your business.
                   </p>
                 </div>
@@ -66,7 +66,7 @@ export function IntegrationsSection() {
                   <h3 className="font-display text-xl font-bold text-white mb-2">
                     Transparent Communication
                   </h3>
-                  <p className="text-slate leading-relaxed">
+                  <p className="text-slate-200 leading-relaxed">
                     If there are issues with a vendor—rate limits, deprecated APIs, missing features—we communicate that clearly. We'll propose alternatives, workarounds, or recommend different solutions if needed.
                   </p>
                 </div>
@@ -80,7 +80,7 @@ export function IntegrationsSection() {
                   <h3 className="font-display text-xl font-bold text-white mb-2">
                     Future-Proof Architecture
                   </h3>
-                  <p className="text-slate leading-relaxed">
+                  <p className="text-slate-200 leading-relaxed">
                     We build integrations that can adapt when vendors change their APIs. Versioning, fallbacks, and monitoring ensure your systems don't break when external services update.
                   </p>
                 </div>
@@ -116,7 +116,7 @@ export function IntegrationsSection() {
                 </div>
               ))}
             </div>
-            <p className="text-center text-slate/60 mt-6 text-sm">
+            <p className="text-center text-slate-200/75 mt-6 text-sm">
               Plus hundreds of other APIs and custom vendor integrations
             </p>
           </motion.div>
@@ -134,7 +134,7 @@ export function IntegrationsSection() {
                 <h3 className="font-display text-xl font-bold text-white mb-2">
                   Why This Matters
                 </h3>
-                <p className="text-slate leading-relaxed mb-4">
+                <p className="text-slate-200 leading-relaxed mb-4">
                   Most agencies build the integration and disappear. When the API changes in 6 months, you're stuck figuring it out alone. When you need to add another service, you're back at square one.
                 </p>
                 <p className="text-white font-medium">

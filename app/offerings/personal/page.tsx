@@ -137,7 +137,7 @@ export default function MyNexarkPage() {
             NEXARK
           </Link>
           <div className="flex items-center gap-6">
-            <Link href="/offerings/business" className="text-sm text-slate hover:text-white transition-colors">
+            <Link href="/offerings/business" className="text-sm text-slate-200 hover:text-white transition-colors">
               For Business
             </Link>
             <Button href="/apply" size="sm">
@@ -183,7 +183,7 @@ export default function MyNexarkPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-xl md:text-2xl text-slate max-w-2xl mb-8"
+              className="text-xl md:text-2xl text-slate-200 max-w-2xl mb-8"
             >
               From foggy to focused in 24 hours. Complete life clarity, a reverse-engineered roadmap, and custom AI tools built for YOUR specific journey.
             </motion.p>
@@ -272,11 +272,11 @@ export default function MyNexarkPage() {
                     <div className="flex-1 pb-8">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="font-display text-xl font-bold text-white">{step.title}</h3>
-                        <span className="text-xs text-slate bg-white/5 px-2 py-1 rounded-full">
+                        <span className="text-xs text-slate-200 bg-white/5 px-2 py-1 rounded-full">
                           {step.duration}
                         </span>
                       </div>
-                      <p className="text-slate leading-relaxed">{step.description}</p>
+                      <p className="text-slate-200 leading-relaxed">{step.description}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -301,7 +301,7 @@ export default function MyNexarkPage() {
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
               The Deliverables
             </h2>
-            <p className="text-xl text-slate max-w-2xl mx-auto">
+            <p className="text-xl text-slate-200 max-w-2xl mx-auto">
               Not just insights. Tangible assets you own forever.
             </p>
           </motion.div>
@@ -319,7 +319,7 @@ export default function MyNexarkPage() {
                     <item.icon className="w-5 h-5 text-purple" />
                   </div>
                   <h3 className="font-display text-lg font-bold mb-2">{item.title}</h3>
-                  <p className="text-sm text-slate leading-relaxed">{item.description}</p>
+                  <p className="text-sm text-slate-200 leading-relaxed">{item.description}</p>
                 </GlowingCard>
               </motion.div>
             ))}
@@ -365,7 +365,7 @@ export default function MyNexarkPage() {
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
               Investment
             </h2>
-            <p className="text-slate mb-12">
+            <p className="text-slate-200 mb-12">
               Three tiers. Same methodology. Different depth.
             </p>
 
@@ -374,8 +374,8 @@ export default function MyNexarkPage() {
               <div className="p-6 rounded-2xl bg-navy border border-white/5">
                 <h3 className="font-display text-lg font-bold mb-2">Reality Blueprint</h3>
                 <p className="text-3xl font-display font-bold mb-4">$2,500</p>
-                <p className="text-sm text-slate mb-6">Dream Dossier + Roadmap</p>
-                <ul className="text-sm text-slate space-y-2 text-left mb-6">
+                <p className="text-sm text-slate-200 mb-6">Dream Dossier + Roadmap</p>
+                <ul className="text-sm text-slate-200 space-y-2 text-left mb-6">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-purple mt-0.5 flex-shrink-0" />
                     2-hour deep dive session
@@ -401,8 +401,8 @@ export default function MyNexarkPage() {
                 </div>
                 <h3 className="font-display text-lg font-bold mb-2">Reality Engineering</h3>
                 <p className="text-3xl font-display font-bold mb-4">$5,000</p>
-                <p className="text-sm text-slate mb-6">Full transformation + AI tools</p>
-                <ul className="text-sm text-slate space-y-2 text-left mb-6">
+                <p className="text-sm text-slate-200 mb-6">Full transformation + AI tools</p>
+                <ul className="text-sm text-slate-200 space-y-2 text-left mb-6">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-purple mt-0.5 flex-shrink-0" />
                     Everything in Blueprint
@@ -433,8 +433,8 @@ export default function MyNexarkPage() {
               <div className="p-6 rounded-2xl bg-navy border border-white/5">
                 <h3 className="font-display text-lg font-bold mb-2">Reality Engineering Elite</h3>
                 <p className="text-3xl font-display font-bold mb-4">$10,000</p>
-                <p className="text-sm text-slate mb-6">VIP + ongoing partnership</p>
-                <ul className="text-sm text-slate space-y-2 text-left mb-6">
+                <p className="text-sm text-slate-200 mb-6">VIP + ongoing partnership</p>
+                <ul className="text-sm text-slate-200 space-y-2 text-left mb-6">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-purple mt-0.5 flex-shrink-0" />
                     Everything in Engineering
@@ -475,7 +475,7 @@ export default function MyNexarkPage() {
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
             Ready to meet your next self?
           </h2>
-          <p className="text-xl text-slate mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
             Limited spots. Application required. We only work with those ready to transform.
           </p>
           <Button href="/apply" size="lg" showArrow>

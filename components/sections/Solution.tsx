@@ -65,7 +65,7 @@ export function Solution() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl md:text-2xl text-slate max-w-2xl mb-16 md:mb-24"
+            className="text-xl md:text-2xl text-slate-200 max-w-2xl mb-16 md:mb-24"
           >
             Bespoke technology built through Reality Engineering methodology. Secure, scalable, production-grade.
           </motion.p>

@@ -32,7 +32,7 @@ export function Footer() {
               <p className="font-display text-lg text-white/90 mb-3 leading-relaxed">
                 Engineering Reality, Together.
               </p>
-              <p className="text-slate text-sm max-w-sm leading-relaxed">
+              <p className="text-slate-200 text-sm max-w-sm leading-relaxed">
                 The technology that takes your business to its next arc.
               </p>
             </div>
@@ -47,7 +47,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-slate hover:text-white transition-colors"
+                      className="text-slate-200 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -66,7 +66,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-slate hover:text-white transition-colors"
+                      className="text-slate-200 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -88,14 +88,14 @@ export function Footer() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate hover:text-white transition-colors"
+                        className="text-slate-200 hover:text-white transition-colors"
                       >
                         {link.label}
                       </a>
                     ) : (
                       <Link
                         href={link.href}
-                        className="text-slate hover:text-white transition-colors"
+                        className="text-slate-200 hover:text-white transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -109,10 +109,10 @@ export function Footer() {
           {/* Divider */}
           <div className="border-t border-white/10 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-slate text-sm">
+              <p className="text-slate-200 text-sm">
                 &copy; {new Date().getFullYear()} Nexark. All rights reserved.
               </p>
-              <p className="text-slate/60 text-sm font-display italic">
+              <p className="text-slate-200/75 text-sm font-display italic">
                 &ldquo;Success is not an accident—it&apos;s engineered.&rdquo;
               </p>
             </div>

@@ -108,7 +108,7 @@ export function RealityEngineering() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl md:text-2xl text-slate leading-relaxed mb-8"
+            className="text-xl md:text-2xl text-slate-200 leading-relaxed mb-8"
           >
             We help you remember what you originally dreamed—and make it feasible now.
           </motion.p>
@@ -132,10 +132,10 @@ export function RealityEngineering() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="max-w-3xl mx-auto mb-20 md:mb-32"
         >
-          <p className="text-lg md:text-xl text-slate/80 leading-relaxed mb-6">
+          <p className="text-lg md:text-xl text-slate-200/90 leading-relaxed mb-6">
             When you started your business, you had a vision. A dream of what this could become.
           </p>
-          <p className="text-lg md:text-xl text-slate/80 leading-relaxed mb-6">
+          <p className="text-lg md:text-xl text-slate-200/90 leading-relaxed mb-6">
             But somewhere along the way—between dealing with customers, managing team, fixing urgent issues—you forgot. You got stuck in day-to-day operations. The dream became &quot;nice to have someday.&quot;
           </p>
           <div className="grid md:grid-cols-2 gap-8 mt-12">
@@ -160,10 +160,10 @@ export function RealityEngineering() {
           <h3 className="font-display text-display-lg font-bold text-gradient mb-6">
             The 5-Step Reality Engineering Process
           </h3>
-          <p className="text-xl text-slate">
+          <p className="text-xl text-slate-200">
             This is how we build. Internally for ourselves. And externally for you.
           </p>
-          <p className="text-lg text-slate/70 mt-4">
+          <p className="text-lg text-slate-200/85 mt-4">
             Every project—no matter the size—runs through this lens. It&apos;s not just about solving today&apos;s pain. It&apos;s about reconnecting you to what you actually wanted and making it feasible RIGHT NOW.
           </p>
         </motion.div>
@@ -197,14 +197,14 @@ export function RealityEngineering() {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-lg text-slate/80 mb-6">
+                  <p className="text-lg text-slate-200/90 mb-6">
                     {step.description}
                   </p>
 
                   {/* Bullets */}
                   <ul className="space-y-2 mb-6">
                     {step.bullets.map((bullet, i) => (
-                      <li key={i} className="flex items-start gap-3 text-slate/70">
+                      <li key={i} className="flex items-start gap-3 text-slate-200/85">
                         <span className="text-indigo mt-1.5">•</span>
                         <span className="text-sm">{bullet}</span>
                       </li>
@@ -214,7 +214,7 @@ export function RealityEngineering() {
                   {/* Why this matters */}
                   <div className="p-4 rounded-lg bg-navy-light/50 border border-white/5">
                     <p className="text-xs font-semibold text-indigo mb-2">Why this matters:</p>
-                    <p className="text-sm text-slate/80 leading-relaxed">{step.why}</p>
+                    <p className="text-sm text-slate-200/90 leading-relaxed">{step.why}</p>
                   </div>
                 </div>
 
@@ -236,22 +236,22 @@ export function RealityEngineering() {
             {/* Traditional */}
             <div className="p-8 rounded-2xl border border-white/5 bg-navy-light">
               <p className="font-display text-xl font-bold text-white/60 mb-6">Traditional dev shops:</p>
-              <p className="text-slate/70 mb-4">&quot;Tell us what to build&quot; → They build it → They leave</p>
-              <p className="text-sm text-slate/50">You get a tool. It might work. But did it move you toward the dream? Who knows.</p>
+              <p className="text-slate-200/85 mb-4">&quot;Tell us what to build&quot; → They build it → They leave</p>
+              <p className="text-sm text-slate-200/70">You get a tool. It might work. But did it move you toward the dream? Who knows.</p>
             </div>
 
             {/* Nexark */}
             <div className="p-8 rounded-2xl border border-indigo/20 bg-navy-light">
               <p className="font-display text-xl font-bold text-indigo mb-6">Nexark with Reality Engineering:</p>
               <p className="text-white mb-4">&quot;Let&apos;s remember your original vision&quot; → We reverse-engineer the path → We build what closes the gap → We stay until you&apos;re there</p>
-              <p className="text-sm text-slate/70">You get technology + a roadmap to the dream you forgot you had.</p>
+              <p className="text-sm text-slate-200/85">You get technology + a roadmap to the dream you forgot you had.</p>
             </div>
           </div>
 
           {/* Real Example */}
           <div className="mt-12 p-8 rounded-2xl border border-purple/20 bg-navy-light">
             <p className="text-sm font-semibold text-purple mb-3">Real Example</p>
-            <p className="text-base text-slate/80 leading-relaxed">
+            <p className="text-base text-slate-200/90 leading-relaxed">
               When we built Park at 14th&apos;s CRM, it wasn&apos;t just &quot;membership management.&quot; It was reconnecting the founder to his vision of a luxury club experience. Facial recognition wasn&apos;t a feature request—it was reverse-engineered from the dream of &quot;members feel like VIPs from the moment they walk in.&quot;
             </p>
             <p className="font-display text-lg font-bold text-gradient mt-4">
@@ -270,16 +270,16 @@ export function RealityEngineering() {
           <p className="font-display text-display-md font-bold text-white mb-8">
             Because we can compress time
           </p>
-          <p className="text-xl md:text-2xl text-slate mb-6">
+          <p className="text-xl md:text-2xl text-slate-200 mb-6">
             (AI-native = 30-50% faster)
           </p>
           <p className="font-display text-display-md font-bold text-gradient mb-12">
             What felt &quot;5 years away&quot; is now &quot;6 months away.&quot;
           </p>
-          <p className="text-xl text-slate/70">
+          <p className="text-xl text-slate-200/85">
             But only if we know what we&apos;re building toward.
           </p>
-          <p className="text-lg text-slate/50 mt-8">
+          <p className="text-lg text-slate-200/70 mt-8">
             That&apos;s why every project—even a simple CRM—starts with the dream, not the task list.
           </p>
         </motion.div>

@@ -84,7 +84,7 @@ export function Problem() {
               </div>
 
               {/* Detail - smaller, muted */}
-              <div className="mt-6 md:mt-8 text-lg md:text-xl text-slate max-w-xl leading-relaxed">
+              <div className="mt-6 md:mt-8 text-lg md:text-xl text-slate-200 max-w-xl leading-relaxed">
                 {point.detail}
               </div>
 
@@ -123,7 +123,7 @@ export function Problem() {
             transition={{ duration: 0.8, delay: 1.4 }}
             className="mt-12 md:mt-16"
           >
-            <p className="text-xl md:text-2xl text-slate mb-6">
+            <p className="text-xl md:text-2xl text-slate-200 mb-6">
               AI-native development. 30-day delivery. Satisfaction guaranteed.
             </p>
             <p className="font-display text-display-md font-bold text-gradient">

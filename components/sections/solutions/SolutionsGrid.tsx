@@ -140,7 +140,7 @@ export function SolutionsGrid() {
           <h2 className="font-display text-display-lg font-bold text-white mb-4">
             Solution Categories
           </h2>
-          <p className="text-xl text-slate max-w-2xl mx-auto">
+          <p className="text-xl text-slate-200 max-w-2xl mx-auto">
             These are just some examples. If you can describe it, we can build it.
           </p>
         </motion.div>
@@ -204,7 +204,7 @@ export function SolutionsGrid() {
                   </p>
 
                   {/* Description */}
-                  <p className="text-slate mb-6 leading-relaxed">
+                  <p className="text-slate-200 mb-6 leading-relaxed">
                     {solution.description}
                   </p>
 
@@ -243,7 +243,7 @@ export function SolutionsGrid() {
           <p className="text-xl font-display font-bold text-white mb-4">
             Don't see what you need?
           </p>
-          <p className="text-slate leading-relaxed">
+          <p className="text-slate-200 leading-relaxed">
             These categories are just examples. We've built everything from facial recognition systems for luxury clubs to document automation for law firms. If you can describe the problem, we can engineer the solution.
           </p>
         </motion.div>

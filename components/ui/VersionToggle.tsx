@@ -43,7 +43,7 @@ export function VersionToggle() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <span className="text-xs font-medium text-slate">Version:</span>
+        <span className="text-xs font-medium text-slate-200">Version:</span>
         <div className="flex gap-1">
           <span
             className={`text-xs font-bold transition-colors ${
