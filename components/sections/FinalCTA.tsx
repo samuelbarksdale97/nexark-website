@@ -44,7 +44,7 @@ export function FinalCTA() {
               </h2>
             </div>
 
-            <p className="text-xl text-slate-200/90 mb-10 max-w-lg">
+            <p className="text-xl text-slate/80 mb-10 max-w-lg">
               Let&apos;s remember what you originally dreamed—and build the technology that makes it real.
             </p>
 
@@ -86,7 +86,7 @@ export function FinalCTA() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-sm text-slate-200/75"
+              className="text-sm text-slate/60"
             >
               Limited capacity. Discovery calls book 2-3 weeks out.
             </motion.p>

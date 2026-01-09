@@ -153,7 +153,7 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.3 }}
-                className="mt-6 lg:mt-8 text-base lg:text-lg text-slate-200 max-w-lg leading-relaxed"
+                className="mt-6 lg:mt-8 text-base lg:text-lg text-slate max-w-lg leading-relaxed"
               >
                 We build custom CRMs, agentic workflows, and business intelligence—the technology that takes your business to its next arc.
               </motion.p>
@@ -313,7 +313,7 @@ export function Hero() {
             className="flex items-center gap-3"
           >
             <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent" />
-            <span className="text-xs text-slate-200/70 tracking-widest uppercase">Scroll</span>
+            <span className="text-xs text-slate/50 tracking-widest uppercase">Scroll</span>
           </motion.div>
         </motion.div>
       </motion.div>

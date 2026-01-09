@@ -64,7 +64,7 @@ export function SolutionsHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.35 }}
-            className="text-lg text-slate-200 leading-relaxed max-w-3xl mx-auto mb-12"
+            className="text-lg text-slate leading-relaxed max-w-3xl mx-auto mb-12"
           >
             We build custom technology for any business challenge. From a simple website to complex agentic workflows. From workflow automation to data infrastructure to customer experiences.
           </motion.p>
@@ -78,19 +78,19 @@ export function SolutionsHero() {
           >
             <div className="p-6 rounded-xl border border-white/10 bg-navy-light/50">
               <p className="font-display text-2xl font-bold text-gradient mb-2">Start Simple</p>
-              <p className="text-slate-200">
+              <p className="text-slate">
                 Build a website, a dashboard, a simple integration. Test the waters with focused solutions.
               </p>
             </div>
             <div className="p-6 rounded-xl border border-indigo/20 bg-navy-light">
               <p className="font-display text-2xl font-bold text-gradient mb-2">Scale Smart</p>
-              <p className="text-slate-200">
+              <p className="text-slate">
                 Add agentic workflows that supercharge your systems. Automate the manual work.
               </p>
             </div>
             <div className="p-6 rounded-xl border border-purple/20 bg-navy-light">
               <p className="font-display text-2xl font-bold text-gradient mb-2">Go Deep</p>
-              <p className="text-slate-200">
+              <p className="text-slate">
                 Transform entire operations. Full tech stacks. Everything custom-built and connected.
               </p>
             </div>
@@ -106,7 +106,7 @@ export function SolutionsHero() {
             <p className="text-lg text-white font-medium mb-3">
               The opportunity is in the integration
             </p>
-            <p className="text-slate-200 leading-relaxed">
+            <p className="text-slate leading-relaxed">
               A website is just a website—until you add an agentic workflow that researches every contact form submission.
               A CRM is just data entry—until automation updates it from your emails and calendar.
               That's where custom-built technology creates leverage.

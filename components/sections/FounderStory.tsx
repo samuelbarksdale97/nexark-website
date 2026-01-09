@@ -61,7 +61,7 @@ export function FounderStory() {
                   <p className="font-display font-semibold text-white text-lg">
                     Samuel Barksdale
                   </p>
-                  <p className="text-slate-200">Founder & Chief Engineer</p>
+                  <p className="text-slate">Founder & Chief Engineer</p>
                 </div>
               </div>
             </div>

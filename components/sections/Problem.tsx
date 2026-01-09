@@ -11,7 +11,7 @@ const painPoints = [
     detail: (
       <>
         Generic SaaS makes you bend your business to their limitations.{" "}
-        <span className="text-purple-400 font-medium">You need software that fits YOU.</span>
+        <span className="text-white font-medium">You need software that fits YOU.</span>
       </>
     ),
     align: "left" as const,
@@ -22,7 +22,7 @@ const painPoints = [
     detail: (
       <>
         Hours spent on tasks that should take minutes. Missed opportunities because your systems can't keep up. Revenue left on the table.{" "}
-        <span className="text-purple-400 font-medium">Custom automation would eliminate the bottleneck.</span>
+        <span className="text-white font-medium">Custom automation would eliminate the bottleneck.</span>
       </>
     ),
     align: "right" as const,
@@ -33,7 +33,7 @@ const painPoints = [
     detail: (
       <>
         Zapier integrations that break. Manual workarounds filling gaps.{" "}
-        <span className="text-purple-400 font-medium">One custom solution would replace it all.</span>
+        <span className="text-white font-medium">One custom solution would replace it all.</span>
       </>
     ),
     align: "left" as const,
@@ -84,7 +84,7 @@ export function Problem() {
               </div>
 
               {/* Detail - smaller, muted */}
-              <div className="mt-6 md:mt-8 text-lg md:text-xl text-slate-200 max-w-xl leading-relaxed">
+              <div className="mt-6 md:mt-8 text-lg md:text-xl text-slate max-w-xl leading-relaxed">
                 {point.detail}
               </div>
 
@@ -123,7 +123,7 @@ export function Problem() {
             transition={{ duration: 0.8, delay: 1.4 }}
             className="mt-12 md:mt-16"
           >
-            <p className="text-xl md:text-2xl text-slate-200 mb-6">
+            <p className="text-xl md:text-2xl text-slate mb-6">
               AI-native development. 30-day delivery. Satisfaction guaranteed.
             </p>
             <p className="font-display text-display-md font-bold text-gradient">

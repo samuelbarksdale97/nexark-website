@@ -76,7 +76,7 @@ export function HowItWorks() {
           <h2 className="font-display text-display-lg font-bold text-gradient mt-4">
             Powered by Reality Engineering.
           </h2>
-          <p className="mt-6 text-lg text-slate-200/90 max-w-2xl">
+          <p className="mt-6 text-lg text-slate/80 max-w-2xl">
             We don't just build what you ask for—we help you remember what you originally dreamed.
           </p>
         </motion.div>
@@ -126,7 +126,7 @@ export function HowItWorks() {
                   {/* Number */}
                   <span className={`
                     text-sm font-medium tracking-wider
-                    ${phase.color === "slate" ? "text-slate-200" : phase.color === "white" ? "text-white/70" : "text-purple"}
+                    ${phase.color === "slate" ? "text-slate" : phase.color === "white" ? "text-white/70" : "text-purple"}
                   `}>
                     {phase.number}
                   </span>
@@ -145,7 +145,7 @@ export function HowItWorks() {
                   </p>
 
                   {/* Description */}
-                  <p className="text-slate-200 leading-relaxed mb-8">
+                  <p className="text-slate leading-relaxed mb-8">
                     {phase.description}
                   </p>
 

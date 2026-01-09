@@ -152,10 +152,10 @@ export function Offerings() {
           <h2 className="font-display text-display-xl font-bold text-white mb-4">
             The Next Arc for Your Business
           </h2>
-          <p className="text-xl text-slate-200 max-w-2xl mx-auto mb-3">
+          <p className="text-xl text-slate max-w-2xl mx-auto mb-3">
             Real use cases. Real outcomes. Built with Reality Engineering.
           </p>
-          <p className="text-base text-slate-200/75 max-w-xl mx-auto italic">
+          <p className="text-base text-slate/60 max-w-xl mx-auto italic">
             These are just a few examples. We build custom technology for any business challenge—from workflow automation to data infrastructure to customer experiences.
           </p>
         </motion.div>
@@ -194,7 +194,7 @@ export function Offerings() {
                 <p className="font-display text-xl font-medium text-white/80 mb-1">
                   {tier.headline}
                 </p>
-                <p className="text-slate-200 mb-8">{tier.subhead}</p>
+                <p className="text-slate mb-8">{tier.subhead}</p>
 
                 {/* Features */}
                 <ul className="space-y-3 mb-10">

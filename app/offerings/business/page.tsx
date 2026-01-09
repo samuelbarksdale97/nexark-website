@@ -231,7 +231,7 @@ export default function BusinessOfferingPage() {
             <div className="hidden md:flex items-center gap-8">
               <Link
                 href="/offerings/personal"
-                className="text-sm text-slate-200 hover:text-white transition-colors"
+                className="text-sm text-slate hover:text-white transition-colors"
               >
                 myNexark
               </Link>
@@ -288,7 +288,7 @@ export default function BusinessOfferingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-xl md:text-2xl text-slate-200 mb-8 max-w-2xl"
+              className="text-xl md:text-2xl text-slate mb-8 max-w-2xl"
             >
               Every day without optimized systems costs you growth. We build
               AI-powered operating systems that run your business while you
@@ -320,19 +320,19 @@ export default function BusinessOfferingPage() {
                 <div className="font-display text-3xl md:text-4xl font-bold text-emerald">
                   30
                 </div>
-                <div className="text-sm text-slate-200 mt-1">Day Sprints</div>
+                <div className="text-sm text-slate mt-1">Day Sprints</div>
               </div>
               <div>
                 <div className="font-display text-3xl md:text-4xl font-bold text-emerald">
                   47%
                 </div>
-                <div className="text-sm text-slate-200 mt-1">Avg. Cost Reduction</div>
+                <div className="text-sm text-slate mt-1">Avg. Cost Reduction</div>
               </div>
               <div>
                 <div className="font-display text-3xl md:text-4xl font-bold text-emerald">
                   12x
                 </div>
-                <div className="text-sm text-slate-200 mt-1">ROI in Year One</div>
+                <div className="text-sm text-slate mt-1">ROI in Year One</div>
               </div>
             </motion.div>
           </div>
@@ -425,7 +425,7 @@ export default function BusinessOfferingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={processInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-slate-200 max-w-2xl mx-auto"
+              className="text-xl text-slate max-w-2xl mx-auto"
             >
               30-day sprints. Measurable outcomes. No fluff.
             </motion.p>
@@ -504,7 +504,7 @@ export default function BusinessOfferingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={deliverablesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-slate-200 max-w-2xl mx-auto"
+              className="text-xl text-slate max-w-2xl mx-auto"
             >
               Not recommendations. Infrastructure. Systems that run without you.
             </motion.p>
@@ -528,7 +528,7 @@ export default function BusinessOfferingPage() {
                   <h3 className="font-display text-lg font-bold text-white mb-2">
                     {deliverable.title}
                   </h3>
-                  <p className="text-slate-200 text-sm leading-relaxed">
+                  <p className="text-slate text-sm leading-relaxed">
                     {deliverable.description}
                   </p>
                 </GlowingCard>
@@ -618,7 +618,7 @@ export default function BusinessOfferingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={pricingInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-slate-200 max-w-2xl mx-auto"
+              className="text-xl text-slate max-w-2xl mx-auto"
             >
               Every engagement includes measurable ROI targets. If we don't hit
               them, you don't pay.
@@ -648,21 +648,21 @@ export default function BusinessOfferingPage() {
                   <h3 className="font-display text-xl font-bold text-white mb-2">
                     {tier.name}
                   </h3>
-                  <p className="text-slate-200 text-sm">{tier.description}</p>
+                  <p className="text-slate text-sm">{tier.description}</p>
                 </div>
 
                 <div className="mb-8">
                   <span className="font-display text-4xl md:text-5xl font-bold text-white">
                     {tier.price}
                   </span>
-                  <span className="text-slate-200 ml-2">{tier.duration}</span>
+                  <span className="text-slate ml-2">{tier.duration}</span>
                 </div>
 
                 <ul className="space-y-4 mb-8">
                   {tier.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-emerald flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-200 text-sm">{feature}</span>
+                      <span className="text-slate text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -701,7 +701,7 @@ export default function BusinessOfferingPage() {
               <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
                 The Performance Guarantee
               </h2>
-              <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-slate mb-8 max-w-2xl mx-auto">
                 We don't bill for time. We bill for results. Every engagement
                 comes with explicit ROI targets. If we don't hit them within the
                 agreed timeframe, you don't pay for that sprint.
@@ -736,7 +736,7 @@ export default function BusinessOfferingPage() {
               <br />
               <span className="text-gradient-emerald">Start scaling smart.</span>
             </h2>
-            <p className="text-xl text-slate-200 mb-10">
+            <p className="text-xl text-slate mb-10">
               Book a diagnostic call. We'll analyze your operation and show you
               exactly where you're leaving money on the table—free.
             </p>
@@ -763,13 +763,13 @@ export default function BusinessOfferingPage() {
               <div className="flex gap-6">
                 <Link
                   href="/offerings/personal"
-                  className="text-sm text-slate-200 hover:text-white transition-colors"
+                  className="text-sm text-slate hover:text-white transition-colors"
                 >
                   myNexark
                 </Link>
                 <Link
                   href="/offerings/business"
-                  className="text-sm text-slate-200 hover:text-white transition-colors"
+                  className="text-sm text-slate hover:text-white transition-colors"
                 >
                   For Business
                 </Link>
