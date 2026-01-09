@@ -6,7 +6,7 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 // import { RealityEngineering } from "@/components/sections/RealityEngineering"; // Now integrated into HowItWorks
 // import { Proof } from "@/components/sections/Proof"; // Removed per user request
 import { Offerings } from "@/components/sections/Offerings";
-import { FounderStory } from "@/components/sections/FounderStory";
+// import { FounderStory } from "@/components/sections/FounderStory"; // Removed per user request
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Footer } from "@/components/sections/Footer";
 
@@ -39,10 +39,7 @@ export default function Home() {
       {/* 6. OFFER - myNexark vs Business */}
       <Offerings />
 
-      {/* 7. STORY - Founder's origin */}
-      <FounderStory />
-
-      {/* 8. CTA - Apply for Reality Engineering */}
+      {/* 7. CTA - Apply for Reality Engineering */}
       <FinalCTA />
 
       {/* Footer */}
