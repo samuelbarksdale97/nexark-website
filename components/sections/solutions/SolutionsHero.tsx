@@ -36,18 +36,11 @@ export function SolutionsHero() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-display-xl font-bold text-white mb-6"
+            className="font-display text-display-xl font-bold mb-10"
           >
-            Success isn&apos;t an accident;
-          </motion.h1>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-display-xl font-bold text-gradient mb-10"
-          >
-            it&apos;s engineered.
+            <span className="text-white">Success isn&apos;t an accident</span>
+            <br />
+            <span className="text-gradient">it&apos;s engineered.</span>
           </motion.h1>
 
           {/* Subheadline */}
