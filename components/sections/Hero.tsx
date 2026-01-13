@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { HeroVisuals } from "@/components/sections/hero/HeroVisuals";
 
 
 export function Hero() {
@@ -189,7 +190,10 @@ export function Hero() {
               </motion.div>
             </div>
 
-            {/* Right side - Empty now, stars cover everything */}
+            {/* Right side - Fanned Cards Visual */}
+            <div className="lg:col-span-4 relative h-[500px] flex items-center justify-center">
+              <HeroVisuals />
+            </div>
 
           </div>
         </div>
