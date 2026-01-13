@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { NextArcVisual } from "@/components/visuals/NextArc/NextArcVisual";
+
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -87,10 +87,7 @@ export function Hero() {
         }}
       />
 
-      {/* Star Field Background - Full Screen */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <NextArcVisual mouseX={springX} mouseY={springY} />
-      </div>
+
 
       {/* Content - asymmetric layout */}
       <motion.div
