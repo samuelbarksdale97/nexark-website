@@ -33,7 +33,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
     }, []);
 
     return (
-        <div className="relative w-full h-[600px] flex items-center justify-center overflow-visible">
+        <div className="relative w-full h-full min-h-screen flex items-center justify-center overflow-hidden">
 
             {/* 1. Realistic Star Field Background */}
             <motion.div
@@ -86,29 +86,25 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
             </motion.div>
 
 
-            {/* 2. Photorealistic Shooting Star Animation */}
+            {/* 2. Photorealistic Shooting Star Animation - Full Screen Across */}
             <div className="absolute inset-0 z-20 pointer-events-none">
                 <div className="relative w-full h-full">
                     <motion.div
-                        className="absolute w-[400px] h-[400px] lg:w-[600px] lg:h-[600px]"
-                        initial={{ opacity: 0, x: -100, y: 100, rotate: -45, scale: 0.8 }}
+                        className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px]"
+                        initial={{ opacity: 0, x: -200, y: '80vh', rotate: -25, scale: 0.8 }}
                         animate={{
                             opacity: [0, 1, 1, 0],
-                            x: [100, 300, 500], // Wider, more fluid arc
-                            y: [250, 0, -250],
-                            rotate: [-35, -45, -55], // Follows arc curve
-                            scale: [0.8, 1, 0.9]
+                            x: ['-10vw', '40vw', '110vw'], // Across the screen
+                            y: ['80vh', '40vh', '10vh'], // Rising arc
+                            rotate: [-25, -35, -45], // Rotation follows arc
+                            scale: [0.6, 1, 0.8]
                         }}
                         transition={{
-                            duration: 6, // Majestic slow motion
+                            duration: 7,
                             repeat: Infinity,
                             ease: "easeInOut",
-                            repeatDelay: 1,
-                            times: [0, 0.2, 0.8, 1]
-                        }}
-                        style={{
-                            left: '5%',
-                            top: '10%'
+                            repeatDelay: 2,
+                            times: [0, 0.1, 0.8, 1]
                         }}
                     >
                         {/* The Star Body image - Transparent Asset */}
@@ -116,12 +112,12 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                             src="/assets/shooting-star-transparent.png"
                             alt="Next Arc"
                             fill
-                            className="object-contain rotate-180" // No mix-blend-screen needed!
+                            className="object-contain rotate-180"
                             priority
                         />
 
-                        {/* The Head Flare - Keep mix-blend-screen for pure light addition */}
-                        <div className="absolute top-[20%] left-[80%] w-32 h-32 -translate-x-1/2 -translate-y-1/2">
+                        {/* The Head Flare */}
+                        <div className="absolute top-[20%] left-[80%] w-24 h-24 md:w-32 md:h-32 -translate-x-1/2 -translate-y-1/2">
                             <Image
                                 src="/assets/star-flare.png"
                                 alt="Flare"

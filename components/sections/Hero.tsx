@@ -87,6 +87,11 @@ export function Hero() {
         }}
       />
 
+      {/* Star Field Background - Full Screen */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <NextArcVisual mouseX={springX} mouseY={springY} />
+      </div>
+
       {/* Content - asymmetric layout */}
       <motion.div
         style={{ y, opacity }}
@@ -95,8 +100,8 @@ export function Hero() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-screen py-16 lg:py-20">
 
-            {/* Left side - Typography (7 columns) */}
-            <div className="lg:col-span-7">
+            {/* Left side - Typography (Full width on mobile, 8 cols on large for readability) */}
+            <div className="lg:col-span-8">
               {/* Pre-headline */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -187,17 +192,11 @@ export function Hero() {
               </motion.div>
             </div>
 
-            {/* Right side - Abstract visual element (5 columns) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
-              className="lg:col-span-5 hidden lg:flex items-center justify-center relative min-h-[500px]"
-            >
-              <NextArcVisual mouseX={springX} mouseY={springY} />
-            </motion.div>
+            {/* Right side - Empty now, stars cover everything */}
+
           </div>
         </div>
+
 
         {/* Scroll indicator - minimal */}
         <motion.div
