@@ -91,19 +91,19 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 <div className="relative w-full h-full">
                     <motion.div
                         className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px]"
-                        initial={{ opacity: 0, x: -200, y: '80vh', rotate: -25, scale: 0.8 }}
+                        initial={{ opacity: 0, x: -200, y: '60vh', rotate: -15, scale: 0.8 }}
                         animate={{
                             opacity: [0, 1, 1, 0],
-                            x: ['-10vw', '40vw', '110vw'], // Across the screen
-                            y: ['80vh', '40vh', '10vh'], // Rising arc
-                            rotate: [-25, -35, -45], // Rotation follows arc
+                            x: ['-10vw', '50vw', '110vw'], // Full width across
+                            y: ['70vh', '50vh', '20vh'], // Gentle rising arc (not steep up)
+                            rotate: [-15, -20, -25], // Horizontal-ish rotation
                             scale: [0.6, 1, 0.8]
                         }}
                         transition={{
-                            duration: 7,
+                            duration: 8, // Very slow and majestic
                             repeat: Infinity,
                             ease: "easeInOut",
-                            repeatDelay: 2,
+                            repeatDelay: 3,
                             times: [0, 0.1, 0.8, 1]
                         }}
                     >
