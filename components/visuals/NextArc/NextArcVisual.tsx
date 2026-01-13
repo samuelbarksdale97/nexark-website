@@ -121,6 +121,8 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
             active: boolean;
             particles: Particle[];
             resetTimer: number;
+            angle: number;
+            rotationSpeed: number;
 
             constructor() {
                 this.active = false;
@@ -130,6 +132,8 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 this.y = 0;
                 this.vx = 0;
                 this.vy = 0;
+                this.angle = 0;
+                this.rotationSpeed = 0.02;
                 this.reset();
             }
 
@@ -147,6 +151,10 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
 
                 // Random delay before starting
                 this.resetTimer = Math.random() * 150 + 50;
+
+                this.angle = 0;
+                // Random rotation
+                this.rotationSpeed = (Math.random() > 0.5 ? 1 : -1) * (0.01 + Math.random() * 0.02);
             }
 
             update() {
@@ -157,6 +165,9 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                     }
                     return;
                 }
+
+                // Internal motion
+                this.angle += this.rotationSpeed;
 
                 // Add trail particles
                 for (let i = 0; i < METEOR_TRAIL_LENGTH * 1.5; i++) {
@@ -203,19 +214,54 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 // Draw particles
                 this.particles.forEach(p => p.draw(parX, parY));
 
-                // Draw Head (Flare Asset)
-                if (this.active && flareImg.complete && flareImg.naturalWidth > 0) {
+                // Draw Head (Procedural)
+                if (this.active) {
                     ctx.save();
                     ctx.globalCompositeOperation = 'lighter';
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.angle);
 
-                    const size = 150;
-                    // Draw flared image centered on star
-                    ctx.drawImage(flareImg, this.x - size / 2, this.y - size / 2, size, size);
-
-                    // Bright core
+                    // 1. Central Core Glow (Soft)
+                    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 25);
+                    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+                    gradient.addColorStop(0.2, 'rgba(200, 225, 255, 0.4)');
+                    gradient.addColorStop(1, 'rgba(200, 225, 255, 0)');
+                    ctx.fillStyle = gradient;
                     ctx.beginPath();
-                    ctx.fillStyle = 'white';
-                    ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+                    ctx.arc(0, 0, 25, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // 2. Bright Cross (Primary Rays)
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                    ctx.lineWidth = 1.5;
+
+                    // Horizontal-ish (relative to rotation)
+                    ctx.beginPath();
+                    ctx.moveTo(-35, 0);
+                    ctx.lineTo(35, 0);
+                    ctx.stroke();
+
+                    // Vertical-ish
+                    ctx.beginPath();
+                    ctx.moveTo(0, -35);
+                    ctx.lineTo(0, 35);
+                    ctx.stroke();
+
+                    // 3. Smaller Diagonal Rays (Sparkle)
+                    ctx.rotate(Math.PI / 4); // 45 degrees
+                    ctx.strokeStyle = 'rgba(200, 220, 255, 0.5)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(-20, 0);
+                    ctx.lineTo(20, 0);
+                    ctx.moveTo(0, -20);
+                    ctx.lineTo(0, 20);
+                    ctx.stroke();
+
+                    // 4. Solid center dot (Hot core)
+                    ctx.beginPath();
+                    ctx.fillStyle = '#fff';
+                    ctx.arc(0, 0, 3, 0, Math.PI * 2);
                     ctx.fill();
 
                     ctx.restore();
