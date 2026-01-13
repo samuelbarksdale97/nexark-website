@@ -159,12 +159,21 @@ export function HeroVisuals() {
                 initial={{ opacity: 0, x: -50, rotateY: 10, z: -50 }}
                 animate={{ opacity: 1, x: -140, rotateY: -15, rotateZ: -5, z: -40 }}
                 transition={{ duration: 1, delay: 0.2, type: "spring" }}
-                className="absolute w-[260px] h-[360px] rounded-xl glass border border-white/10 p-5 shadow-2xl bg-gradient-to-br from-white/5 to-white/[0.02]"
+                className="absolute w-[260px] h-[360px] rounded-xl glass border border-white/10 p-5 shadow-2xl"
                 style={{
                     boxShadow: "0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(16, 185, 129, 0.1)", // Emerald glow hint
-                    zIndex: 10
+                    zIndex: 10,
+                    background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)"
                 }}
-                whileHover={{ scale: 1.05, zIndex: 50, rotateY: 0, x: -160 }}
+                whileHover={{
+                    scale: 1.1,
+                    zIndex: 100,
+                    rotateY: 0,
+                    x: -140,
+                    backgroundColor: "#020410", // Solid nearly-black for max readability
+                    borderColor: "rgba(16, 185, 129, 0.5)", // Emerald border highlight
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.9)"
+                }}
             >
                 <CRMCard />
             </motion.div>
@@ -179,12 +188,21 @@ export function HeroVisuals() {
                 initial={{ opacity: 0, x: 50, rotateY: -10, z: -50 }}
                 animate={{ opacity: 1, x: 140, rotateY: 15, rotateZ: 5, z: -40 }}
                 transition={{ duration: 1, delay: 0.4, type: "spring" }}
-                className="absolute w-[260px] h-[360px] rounded-xl glass border border-white/10 p-5 shadow-2xl bg-gradient-to-bl from-white/5 to-white/[0.02]"
+                className="absolute w-[260px] h-[360px] rounded-xl glass border border-white/10 p-5 shadow-2xl"
                 style={{
                     boxShadow: "0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(59, 130, 246, 0.1)", // Blue glow hint
-                    zIndex: 10
+                    zIndex: 10,
+                    background: "linear-gradient(225deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)"
                 }}
-                whileHover={{ scale: 1.05, zIndex: 50, rotateY: 0, x: 160 }}
+                whileHover={{
+                    scale: 1.1,
+                    zIndex: 100,
+                    rotateY: 0,
+                    x: 140,
+                    backgroundColor: "#020410", // Solid nearly-black
+                    borderColor: "rgba(59, 130, 246, 0.5)", // Blue border highlight
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.9)"
+                }}
             >
                 <DashboardCard />
             </motion.div>
@@ -198,12 +216,20 @@ export function HeroVisuals() {
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1, rotateY: 0, z: 20 }}
                 transition={{ duration: 1, delay: 0.6, type: "spring" }}
-                className="absolute w-[280px] h-[400px] rounded-xl glass border border-white/10 p-6 shadow-2xl bg-gradient-to-b from-white/10 to-white/[0.02]" // Slightly bigger, brighter
+                className="absolute w-[280px] h-[400px] rounded-xl glass border border-white/10 p-6 shadow-2xl"
                 style={{
                     boxShadow: "0 30px 60px rgba(0,0,0,0.6), 0 0 40px rgba(99, 102, 241, 0.2)", // Indigo glow
-                    zIndex: 20 // Front
+                    zIndex: 20, // Front
+                    background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)"
                 }}
-                whileHover={{ scale: 1.05, y: -10 }}
+                whileHover={{
+                    scale: 1.1,
+                    y: -20,
+                    zIndex: 100,
+                    backgroundColor: "#020410", // Solid nearly-black
+                    borderColor: "rgba(99, 102, 241, 0.5)", // Indigo border highlight
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.9)"
+                }}
             >
                 <WorkflowCard />
             </motion.div>
