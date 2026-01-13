@@ -94,33 +94,33 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                         initial={{ opacity: 0, x: -100, y: 100, rotate: -45, scale: 0.8 }}
                         animate={{
                             opacity: [0, 1, 1, 0],
-                            x: [0, 200, 400], // Arc movement
-                            y: [200, -50, -200],
+                            x: [100, 300, 500], // Wider, more fluid arc
+                            y: [250, 0, -250],
                             rotate: [-35, -45, -55], // Follows arc curve
                             scale: [0.8, 1, 0.9]
                         }}
                         transition={{
-                            duration: 4,
+                            duration: 6, // Majestic slow motion
                             repeat: Infinity,
                             ease: "easeInOut",
-                            repeatDelay: 2,
+                            repeatDelay: 1,
                             times: [0, 0.2, 0.8, 1]
                         }}
                         style={{
-                            left: '10%',
+                            left: '5%',
                             top: '10%'
                         }}
                     >
-                        {/* The Star Body image */}
+                        {/* The Star Body image - Transparent Asset */}
                         <Image
-                            src="/assets/shooting-star.png"
+                            src="/assets/shooting-star-transparent.png"
                             alt="Next Arc"
                             fill
-                            className="object-contain mix-blend-screen rotate-180" // Rotate if needed based on generation direction
+                            className="object-contain rotate-180" // No mix-blend-screen needed!
                             priority
                         />
 
-                        {/* The Head Flare */}
+                        {/* The Head Flare - Keep mix-blend-screen for pure light addition */}
                         <div className="absolute top-[20%] left-[80%] w-32 h-32 -translate-x-1/2 -translate-y-1/2">
                             <Image
                                 src="/assets/star-flare.png"
