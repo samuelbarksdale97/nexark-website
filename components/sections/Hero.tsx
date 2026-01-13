@@ -1,12 +1,22 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { RealityBlueprint } from "@/components/visuals/RealityBlueprint";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Performance Optimization: Use MotionValues instead of State
+  // This prevents React re-renders on every mouse move
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth out the mouse movement
+  const springConfig = { damping: 25, stiffness: 150 };
+  const springX = useSpring(mouseX, springConfig);
+  const springY = useSpring(mouseY, springConfig);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -18,14 +28,16 @@ export function Hero() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 30,
-        y: (e.clientY / window.innerHeight - 0.5) * 30,
-      });
+      // Calculate normalized position (-0.5 to 0.5)
+      const xPct = (e.clientX / window.innerWidth) - 0.5;
+      const yPct = (e.clientY / window.innerHeight) - 0.5;
+
+      mouseX.set(xPct * 30);
+      mouseY.set(yPct * 30);
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [mouseX, mouseY]);
 
   // Text animation variants
   const lineVariants = {
@@ -48,11 +60,11 @@ export function Hero() {
     >
       {/* Single gradient orb - off center, subtle */}
       <motion.div
-        className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full opacity-30"
+        className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full opacity-30 pointer-events-none"
         style={{
           background: "radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%)",
-          x: mousePosition.x,
-          y: mousePosition.y,
+          x: springX,
+          y: springY,
         }}
         animate={{
           scale: [1, 1.1, 1],
@@ -64,13 +76,13 @@ export function Hero() {
         }}
       />
 
-      {/* Secondary subtle orb */}
+      {/* Secondary subtle orb - Gold tint added for V2 alignment */}
       <motion.div
-        className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full opacity-20"
+        className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full opacity-20 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 70%)",
-          x: mousePosition.x * -0.5,
-          y: mousePosition.y * -0.5,
+          background: "radial-gradient(circle, rgba(211, 175, 55,0.1) 0%, transparent 70%)",
+          x: useTransform(springX, (val) => val * -0.5),
+          y: useTransform(springY, (val) => val * -0.5),
         }}
       />
 
@@ -153,9 +165,9 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.3 }}
-                className="mt-6 lg:mt-8 text-base lg:text-lg text-slate max-w-lg leading-relaxed"
+                className="mt-6 lg:mt-8 text-lg lg:text-xl text-slate-300 max-w-2xl leading-relaxed text-balance"
               >
-                We build custom CRMs, agentic workflows, and business intelligence—the technology that takes your business to its next arc.
+                We build the technology that takes your business to its next arc.
               </motion.p>
 
               {/* CTAs */}
@@ -176,124 +188,74 @@ export function Hero() {
 
             {/* Right side - Abstract visual element (5 columns) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="lg:col-span-5 hidden lg:flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
+              className="lg:col-span-5 hidden lg:flex items-center justify-center relative"
+              style={{
+                x: useTransform(springX, (val) => val * -1.5), // Stronger parallax
+                y: useTransform(springY, (val) => val * -1.5),
+              }}
             >
-              <div className="relative w-full aspect-square max-w-md">
-                {/* Architectural lines */}
-                <svg
-                  className="w-full h-full"
-                  viewBox="0 0 400 400"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Grid of precise lines */}
-                  <motion.line
-                    x1="0" y1="100" x2="400" y2="100"
-                    stroke="rgba(255,255,255,0.05)"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.5, delay: 0.8 }}
-                  />
-                  <motion.line
-                    x1="0" y1="200" x2="400" y2="200"
-                    stroke="rgba(255,255,255,0.05)"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.5, delay: 0.9 }}
-                  />
-                  <motion.line
-                    x1="0" y1="300" x2="400" y2="300"
-                    stroke="rgba(255,255,255,0.05)"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.5, delay: 1.0 }}
-                  />
-                  <motion.line
-                    x1="100" y1="0" x2="100" y2="400"
-                    stroke="rgba(255,255,255,0.05)"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.5, delay: 1.1 }}
-                  />
-                  <motion.line
-                    x1="200" y1="0" x2="200" y2="400"
-                    stroke="rgba(255,255,255,0.05)"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.5, delay: 1.2 }}
-                  />
-                  <motion.line
-                    x1="300" y1="0" x2="300" y2="400"
-                    stroke="rgba(255,255,255,0.05)"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.5, delay: 1.3 }}
-                  />
+              {/* Backglow for "alive" feel */}
+              <motion.div
+                className="absolute inset-0 bg-gold/20 rounded-full blur-[100px]"
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                  scale: [0.8, 1.1, 0.8],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
 
-                  {/* Accent diagonal */}
-                  <motion.line
-                    x1="50" y1="350" x2="350" y2="50"
-                    stroke="url(#gradient)"
-                    strokeWidth="2"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 2, delay: 1.5 }}
-                  />
-
-                  {/* Central focus point */}
-                  <motion.circle
-                    cx="200" cy="200" r="60"
-                    stroke="rgba(99,102,241,0.3)"
-                    strokeWidth="1"
-                    fill="none"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 1.8 }}
-                  />
-                  <motion.circle
-                    cx="200" cy="200" r="40"
-                    stroke="rgba(168,85,247,0.4)"
-                    strokeWidth="1"
-                    fill="none"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 2.0 }}
-                  />
-                  <motion.circle
-                    cx="200" cy="200" r="6"
-                    fill="rgba(99,102,241,0.8)"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.5, delay: 2.2 }}
-                  />
-
-                  <defs>
-                    <linearGradient id="gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="rgba(99,102,241,0.6)" />
-                      <stop offset="100%" stopColor="rgba(168,85,247,0.6)" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-
-                {/* NEXARK wordmark */}
+              {/* The "Abstract Engineer" Logo */}
+              <div className="relative w-full max-w-[500px] aspect-square">
                 <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: 2.5 }}
+                  className="w-full h-full relative"
+                  animate={{
+                    y: [0, -20, 0],
+                    rotate: [0, 1, 0, -1, 0], // Subtle organic rotation
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
-                  <span className="font-display text-2xl tracking-[0.4em] text-white/20">
-                    NEXARK
-                  </span>
+                  <Image
+                    src="/assets/reality-logo.png"
+                    alt="Engineering Reality"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority
+                  />
+
+                  {/* "Scanline" energy effect overlaid */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"
+                    animate={{
+                      x: ['-100%', '100%'],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear",
+                      repeatDelay: 2
+                    }}
+                    style={{
+                      maskImage: "url(/assets/reality-logo.png)",
+                      WebkitMaskImage: "url(/assets/reality-logo.png)",
+                      maskSize: "contain",
+                      WebkitMaskSize: "contain",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskPosition: "center",
+                      WebkitMaskPosition: "center"
+                    }}
+                  />
                 </motion.div>
               </div>
             </motion.div>

@@ -93,9 +93,8 @@ export function Problem() {
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.5 + index * 0.2 }}
-                className={`mt-8 h-px w-24 bg-gradient-to-r from-indigo/50 to-transparent ${
-                  point.align === "right" ? "ml-auto origin-right" : "origin-left"
-                }`}
+                className={`mt-8 h-px w-24 bg-gradient-to-r from-indigo/50 to-transparent ${point.align === "right" ? "ml-auto origin-right" : "origin-left"
+                  }`}
               />
             </motion.div>
           ))}
@@ -123,9 +122,7 @@ export function Problem() {
             transition={{ duration: 0.8, delay: 1.4 }}
             className="mt-12 md:mt-16"
           >
-            <p className="text-xl md:text-2xl text-slate mb-6">
-              AI-native development. 30-day delivery. Satisfaction guaranteed.
-            </p>
+
             <p className="font-display text-display-md font-bold text-gradient">
               Custom software that takes you there.
             </p>

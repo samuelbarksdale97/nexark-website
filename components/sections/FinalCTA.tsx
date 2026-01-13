@@ -16,13 +16,13 @@ export function FinalCTA() {
       className="py-32 md:py-48 bg-gradient-to-b from-navy-light to-navy relative overflow-hidden"
     >
       {/* Subtle gradient accent */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] rounded-full opacity-30"
           style={{ background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)" }} />
       </div>
 
       {/* Subtle top border */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-12">
         {/* Asymmetric layout */}
@@ -86,7 +86,7 @@ export function FinalCTA() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-sm text-slate/60"
+              className="text-sm font-medium text-slate-400"
             >
               Limited capacity. Discovery calls book 2-3 weeks out.
             </motion.p>
