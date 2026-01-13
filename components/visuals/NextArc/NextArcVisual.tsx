@@ -30,8 +30,8 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
 
         // --- Configuration ---
         const STAR_COUNT = 300;
-        const SHOOTING_STAR_SPEED = 2.5;
-        const METEOR_TRAIL_LENGTH = 15;
+        const SHOOTING_STAR_SPEED = 3.5; // Faster for comet look
+        const METEOR_TRAIL_LENGTH = 25; // Dense tail
 
         // --- Classes ---
 
@@ -82,31 +82,54 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
             vx: number;
             vy: number;
             color: string;
+            isGas: boolean; // Distinguish between smoke and sparks
 
-            constructor(x: number, y: number, color: string) {
+            constructor(x: number, y: number, color: string, isGas: boolean) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 2 + 0.5;
-                this.life = 1.0;
-                this.decay = Math.random() * 0.015 + 0.005;
-                this.vx = (Math.random() - 0.5) * 0.2;
-                this.vy = (Math.random() - 0.5) * 0.2;
-                this.color = color;
+                this.isGas = isGas;
+
+                if (isGas) {
+                    // Smoke/Cloud particle
+                    this.size = Math.random() * 20 + 10; // Large
+                    this.life = 0.6; // Start transparent
+                    this.decay = Math.random() * 0.02 + 0.01;
+                    this.vx = (Math.random() - 0.5) * 0.5; // Drift
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.color = '40, 100, 255'; // Deep Blue
+                } else {
+                    // Spark/Core particle
+                    this.size = Math.random() * 3 + 1;
+                    this.life = 1.0;
+                    this.decay = Math.random() * 0.03 + 0.02;
+                    this.vx = (Math.random() - 0.5) * 1.0;
+                    this.vy = (Math.random() - 0.5) * 1.0;
+                    this.color = color;
+                }
             }
 
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
                 this.life -= this.decay;
-                this.size *= 0.96;
+
+                if (this.isGas) {
+                    this.size *= 0.98; // Shrink slowly
+                } else {
+                    this.size *= 0.92; // Sparks dissolve fast
+                }
             }
 
             draw(parX: number, parY: number) {
                 if (!ctx || this.life <= 0) return;
                 ctx.save();
                 ctx.globalCompositeOperation = 'lighter';
+
+                // Gas has deeper blue look
+                const opacity = this.isGas ? this.life * 0.3 : this.life;
+
                 ctx.beginPath();
-                ctx.fillStyle = `rgba(${this.color}, ${this.life})`;
+                ctx.fillStyle = `rgba(${this.color}, ${opacity})`;
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.restore();
@@ -153,8 +176,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 this.resetTimer = Math.random() * 150 + 50;
 
                 this.angle = 0;
-                // Random rotation
-                this.rotationSpeed = (Math.random() > 0.5 ? 1 : -1) * (0.01 + Math.random() * 0.02);
+                this.rotationSpeed = (Math.random() > 0.5 ? 1 : -1) * 0.02;
             }
 
             update() {
@@ -166,24 +188,31 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                     return;
                 }
 
-                // Internal motion
                 this.angle += this.rotationSpeed;
 
-                // Add trail particles
-                for (let i = 0; i < METEOR_TRAIL_LENGTH * 1.5; i++) {
+                // Add Dense Tail (Gaseous + Sparks)
+                for (let i = 0; i < METEOR_TRAIL_LENGTH; i++) {
                     const rand = Math.random();
-                    let color = '255, 255, 255';
-                    if (rand > 0.8) color = '200, 220, 255'; // Cyan tint
-                    else if (rand > 0.9) color = '220, 200, 255'; // Purple tint
+                    // Positioning: Trail behind head
+                    const lagX = this.vx * -1.5 * Math.random();
+                    const lagY = this.vy * -1.5 * Math.random();
 
-                    const lagX = this.vx * Math.random() * -2;
-                    const lagY = this.vy * Math.random() * -2;
-
-                    this.particles.push(new Particle(
-                        this.x + lagX + (Math.random() - 0.5) * 3,
-                        this.y + lagY + (Math.random() - 0.5) * 3,
-                        color
-                    ));
+                    if (i % 2 === 0) {
+                        // Gas Particle
+                        this.particles.push(new Particle(
+                            this.x + lagX,
+                            this.y + lagY,
+                            '0, 0, 0', true // Color handled in class
+                        ));
+                    } else {
+                        // Spark Particle
+                        const color = Math.random() > 0.5 ? '200, 240, 255' : '100, 200, 255';
+                        this.particles.push(new Particle(
+                            this.x + lagX + (Math.random() - 0.5) * 5,
+                            this.y + lagY + (Math.random() - 0.5) * 5,
+                            color, false
+                        ));
+                    }
                 }
 
                 // Move Head
@@ -214,74 +243,48 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 // Draw particles
                 this.particles.forEach(p => p.draw(parX, parY));
 
-                // Draw Head (Procedural)
+                // Draw Head (Blue Comet Star)
                 if (this.active) {
                     ctx.save();
                     ctx.globalCompositeOperation = 'lighter';
                     ctx.translate(this.x, this.y);
 
-                    // -------------------------------------------------
-                    // 1. Anamorphic Horizontal Flare (Static)
-                    // -------------------------------------------------
-                    ctx.save();
-                    // Stay horizontal relative to screen (techno look)
-                    ctx.scale(1, 0.15); // Flatten vertical
-                    const gradientH = ctx.createRadialGradient(0, 0, 0, 0, 0, 80);
-                    gradientH.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
-                    gradientH.addColorStop(0.4, 'rgba(200, 225, 255, 0.5)');
-                    gradientH.addColorStop(1, 'rgba(200, 225, 255, 0)');
-                    ctx.fillStyle = gradientH;
+                    // 1. Large Blue Coma (Outer Glow)
+                    const gradientComa = ctx.createRadialGradient(0, 0, 0, 0, 0, 45);
+                    gradientComa.addColorStop(0, 'rgba(100, 200, 255, 0.8)'); // Cyan core
+                    gradientComa.addColorStop(0.4, 'rgba(50, 100, 255, 0.3)'); // Blue mid
+                    gradientComa.addColorStop(1, 'rgba(0, 0, 255, 0)'); // Fade out
+                    ctx.fillStyle = gradientComa;
                     ctx.beginPath();
-                    ctx.arc(0, 0, 80, 0, Math.PI * 2);
+                    ctx.arc(0, 0, 45, 0, Math.PI * 2);
                     ctx.fill();
 
-                    // Thin bright streak core
-                    ctx.fillStyle = 'rgba(255, 255, 255, 1)';
-                    ctx.fillRect(-60, -2, 120, 4);
-                    ctx.restore();
+                    // 2. Rotating Star Core
+                    ctx.rotate(this.angle);
 
+                    // Star Shape (6-point?)
+                    ctx.strokeStyle = 'rgba(200, 240, 255, 0.9)';
+                    ctx.lineWidth = 2;
 
-                    // -------------------------------------------------
-                    // 2. Rotating Inner Core (Dynamic Motion)
-                    // -------------------------------------------------
-                    ctx.rotate(this.angle); // Rotate the sparkles
-
-                    // Central Glow
-                    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 15);
-                    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-                    gradient.addColorStop(1, 'rgba(200, 225, 255, 0)');
-                    ctx.fillStyle = gradient;
+                    // Main Cross
                     ctx.beginPath();
-                    ctx.arc(0, 0, 15, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    // Shorter, sharper cross rays (Rotating)
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-                    ctx.lineWidth = 1.5;
-
-                    // Primary Cross
-                    ctx.beginPath();
-                    ctx.moveTo(-18, 0);
-                    ctx.lineTo(18, 0);
-                    ctx.moveTo(0, -18);
-                    ctx.lineTo(0, 18);
+                    ctx.moveTo(-25, 0); ctx.lineTo(25, 0);
+                    ctx.moveTo(0, -25); ctx.lineTo(0, 25);
                     ctx.stroke();
 
-                    // Secondary X (Sparkle)
+                    // Diagonal Cross
                     ctx.rotate(Math.PI / 4);
-                    ctx.strokeStyle = 'rgba(200, 220, 255, 0.5)';
+                    ctx.strokeStyle = 'rgba(100, 200, 255, 0.6)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
-                    ctx.moveTo(-12, 0);
-                    ctx.lineTo(12, 0);
-                    ctx.moveTo(0, -12);
-                    ctx.lineTo(0, 12);
+                    ctx.moveTo(-18, 0); ctx.lineTo(18, 0);
+                    ctx.moveTo(0, -18); ctx.lineTo(0, 18);
                     ctx.stroke();
 
-                    // Hot core dot
+                    // Hot White Center
                     ctx.beginPath();
                     ctx.fillStyle = '#fff';
-                    ctx.arc(0, 0, 3, 0, Math.PI * 2);
+                    ctx.arc(0, 0, 5, 0, Math.PI * 2);
                     ctx.fill();
 
                     ctx.restore();
