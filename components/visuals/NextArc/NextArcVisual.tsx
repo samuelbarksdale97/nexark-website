@@ -24,14 +24,18 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
+        // Load assets
+        const flareImg = new Image();
+        flareImg.src = "/assets/star-flare.png";
+
         let animationFrameId: number;
         let width = 0;
         let height = 0;
 
         // --- Configuration ---
         const STAR_COUNT = 300;
-        const SHOOTING_STAR_SPEED = 2.5; // Controls how fast it moves
-        const METEOR_TRAIL_LENGTH = 15; // Number of tail particles per frame
+        const SHOOTING_STAR_SPEED = 2.5;
+        const METEOR_TRAIL_LENGTH = 15;
 
         // --- Classes ---
 
@@ -55,7 +59,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
             draw(parX: number, parY: number) {
                 if (!ctx) return;
 
-                // Parallax offset (deeper stars move less)
+                // Parallax offset
                 const depth = this.size < 1 ? 0.2 : 0.5;
                 const moveX = parX * depth;
                 const moveY = parY * depth;
@@ -67,9 +71,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
             }
 
             update() {
-                // Simple twinkling
                 this.opacity += Math.sin(Date.now() * this.blinkSpeed) * 0.01;
-                // Clamp opacity
                 if (this.opacity < 0.1) this.opacity = 0.1;
                 if (this.opacity > 0.8) this.opacity = 0.8;
             }
@@ -90,9 +92,9 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 this.y = y;
                 this.size = Math.random() * 2 + 0.5;
                 this.life = 1.0;
-                this.decay = Math.random() * 0.03 + 0.01; // Fade speed
-                this.vx = (Math.random() - 0.5) * 0.5; // Slight drift
-                this.vy = (Math.random() - 0.5) * 0.5;
+                this.decay = Math.random() * 0.015 + 0.005; // Slower decay for smoother trail
+                this.vx = (Math.random() - 0.5) * 0.2;
+                this.vy = (Math.random() - 0.5) * 0.2;
                 this.color = color;
             }
 
@@ -100,13 +102,13 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 this.x += this.vx;
                 this.y += this.vy;
                 this.life -= this.decay;
-                this.size *= 0.95; // Shrink
+                this.size *= 0.96;
             }
 
             draw(parX: number, parY: number) {
                 if (!ctx || this.life <= 0) return;
                 ctx.save();
-                ctx.globalCompositeOperation = 'lighter'; // Additive blending
+                ctx.globalCompositeOperation = 'lighter';
                 ctx.beginPath();
                 ctx.fillStyle = `rgba(${this.color}, ${this.life})`;
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -118,8 +120,6 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
         class ShootingStar {
             x: number;
             y: number;
-            startX: number;
-            startY: number;
             vx: number;
             vy: number;
             active: boolean;
@@ -132,8 +132,6 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 this.resetTimer = 0;
                 this.x = 0;
                 this.y = 0;
-                this.startX = 0;
-                this.startY = 0;
                 this.vx = 0;
                 this.vy = 0;
                 this.reset();
@@ -142,20 +140,17 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
             reset() {
                 this.active = false;
                 this.particles = [];
-                // Start from left, somewhere in the middle-ish vertically
-                this.startX = -100;
-                this.startY = Math.random() * (height * 0.6) + (height * 0.2);
 
-                this.x = this.startX;
-                this.y = this.startY;
+                // Start from bottom-left area
+                this.x = -100;
+                this.y = height * 0.8 + Math.random() * 100;
 
-                // Velocity: Move right and slightly up/down curve
-                // For a curve, we'll update V in update()
-                this.vx = SHOOTING_STAR_SPEED * (Math.random() * 2 + 3);
-                this.vy = (Math.random() - 0.5) * 1;
+                // Velocity: Move right and slightly UP initially
+                this.vx = SHOOTING_STAR_SPEED * (Math.random() * 1.5 + 2.5);
+                this.vy = -(Math.random() * 1.5 + 1.0);
 
                 // Random delay before starting
-                this.resetTimer = Math.random() * 200 + 100;
+                this.resetTimer = Math.random() * 150 + 50;
             }
 
             update() {
@@ -168,19 +163,28 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 }
 
                 // Add trail particles
-                for (let i = 0; i < METEOR_TRAIL_LENGTH; i++) {
-                    // Interpolate between current and last position if moving fast?
-                    // For now, simple spread around the head
-                    const color = Math.random() > 0.8 ? '255, 255, 255' : '200, 220, 255'; // Blue-ish white tint
-                    this.particles.push(new Particle(this.x + (Math.random() - 0.5) * 2, this.y + (Math.random() - 0.5) * 2, color));
+                for (let i = 0; i < METEOR_TRAIL_LENGTH * 1.5; i++) {
+                    const rand = Math.random();
+                    let color = '255, 255, 255';
+                    if (rand > 0.8) color = '200, 220, 255'; // Cyan tint
+                    else if (rand > 0.9) color = '220, 200, 255'; // Purple tint
+
+                    const lagX = this.vx * Math.random() * -2;
+                    const lagY = this.vy * Math.random() * -2;
+
+                    this.particles.push(new Particle(
+                        this.x + lagX + (Math.random() - 0.5) * 3,
+                        this.y + lagY + (Math.random() - 0.5) * 3,
+                        color
+                    ));
                 }
 
                 // Move Head
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Gentle arc gravity/lift
-                this.vy -= 0.005; // Gentle curve up
+                // Gravity / Arc
+                this.vy += 0.008; // Curve downwards/across
 
                 // Update particles
                 for (let i = this.particles.length - 1; i >= 0; i--) {
@@ -191,8 +195,8 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                     }
                 }
 
-                // Reset if off screen (far right)
-                if (this.x > width + 200 || this.y < -100 || this.y > height + 100) {
+                // Reset if off screen
+                if (this.x > width + 300 || this.y > height + 200) {
                     this.reset();
                 }
             }
@@ -200,34 +204,23 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
             draw(parX: number, parY: number) {
                 if (!ctx) return;
 
-                // Draw particles (Tail)
+                // Draw particles
                 this.particles.forEach(p => p.draw(parX, parY));
 
-                if (this.active) {
-                    // Draw Head (Bright glowing core)
+                // Draw Head (Flare Asset)
+                if (this.active && flareImg.complete && flareImg.naturalWidth > 0) {
                     ctx.save();
                     ctx.globalCompositeOperation = 'lighter';
 
-                    // Core
-                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 4);
-                    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-                    gradient.addColorStop(0.4, 'rgba(200, 220, 255, 0.8)');
-                    gradient.addColorStop(1, 'rgba(200, 220, 255, 0)');
+                    const size = 150;
+                    // Draw flared image centered on star
+                    ctx.drawImage(flareImg, this.x - size / 2, this.y - size / 2, size, size);
 
-                    ctx.fillStyle = gradient;
+                    // Bright core
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, 10, 0, Math.PI * 2);
+                    ctx.fillStyle = 'white';
+                    ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
                     ctx.fill();
-
-                    // Flare lines (Cross)
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(this.x - 15, this.y);
-                    ctx.lineTo(this.x + 15, this.y);
-                    ctx.moveTo(this.x, this.y - 15);
-                    ctx.lineTo(this.x, this.y + 15);
-                    ctx.stroke();
 
                     ctx.restore();
                 }
@@ -237,7 +230,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
 
         // --- Initialization ---
         const stars: Star[] = [];
-        // Stars are populated in handleResize to ensure we have correct width/height
+        // Stars are populated in handleResize
 
         const shootingStar = new ShootingStar();
 
@@ -246,22 +239,18 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
         const render = () => {
             if (!ctx) return;
 
-            // Clear canvas
             ctx.clearRect(0, 0, width, height);
 
-            // Get current smooth mouse position for parallax
             const mx = smoothX.get() || 0;
             const my = smoothY.get() || 0;
-            const parX = mx * -0.05; // dampen for subtle effect
+            const parX = mx * -0.05;
             const parY = my * -0.05;
 
-            // Draw Background Stars
             stars.forEach(star => {
                 star.update();
                 star.draw(parX, parY);
             });
 
-            // Draw Shooting Star
             shootingStar.update();
             shootingStar.draw(parX, parY);
 
@@ -275,14 +264,11 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 width = container.clientWidth;
                 height = container.clientHeight;
 
-                // Handle high DPI displays
                 const dpr = window.devicePixelRatio || 1;
                 canvas.width = width * dpr;
                 canvas.height = height * dpr;
                 ctx.scale(dpr, dpr);
 
-                // Re-init stars to cover new area if needed, or just let them be
-                // Ideally, spread them out again, but for now randomly placed ones are fine
                 if (stars.length === 0) {
                     for (let i = 0; i < STAR_COUNT; i++) {
                         stars.push(new Star());
@@ -299,7 +285,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
             window.removeEventListener("resize", handleResize);
             cancelAnimationFrame(animationFrameId);
         };
-    }, [smoothX, smoothY]); // dependencies
+    }, [smoothX, smoothY]);
 
     return (
         <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none">
