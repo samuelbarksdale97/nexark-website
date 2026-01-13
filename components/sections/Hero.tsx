@@ -229,7 +229,7 @@ export function Hero() {
                     src="/assets/reality-logo.png"
                     alt="Engineering Reality"
                     fill
-                    className="object-contain drop-shadow-2xl"
+                    className="object-contain drop-shadow-2xl mix-blend-screen"
                     priority
                   />
 
