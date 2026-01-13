@@ -2,6 +2,7 @@
 
 import { motion, useTransform, MotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface NextArcVisualProps {
     mouseX: MotionValue<number>;
@@ -9,22 +10,24 @@ interface NextArcVisualProps {
 }
 
 export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
-    // Parallax transforms
-    const x = useTransform(mouseX, (val) => val * -1);
-    const y = useTransform(mouseY, (val) => val * -1);
+    // Parallax transforms - subtle depth
     const starsX = useTransform(mouseX, (val) => val * -0.5);
     const starsY = useTransform(mouseY, (val) => val * -0.5);
+    const deepStarsX = useTransform(mouseX, (val) => val * -0.2);
+    const deepStarsY = useTransform(mouseY, (val) => val * -0.2);
 
-    // Generate random stars for background
-    const [stars, setStars] = useState<{ id: number; top: string; left: string; size: number; delay: number }[]>([]);
+    // Generate random stars for background with different sizes and blink rates
+    const [stars, setStars] = useState<{ id: number; top: string; left: string; size: number; opacity: number; blinkDuration: number }[]>([]);
 
     useEffect(() => {
-        const newStars = Array.from({ length: 40 }).map((_, i) => ({
+        // Generate a dense, realistic star field
+        const newStars = Array.from({ length: 150 }).map((_, i) => ({
             id: i,
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
-            size: Math.random() * 2 + 1,
-            delay: Math.random() * 3,
+            size: Math.random() < 0.8 ? Math.random() * 2 : Math.random() * 3 + 1, // Mostly small stars, few bright ones
+            opacity: Math.random() * 0.7 + 0.3,
+            blinkDuration: Math.random() * 3 + 2, // Random blink speed between 2s and 5s
         }));
         setStars(newStars);
     }, []);
@@ -32,7 +35,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
     return (
         <div className="relative w-full h-[600px] flex items-center justify-center overflow-visible">
 
-            {/* 1. Star Field (We shoot for the stars) */}
+            {/* 1. Realistic Star Field Background */}
             <motion.div
                 style={{ x: starsX, y: starsY }}
                 className="absolute inset-0 z-0"
@@ -40,101 +43,94 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 {stars.map((star) => (
                     <motion.div
                         key={star.id}
-                        className="absolute bg-white rounded-full opacity-60"
+                        className="absolute bg-white rounded-full"
                         style={{
                             top: star.top,
                             left: star.left,
                             width: star.size,
                             height: star.size,
+                            opacity: star.opacity,
+                            boxShadow: star.size > 2 ? `0 0 ${star.size * 2}px rgba(255, 255, 255, 0.8)` : 'none'
                         }}
                         animate={{
-                            opacity: [0.3, 0.8, 0.3],
-                            scale: [1, 1.2, 1],
+                            opacity: [star.opacity, star.opacity * 0.3, star.opacity], // Twinkle effect
                         }}
                         transition={{
-                            duration: 3 + Math.random() * 2,
+                            duration: star.blinkDuration,
                             repeat: Infinity,
-                            delay: star.delay,
                             ease: "easeInOut",
+                            delay: Math.random() * 5,
                         }}
                     />
                 ))}
             </motion.div>
 
-            {/* 2. The Moon (Hope to land on the moon) */}
+            {/* Deep Space Stars (Parallax Layer) */}
             <motion.div
-                style={{ x, y }}
-                className="absolute w-32 h-32 rounded-full z-10"
+                style={{ x: deepStarsX, y: deepStarsY }}
+                className="absolute inset-0 z-0 opacity-50"
             >
-                {/* Moon Body */}
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-indigo-100 to-indigo-300 opacity-90 blur-[1px] shadow-[0_0_60px_rgba(255,255,255,0.4)]" />
-                {/* Moon Craters/Texture overlay */}
-                <div className="absolute inset-0 rounded-full opacity-30 mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+                {stars.slice(0, 50).map((star) => (
+                    <div
+                        key={`deep-${star.id}`}
+                        className="absolute bg-slate-400 rounded-full"
+                        style={{
+                            top: star.left, // Swap coords for randomness
+                            left: star.top,
+                            width: star.size * 0.5,
+                            height: star.size * 0.5,
+                            opacity: 0.4
+                        }}
+                    />
+                ))}
             </motion.div>
 
-            {/* 3. The "Next Arc" Shooting Star */}
-            <div className="absolute inset-0 z-20 pointer-events-none">
-                <svg className="w-full h-full overflow-visible">
-                    <defs>
-                        <linearGradient id="arcGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="transparent" />
-                            <stop offset="20%" stopColor="#6366F1" stopOpacity="0.5" /> {/* Indigo tail */}
-                            <stop offset="80%" stopColor="#F59E0B" /> {/* Gold head */}
-                            <stop offset="100%" stopColor="#FFFFFF" />
-                        </linearGradient>
-                        <filter id="glow">
-                            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                            <feMerge>
-                                <feMergeNode in="coloredBlur" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-                    </defs>
 
-                    {/* The Arc Path */}
-                    <motion.path
-                        d="M 50 500 Q 250 100 550 50" // Bezier curve representing the "Arc"
-                        fill="none"
-                        stroke="url(#arcGradient)"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        filter="url(#glow)"
-                        initial={{ pathLength: 0, opacity: 0 }}
+            {/* 2. Photorealistic Shooting Star Animation */}
+            <div className="absolute inset-0 z-20 pointer-events-none">
+                <div className="relative w-full h-full">
+                    <motion.div
+                        className="absolute w-[400px] h-[400px] lg:w-[600px] lg:h-[600px]"
+                        initial={{ opacity: 0, x: -100, y: 100, rotate: -45, scale: 0.8 }}
                         animate={{
-                            pathLength: [0, 0.4, 0], // Shoots across
-                            opacity: [0, 1, 0],
-                            pathOffset: [0, 0.6, 1] // Moves along the path
+                            opacity: [0, 1, 1, 0],
+                            x: [0, 200, 400], // Arc movement
+                            y: [200, -50, -200],
+                            rotate: [-35, -45, -55], // Follows arc curve
+                            scale: [0.8, 1, 0.9]
                         }}
                         transition={{
                             duration: 4,
                             repeat: Infinity,
                             ease: "easeInOut",
-                            repeatDelay: 1
+                            repeatDelay: 2,
+                            times: [0, 0.2, 0.8, 1]
                         }}
-                    />
-
-                    {/* The Leading Star Particle */}
-                    <motion.circle
-                        r="6"
-                        fill="#F59E0B"
-                        filter="url(#glow)"
+                        style={{
+                            left: '10%',
+                            top: '10%'
+                        }}
                     >
-                        <animateMotion
-                            dur="4s"
-                            repeatCount="indefinite"
-                            path="M 50 500 Q 250 100 550 50"
-                            keyPoints="0;1"
-                            keyTimes="0;1"
-                            calcMode="linear"
+                        {/* The Star Body image */}
+                        <Image
+                            src="/assets/shooting-star.png"
+                            alt="Next Arc"
+                            fill
+                            className="object-contain mix-blend-screen rotate-180" // Rotate if needed based on generation direction
+                            priority
                         />
-                        <animate
-                            attributeName="opacity"
-                            values="0;1;0"
-                            dur="4s"
-                            repeatCount="indefinite"
-                        />
-                    </motion.circle>
-                </svg>
+
+                        {/* The Head Flare */}
+                        <div className="absolute top-[20%] left-[80%] w-32 h-32 -translate-x-1/2 -translate-y-1/2">
+                            <Image
+                                src="/assets/star-flare.png"
+                                alt="Flare"
+                                fill
+                                className="object-contain mix-blend-screen"
+                            />
+                        </div>
+                    </motion.div>
+                </div>
             </div>
 
         </div>
