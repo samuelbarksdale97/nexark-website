@@ -290,22 +290,20 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 }
             }
         };
-    }
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Initial size
+        render(); // Start loop
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            cancelAnimationFrame(animationFrameId);
         };
-
-window.addEventListener("resize", handleResize);
-handleResize(); // Initial size
-render(); // Start loop
-
-return () => {
-    window.removeEventListener("resize", handleResize);
-    cancelAnimationFrame(animationFrameId);
-};
     }, [smoothX, smoothY]); // dependencies
 
-return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none">
-        <canvas ref={canvasRef} className="block w-full h-full" />
-    </div>
-);
+    return (
+        <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none">
+            <canvas ref={canvasRef} className="block w-full h-full" />
+        </div>
+    );
 }
