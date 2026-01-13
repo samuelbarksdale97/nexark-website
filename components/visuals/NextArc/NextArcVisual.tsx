@@ -24,10 +24,6 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        // Load assets
-        const flareImg = new Image();
-        flareImg.src = "/assets/star-flare.png";
-
         let animationFrameId: number;
         let width = 0;
         let height = 0;
