@@ -2,8 +2,8 @@
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useEffect } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { RealityBlueprint } from "@/components/visuals/RealityBlueprint";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
