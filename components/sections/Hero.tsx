@@ -189,76 +189,12 @@ export function Hero() {
 
             {/* Right side - Abstract visual element (5 columns) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
-              className="lg:col-span-5 hidden lg:flex items-center justify-center relative"
-              style={{
-                x: useTransform(springX, (val) => val * -1.5), // Stronger parallax
-                y: useTransform(springY, (val) => val * -1.5),
-              }}
+              className="lg:col-span-5 hidden lg:flex items-center justify-center relative min-h-[500px]"
             >
-              {/* Backglow for "alive" feel */}
-              <motion.div
-                className="absolute inset-0 bg-gold/20 rounded-full blur-[100px]"
-                animate={{
-                  opacity: [0.3, 0.6, 0.3],
-                  scale: [0.8, 1.1, 0.8],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-
-              {/* The "Abstract Engineer" Logo */}
-              <div className="relative w-full max-w-[500px] aspect-square">
-                <motion.div
-                  className="w-full h-full relative"
-                  animate={{
-                    y: [0, -20, 0],
-                    rotate: [0, 1, 0, -1, 0], // Subtle organic rotation
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src="/assets/reality-logo.png"
-                    alt="Engineering Reality"
-                    fill
-                    className="object-contain drop-shadow-2xl mix-blend-screen"
-                    priority
-                  />
-
-                  {/* "Scanline" energy effect overlaid */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"
-                    animate={{
-                      x: ['-100%', '100%'],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear",
-                      repeatDelay: 2
-                    }}
-                    style={{
-                      maskImage: "url(/assets/reality-logo.png)",
-                      WebkitMaskImage: "url(/assets/reality-logo.png)",
-                      maskSize: "contain",
-                      WebkitMaskSize: "contain",
-                      maskRepeat: "no-repeat",
-                      WebkitMaskRepeat: "no-repeat",
-                      maskPosition: "center",
-                      WebkitMaskPosition: "center"
-                    }}
-                  />
-                </motion.div>
-              </div>
+              <NextArcVisual mouseX={springX} mouseY={springY} />
             </motion.div>
           </div>
         </div>
