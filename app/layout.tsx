@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, Cormorant_Garamond } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { NextArcVisual } from "@/components/visuals/NextArc/NextArcVisual";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -48,7 +49,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${cormorantGaramond.variable}`}>
-      <body className="min-h-screen bg-navy text-white antialiased">
+      <body className="min-h-screen bg-navy text-white antialiased relative selection:bg-indigo-500/30">
+        <NextArcVisual />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

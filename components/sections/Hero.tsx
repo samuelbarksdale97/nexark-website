@@ -57,7 +57,7 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden bg-navy"
+      className="relative min-h-screen flex items-center overflow-hidden"
     >
       {/* Single gradient orb - off center, subtle */}
       <motion.div
