@@ -237,9 +237,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
 
         // --- Initialization ---
         const stars: Star[] = [];
-        for (let i = 0; i < STAR_COUNT; i++) {
-            stars.push(new Star());
-        }
+        // Stars are populated in handleResize to ensure we have correct width/height
 
         const shootingStar = new ShootingStar();
 
