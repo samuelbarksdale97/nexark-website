@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { NextArcVisual } from "@/components/visuals/NextArc/NextArcVisual";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
