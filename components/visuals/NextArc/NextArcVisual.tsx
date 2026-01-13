@@ -88,7 +88,7 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                 this.y = y;
                 this.size = Math.random() * 2 + 0.5;
                 this.life = 1.0;
-                this.decay = Math.random() * 0.015 + 0.005; // Slower decay for smoother trail
+                this.decay = Math.random() * 0.015 + 0.005;
                 this.vx = (Math.random() - 0.5) * 0.2;
                 this.vy = (Math.random() - 0.5) * 0.2;
                 this.color = color;
@@ -219,46 +219,66 @@ export function NextArcVisual({ mouseX, mouseY }: NextArcVisualProps) {
                     ctx.save();
                     ctx.globalCompositeOperation = 'lighter';
                     ctx.translate(this.x, this.y);
-                    ctx.rotate(this.angle);
 
-                    // 1. Central Core Glow (Soft)
-                    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 25);
+                    // -------------------------------------------------
+                    // 1. Anamorphic Horizontal Flare (Static)
+                    // -------------------------------------------------
+                    ctx.save();
+                    // Stay horizontal relative to screen (techno look)
+                    ctx.scale(1, 0.15); // Flatten vertical
+                    const gradientH = ctx.createRadialGradient(0, 0, 0, 0, 0, 80);
+                    gradientH.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+                    gradientH.addColorStop(0.4, 'rgba(200, 225, 255, 0.5)');
+                    gradientH.addColorStop(1, 'rgba(200, 225, 255, 0)');
+                    ctx.fillStyle = gradientH;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 80, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Thin bright streak core
+                    ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+                    ctx.fillRect(-60, -2, 120, 4);
+                    ctx.restore();
+
+
+                    // -------------------------------------------------
+                    // 2. Rotating Inner Core (Dynamic Motion)
+                    // -------------------------------------------------
+                    ctx.rotate(this.angle); // Rotate the sparkles
+
+                    // Central Glow
+                    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 15);
                     gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-                    gradient.addColorStop(0.2, 'rgba(200, 225, 255, 0.4)');
                     gradient.addColorStop(1, 'rgba(200, 225, 255, 0)');
                     ctx.fillStyle = gradient;
                     ctx.beginPath();
-                    ctx.arc(0, 0, 25, 0, Math.PI * 2);
+                    ctx.arc(0, 0, 15, 0, Math.PI * 2);
                     ctx.fill();
 
-                    // 2. Bright Cross (Primary Rays)
+                    // Shorter, sharper cross rays (Rotating)
                     ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
                     ctx.lineWidth = 1.5;
 
-                    // Horizontal-ish (relative to rotation)
+                    // Primary Cross
                     ctx.beginPath();
-                    ctx.moveTo(-35, 0);
-                    ctx.lineTo(35, 0);
+                    ctx.moveTo(-18, 0);
+                    ctx.lineTo(18, 0);
+                    ctx.moveTo(0, -18);
+                    ctx.lineTo(0, 18);
                     ctx.stroke();
 
-                    // Vertical-ish
-                    ctx.beginPath();
-                    ctx.moveTo(0, -35);
-                    ctx.lineTo(0, 35);
-                    ctx.stroke();
-
-                    // 3. Smaller Diagonal Rays (Sparkle)
-                    ctx.rotate(Math.PI / 4); // 45 degrees
+                    // Secondary X (Sparkle)
+                    ctx.rotate(Math.PI / 4);
                     ctx.strokeStyle = 'rgba(200, 220, 255, 0.5)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
-                    ctx.moveTo(-20, 0);
-                    ctx.lineTo(20, 0);
-                    ctx.moveTo(0, -20);
-                    ctx.lineTo(0, 20);
+                    ctx.moveTo(-12, 0);
+                    ctx.lineTo(12, 0);
+                    ctx.moveTo(0, -12);
+                    ctx.lineTo(0, 12);
                     ctx.stroke();
 
-                    // 4. Solid center dot (Hot core)
+                    // Hot core dot
                     ctx.beginPath();
                     ctx.fillStyle = '#fff';
                     ctx.arc(0, 0, 3, 0, Math.PI * 2);
