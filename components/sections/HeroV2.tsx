@@ -90,7 +90,7 @@ export function HeroV2() {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <Button href="#apply" size="lg" showArrow>
-              Start Your Build
+              Book Strategy Session
             </Button>
             <Button href="#what-we-build" variant="secondary" size="lg" showArrow>
               See What We Build

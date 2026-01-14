@@ -8,8 +8,7 @@ const footerLinks = {
     { label: "Reality Engineering", href: "/#reality-engineering" },
   ],
   company: [
-    { label: "Methodology", href: "/#methodology" },
-    { label: "Our Story", href: "/#story" },
+    { href: "/#story", label: "Our Story" },
   ],
   connect: [
     { label: "Apply", href: "/#apply" },

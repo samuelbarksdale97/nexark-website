@@ -10,7 +10,7 @@ export function FounderStory() {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section id="story" ref={ref} className="py-32 md:py-48 bg-navy relative overflow-hidden">
+    <section id="story" ref={ref} className="py-32 md:py-48 relative overflow-hidden">
       {/* Full-bleed background accent */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple/5 via-transparent to-indigo/5" />
@@ -68,8 +68,8 @@ export function FounderStory() {
 
             {/* CTA */}
             <div className="mt-10">
-              <Button href="#apply" variant="ghost" showArrow>
-                Start Your Build
+              <Button href="#apply" variant="secondary" size="lg">
+                Book Strategy Session
               </Button>
             </div>
           </motion.div>

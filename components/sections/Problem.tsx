@@ -42,14 +42,23 @@ const painPoints = [
 
 export function Problem() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once: true, margin: "0%" });
 
   return (
-    <section ref={ref} className="py-32 md:py-48 bg-navy-light relative overflow-hidden">
-      {/* Subtle gradient accent */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 1.2, ease: "easeOut" }}
+      className="py-24 md:py-32 relative overflow-hidden bg-navy"
+    >
+      {/* Solid background to hide stars - stark contrast for "the problem" */}
+      <div className="absolute inset-0 bg-navy z-0" />
 
-      <div className="container mx-auto px-6 lg:px-12">
+      {/* Subtle gradient accent */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent z-10" />
+
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Section intro - small, understated */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -132,6 +141,6 @@ export function Problem() {
 
       {/* Bottom gradient accent */}
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-    </section>
+    </motion.section>
   );
 }

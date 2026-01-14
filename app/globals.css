@@ -218,10 +218,19 @@ body {
 
 /* Glassmorphism utilities */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Mobile: Solid background for performance (no expensive blur) */
+  background: rgba(10, 10, 15, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Desktop: Expensive backdrop blur only on larger screens */
+@media (min-width: 768px) {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
 }
 
 .glass-hover:hover {

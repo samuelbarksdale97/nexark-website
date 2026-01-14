@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { CTAVisual } from "./cta/CTAVisual";
 
 export function FinalCTA() {
   const ref = useRef(null);
@@ -13,145 +15,86 @@ export function FinalCTA() {
     <section
       ref={ref}
       id="apply"
-      className="py-32 md:py-48 bg-gradient-to-b from-navy-light to-navy relative overflow-hidden"
+      className="py-32 md:py-48 bg-[#020410] relative overflow-hidden flex items-center justify-center min-h-[60vh]"
     >
-      {/* Subtle gradient accent */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] rounded-full opacity-30"
-          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)" }} />
-      </div>
+      {/* Dreamer's Zenith Visual Background */}
+      <CTAVisual />
 
       {/* Subtle top border */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
 
-      <div className="container mx-auto px-6 lg:px-12">
-        {/* Asymmetric layout */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left side - main content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-7"
-          >
-            {/* Main headline */}
-            <div className="mb-8">
-              <h2 className="font-display text-display-lg font-bold text-white leading-none">
-                Ready to begin
-              </h2>
-              <h2 className="font-display text-display-lg font-bold text-gradient leading-none mt-2">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10 flex flex-col items-center text-center">
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto"
+        >
+          {/* Main headline */}
+          <div className="mb-8">
+            <h2 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
+              Ready to begin<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white to-purple-300 blur-[0.5px]">
                 your next arc?
-              </h2>
-            </div>
+              </span>
+            </h2>
+          </div>
 
-            <p className="text-xl text-slate/80 mb-10 max-w-lg">
-              Let&apos;s remember what you originally dreamed—and build the technology that makes it real.
-            </p>
+          <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Let&apos;s remember what you originally dreamed—and build the technology that makes it real.
+          </p>
 
-            {/* Value props */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="space-y-3 mb-10 max-w-md"
-            >
-              <p className="text-lg text-white/80">
-                ✓ AI-native development • 30-50% faster
-              </p>
-              <p className="text-lg text-white/80">
-                ✓ Reality Engineering lens • Dream to delivery
-              </p>
-              <p className="text-lg text-white/80">
-                ✓ Satisfaction guaranteed • We&apos;ll make it right or refund you
-              </p>
-              <p className="text-lg text-white/80">
-                ✓ Secure, scalable, production-ready
-              </p>
-            </motion.div>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 mb-8"
-            >
-              <Button href="/apply" size="lg" showArrow>
-                Start Your Build
-              </Button>
-            </motion.div>
-
-            {/* Fine print */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-sm font-medium text-slate-400"
-            >
-              Limited capacity. Discovery calls book 2-3 weeks out.
-            </motion.p>
-          </motion.div>
-
-          {/* Right side - visual element */}
+          {/* Value props - Centered Grid */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="lg:col-span-5 hidden lg:block"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="grid sm:grid-cols-2 gap-x-12 gap-y-4 mb-12 text-left max-w-2xl mx-auto"
           >
-            <div className="relative">
-              {/* Abstract destination visual */}
-              <div className="aspect-square relative">
-                {/* Concentric circles representing growth */}
-                <motion.div
-                  className="absolute inset-0 rounded-full border border-white/5"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                  transition={{ duration: 1, delay: 0.6 }}
-                />
-                <motion.div
-                  className="absolute inset-[15%] rounded-full border border-white/10"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                  transition={{ duration: 1, delay: 0.8 }}
-                />
-                <motion.div
-                  className="absolute inset-[30%] rounded-full border border-indigo/20"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                  transition={{ duration: 1, delay: 1 }}
-                />
-                <motion.div
-                  className="absolute inset-[42%] rounded-full bg-gradient-to-br from-indigo/10 to-purple/10 border border-indigo/30"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 1.2 }}
-                />
-
-                {/* Center glow */}
-                <motion.div
-                  className="absolute inset-[45%] rounded-full"
-                  style={{ background: "radial-gradient(circle, rgba(99,102,241,0.4) 0%, transparent 70%)" }}
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1.5 } : {}}
-                  transition={{ duration: 0.6, delay: 1.4 }}
-                />
-
-                {/* NEXARK wordmark */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 1 } : {}}
-                  transition={{ duration: 1, delay: 1.6 }}
-                >
-                  <span className="font-display text-xl tracking-[0.3em] text-white/20">
-                    NEXARK
-                  </span>
-                </motion.div>
+            {[
+              "AI-native development • 30-50% faster",
+              "Reality Engineering lens • Dream to delivery",
+              "Satisfaction guaranteed • Or we refund you",
+              "Secure, scalable, production-ready"
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3 text-lg text-slate-300/90">
+                <span className="text-indigo-400">✓</span> {item}
               </div>
-            </div>
+            ))}
           </motion.div>
-        </div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col items-center gap-6 mb-8"
+          >
+            <Button href="https://cal.com/sam-barksdale/discovery" size="lg" className="h-14 px-10 text-lg rounded-full group bg-white text-black hover:bg-zinc-200 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300 w-auto">
+              <span className="flex items-center gap-2 whitespace-nowrap">
+                Book Strategy Session
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+              </span>
+            </Button>
+
+            {/* Secondary Lead Magnet CTA */}
+            <button className="text-sm text-slate-400 hover:text-white transition-colors border-b border-transparent hover:border-white/50 pb-0.5">
+              Not ready to build? <span className="text-indigo-300">Get the Blueprint</span>
+            </button>
+          </motion.div>
+
+          {/* Fine print */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-sm font-medium text-slate-500"
+          >
+            Limited capacity. Discovery calls book 2-3 weeks out.
+          </motion.p>
+        </motion.div>
+
       </div>
     </section>
   );

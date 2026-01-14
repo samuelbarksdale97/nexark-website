@@ -7,7 +7,6 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { href: "/methodology", label: "Methodology" },
   { href: "/solutions", label: "Solutions" },
 ];
 
@@ -30,11 +29,10 @@ export function Header() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "glass border-b border-white/5"
-            : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+          ? "glass border-b border-white/5"
+          : "bg-transparent"
+          }`}
       >
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-16 md:h-20">
@@ -57,8 +55,8 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
-              <Button href="/#apply" size="sm">
-                Get Started
+              <Button href="https://cal.com/sam-barksdale/discovery" size="sm">
+                Book Strategy Session
               </Button>
             </nav>
 
@@ -115,11 +113,11 @@ export function Header() {
                 transition={{ delay: navLinks.length * 0.1 }}
               >
                 <Button
-                  href="/#apply"
+                  href="https://cal.com/sam-barksdale/discovery"
                   size="lg"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Get Started
+                  Book Strategy Session
                 </Button>
               </motion.div>
             </nav>

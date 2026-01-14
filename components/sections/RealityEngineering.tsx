@@ -67,13 +67,13 @@ export function RealityEngineering() {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className="py-32 md:py-48 bg-navy relative overflow-hidden">
+    <section ref={ref} className="py-32 md:py-48 relative overflow-hidden">
       {/* Subtle gradient accent */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
       <div className="container mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="max-w-4xl mx-auto text-center mb-20 md:mb-32">
+        <div className="max-w-7xl mx-auto text-center mb-20 md:mb-32">
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
@@ -90,7 +90,7 @@ export function RealityEngineering() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-display-xl font-bold text-white mb-6"
+            className="font-display text-display-xl font-bold text-white mb-6 whitespace-nowrap"
           >
             We Don&apos;t Just Build
           </motion.h2>
@@ -99,7 +99,7 @@ export function RealityEngineering() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-display-xl font-bold text-white/40 mb-8"
+            className="font-display text-display-xl font-bold text-white/40 mb-8 whitespace-nowrap"
           >
             What You Ask For
           </motion.h2>
@@ -108,7 +108,7 @@ export function RealityEngineering() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl md:text-2xl text-slate leading-relaxed mb-8"
+            className="text-xl md:text-2xl text-slate leading-relaxed mb-8 whitespace-nowrap"
           >
             We help you remember what you originally dreamed—and make it feasible now.
           </motion.p>

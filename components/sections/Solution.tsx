@@ -32,7 +32,7 @@ export function Solution() {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section id="what-we-build" ref={ref} className="py-32 md:py-48 bg-navy relative overflow-hidden">
+    <section id="what-we-build" ref={ref} className="py-32 md:py-40 relative overflow-hidden">
       {/* Subtle background accents */}
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full opacity-20"
         style={{ background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)" }} />

@@ -9,7 +9,7 @@ export function SolutionsHero() {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-navy to-navy-light overflow-hidden pt-32 pb-20">
+    <section ref={ref} className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-32 pb-20">
       {/* Background accents */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-indigo/5 blur-3xl" />
@@ -36,10 +36,9 @@ export function SolutionsHero() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-display-xl font-bold mb-10"
+            className="font-display text-display-xl font-bold mb-10 flex flex-col items-center"
           >
-            <span className="text-white">Success isn&apos;t an accident</span>
-            <br />
+            <span className="text-white md:whitespace-nowrap">Success isn&apos;t an accident</span>
             <span className="text-gradient">it&apos;s engineered.</span>
           </motion.h1>
 
@@ -97,12 +96,12 @@ export function SolutionsHero() {
             className="mt-16 p-8 rounded-2xl border border-gold/20 bg-navy-light max-w-3xl mx-auto"
           >
             <p className="text-lg text-white font-medium mb-3">
-              The opportunity is in the integration
+              The magic is in the connection
             </p>
             <p className="text-slate leading-relaxed">
-              A website is just a website—until you add an agentic workflow that researches every contact form submission.
-              A CRM is just data entry—until automation updates it from your emails and calendar.
-              That's where custom-built technology creates leverage.
+              A website is simply a brochure — until it starts researching leads for you.
+              A CRM is just a chore — until it starts managing itself.
+              We don&apos;t just build software; we engineer systems that give you your time back.
             </p>
           </motion.div>
         </div>

@@ -51,7 +51,7 @@ export function HowItWorks() {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className="py-32 md:py-48 bg-navy-light relative overflow-hidden">
+    <section ref={ref} className="py-32 md:py-48 relative overflow-hidden">
       {/* Subtle top border */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
@@ -109,7 +109,7 @@ export function HowItWorks() {
                     <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                       <defs>
                         <pattern id="blueprint-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5"/>
+                          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
                         </pattern>
                       </defs>
                       <rect width="100%" height="100%" fill="url(#blueprint-grid)" />
@@ -153,9 +153,8 @@ export function HowItWorks() {
                   <div className="space-y-3">
                     {phase.bullets.map((bullet, i) => (
                       <div key={i} className="flex items-center gap-3">
-                        <span className={`w-1.5 h-1.5 rounded-full ${
-                          phase.color === "slate" ? "bg-white/60" : phase.color === "white" ? "bg-white" : "bg-purple"
-                        }`} />
+                        <span className={`w-1.5 h-1.5 rounded-full ${phase.color === "slate" ? "bg-white/60" : phase.color === "white" ? "bg-white" : "bg-purple"
+                          }`} />
                         <span className="text-sm text-white/80">
                           {bullet}
                         </span>

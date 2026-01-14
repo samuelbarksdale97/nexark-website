@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check, AlertCircle } from "lucide-react";
+import { Check } from "lucide-react";
+import { IntegrationsInteractive } from "./IntegrationsInteractive";
+
 
 export function IntegrationsSection() {
   const ref = useRef(null);
@@ -15,7 +17,7 @@ export function IntegrationsSection() {
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -30,8 +32,8 @@ export function IntegrationsSection() {
             <h2 className="font-display text-display-lg font-bold text-white mb-6">
               We'll Work With Other Companies
             </h2>
-            <h2 className="font-display text-display-lg font-bold text-white/40 mb-8">
-              So You Don't Have To
+            <h2 className="font-display text-display-lg font-bold text-white/40 mb-8 whitespace-nowrap">
+              So You Don&apos;t Have To
             </h2>
             <p className="text-xl text-slate leading-relaxed">
               Integrations are where most projects fail. API changes, vendor communication, technical debt. We handle all of it.
@@ -88,61 +90,29 @@ export function IntegrationsSection() {
             </div>
           </motion.div>
 
-          {/* Common integrations */}
+          {/* Common integrations - Interactive Prototype */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-16"
+            className="mb-24"
           >
-            <h3 className="font-display text-2xl font-bold text-white mb-6 text-center">
-              Common Integrations We Build
-            </h3>
-            <div className="grid md:grid-cols-3 gap-4">
-              {[
-                ["Stripe", "QuickBooks", "Xero"],
-                ["Salesforce", "HubSpot", "Pipedrive"],
-                ["Gmail", "Outlook", "Slack"],
-                ["Twilio", "SendGrid", "Mailchimp"],
-                ["DocuSign", "HelloSign", "PandaDoc"],
-                ["Google Calendar", "Calendly", "Acuity"],
-              ].map((column, i) => (
-                <div key={i} className="space-y-2">
-                  {column.map((service, j) => (
-                    <div key={j} className="p-3 rounded-lg bg-navy-light border border-white/5">
-                      <p className="text-white/80 text-sm">{service}</p>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <p className="text-center text-slate/60 mt-6 text-sm">
-              Plus hundreds of other APIs and custom vendor integrations
+            <IntegrationsInteractive />
+          </motion.div>
+
+          {/* Connective Tissue: "...and more" */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="relative pt-12 pb-12 mt-8 overflow-hidden rounded-2xl"
+          >
+            <p className="relative z-10 text-center font-display text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white/90 to-white/40 pb-4">
+              ...and more.
             </p>
           </motion.div>
 
-          {/* The difference */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="p-8 rounded-2xl border border-purple/20 bg-navy-light"
-          >
-            <div className="flex items-start gap-4 mb-6">
-              <AlertCircle className="w-6 h-6 text-purple flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-display text-xl font-bold text-white mb-2">
-                  Why This Matters
-                </h3>
-                <p className="text-slate leading-relaxed mb-4">
-                  Most agencies build the integration and disappear. When the API changes in 6 months, you're stuck figuring it out alone. When you need to add another service, you're back at square one.
-                </p>
-                <p className="text-white font-medium">
-                  We build integrations as part of your technology ecosystem—maintained, monitored, and evolving with your business.
-                </p>
-              </div>
-            </div>
-          </motion.div>
+
         </div>
       </div>
     </section>

@@ -10,23 +10,24 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Offerings } from "@/components/sections/Offerings";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Footer } from "@/components/sections/Footer";
-import { IntroPreloader } from "@/components/ui/preloader/IntroPreloader";
+// import { IntroPreloader } from "@/components/ui/preloader/IntroPreloader"; // Disabled for dev
 
 export default function Home() {
-  const [introComplete, setIntroComplete] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  // Disabled intro state for development
+  const [introComplete, setIntroComplete] = useState(true);
+  const [showContent, setShowContent] = useState(true);
 
-  const handleIntroComplete = () => {
-    setIntroComplete(true);
-    setTimeout(() => setShowContent(true), 100);
-  };
+  // const handleIntroComplete = () => {
+  //   setIntroComplete(true);
+  //   setTimeout(() => setShowContent(true), 100);
+  // };
 
   return (
     <>
       <AnimatePresence mode="wait">
-        {!introComplete && (
+        {/* {!introComplete && (
           <IntroPreloader onComplete={handleIntroComplete} />
-        )}
+        )} */}
       </AnimatePresence>
 
       <main className={`min-h-screen transition-opacity duration-1000 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
@@ -41,8 +42,8 @@ export default function Home() {
         {/* 2. PROBLEM - You're capable of more */}
         <Problem />
 
-        {/* 3. SOLUTION - Reality Engineering */}
-        <Solution />
+        {/* 3. SOLUTION - Reality Engineering - HIDDEN FOR NOW */}
+        {/* <Solution /> */}
 
         {/* 4. HOW - Blueprint → Build → Partner (Powered by Reality Engineering) */}
         <HowItWorks />

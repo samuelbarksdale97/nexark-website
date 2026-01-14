@@ -99,23 +99,26 @@ export function Hero() {
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-screen py-16 lg:py-20">
 
             {/* Left side - Typography (Full width on mobile, 8 cols on large for readability) */}
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-8 flex flex-col justify-center text-center items-center md:items-start md:text-left relative">
+              {/* Mobile Ambient Glow */}
+              <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-indigo-600/20 blur-[90px] rounded-full pointer-events-none md:hidden" />
+
               {/* Pre-headline */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="mb-6 lg:mb-8"
+                className="mb-8 md:mb-6 lg:mb-8 relative"
               >
-                <span className="inline-flex items-center gap-3 text-base font-semibold tracking-wide text-white/90 uppercase">
-                  <span className="w-8 h-px bg-gradient-to-r from-indigo to-transparent" />
+                <span className="inline-flex items-center gap-3 text-sm md:text-base font-semibold tracking-wide text-white/90 uppercase bg-indigo-500/10 border border-indigo-500/20 text-indigo-200 px-4 py-1.5 rounded-full md:bg-transparent md:border-0 md:px-0 md:py-0 md:text-white/90 shadow-[0_0_15px_rgba(99,102,241,0.3)] md:shadow-none">
+                  <span className="hidden md:block w-8 h-px bg-gradient-to-r from-indigo to-transparent" />
                   Reality Engineering
                 </span>
               </motion.div>
 
               {/* Main headline - massive typography */}
-              <div className="space-y-2 lg:space-y-4">
-                <div className="overflow-hidden">
+              <div className="space-y-1 md:space-y-4 mb-4 md:mb-0 relative">
+                <div className="overflow-visible">
                   <motion.h1
                     custom={0}
                     variants={lineVariants}
@@ -127,7 +130,7 @@ export function Hero() {
                   </motion.h1>
                 </div>
 
-                <div className="overflow-hidden">
+                <div className="overflow-visible">
                   <motion.h1
                     custom={1}
                     variants={lineVariants}
@@ -139,13 +142,13 @@ export function Hero() {
                   </motion.h1>
                 </div>
 
-                <div className="overflow-hidden">
+                <div className="overflow-visible">
                   <motion.h1
                     custom={2}
                     variants={lineVariants}
                     initial="hidden"
                     animate="visible"
-                    className="font-display text-hero font-bold tracking-tight text-white/60"
+                    className="font-display text-hero font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-indigo-300 via-purple-300 to-indigo-300 md:text-white/60 md:bg-none"
                   >
                     you&apos;re missing.
                   </motion.h1>
@@ -157,9 +160,19 @@ export function Hero() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.9 }}
-                className="mt-4 lg:mt-6"
+                className="mt-8 md:mt-4 lg:mt-6 relative"
               >
-                <span className="font-display text-display-md font-bold text-gradient">
+                {/* Mobile: Elegant Pills Layout */}
+                <div className="flex flex-wrap gap-2 justify-center md:hidden max-w-sm mx-auto">
+                  {["CRMs", "Agentic Workflows", "Integrations", "Dashboards"].map((item, i) => (
+                    <span key={item} className="px-4 py-2 rounded-xl bg-indigo-950/40 border border-indigo-500/20 text-sm font-medium text-indigo-200 backdrop-blur-sm shadow-sm">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Desktop: Original Line */}
+                <span className="hidden md:block font-display text-display-md font-bold text-gradient">
                   CRMs • Agentic Workflows • Integrations • Dashboards
                 </span>
               </motion.div>
@@ -169,7 +182,7 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.3 }}
-                className="mt-6 lg:mt-8 text-lg lg:text-xl text-slate-300 max-w-2xl leading-relaxed text-balance"
+                className="mt-8 md:mt-6 lg:mt-8 text-lg px-4 md:px-0 lg:text-xl text-slate-300 max-w-xl md:max-w-2xl leading-relaxed text-balance"
               >
                 We build the technology that takes your business to its next arc.
               </motion.p>
@@ -179,12 +192,12 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.6 }}
-                className="mt-8 lg:mt-10 flex flex-col sm:flex-row gap-3"
+                className="mt-10 md:mt-8 lg:mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-6 md:px-0"
               >
-                <Button href="#apply" size="lg" showArrow>
-                  Start Your Build
+                <Button href="https://cal.com/sam-barksdale/discovery" size="lg" showArrow className="w-full sm:w-auto bg-white text-navy hover:bg-indigo-50 border-0 h-14 md:h-auto text-base md:text-sm shadow-[0_0_20px_rgba(255,255,255,0.3)] md:shadow-none">
+                  Book Strategy Session
                 </Button>
-                <Button href="#what-we-build" variant="ghost" size="lg">
+                <Button href="#what-we-build" variant="secondary" size="lg" className="w-full sm:w-auto h-14 md:h-auto text-base md:text-sm border-white/10 bg-white/5 md:bg-transparent">
                   See What We Build
                 </Button>
               </motion.div>

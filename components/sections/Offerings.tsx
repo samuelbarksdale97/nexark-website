@@ -104,7 +104,7 @@ function TiltCard({ children, className, color }: { children: React.ReactNode; c
           relative h-full p-8 lg:p-10 rounded-2xl border overflow-hidden transition-all duration-300
           ${color === "indigo" ? "border-indigo/20 bg-navy-light" :
             color === "emerald" ? "border-emerald/20 bg-navy-light" :
-            "border-purple/20 bg-navy-light"}
+              "border-purple/20 bg-navy-light"}
           ${isHovered ? "border-opacity-50 shadow-xl" : ""}
         `}
         style={{ transform: "translateZ(50px)" }}
@@ -116,7 +116,7 @@ function TiltCard({ children, className, color }: { children: React.ReactNode; c
             ${isHovered ? "opacity-100" : ""}
             ${color === "indigo" ? "bg-gradient-to-br from-indigo/5 to-transparent" :
               color === "emerald" ? "bg-gradient-to-br from-emerald/5 to-transparent" :
-              "bg-gradient-to-br from-purple/5 to-transparent"}
+                "bg-gradient-to-br from-purple/5 to-transparent"}
           `}
         />
         <div className="relative z-10">{children}</div>
@@ -130,7 +130,7 @@ export function Offerings() {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className="py-32 md:py-48 bg-navy-light relative overflow-hidden">
+    <section ref={ref} className="py-32 md:py-48 relative overflow-hidden">
       {/* Subtle top border */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
