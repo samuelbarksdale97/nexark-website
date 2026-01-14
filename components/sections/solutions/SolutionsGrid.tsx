@@ -160,28 +160,28 @@ export function SolutionsGrid() {
                 <div className={`p-8 lg:p-10 rounded-2xl border bg-navy-light
                   ${solution.color === "indigo" ? "border-indigo/20" :
                     solution.color === "purple" ? "border-purple/20" :
-                    solution.color === "emerald" ? "border-emerald/20" :
-                    solution.color === "blue" ? "border-blue-500/20" :
-                    solution.color === "gold" ? "border-gold/20" :
-                    "border-white/10"}`}
+                      solution.color === "emerald" ? "border-emerald/20" :
+                        solution.color === "blue" ? "border-blue-500/20" :
+                          solution.color === "gold" ? "border-gold/20" :
+                            "border-white/10"}`}
                 >
                   {/* Icon */}
                   <div className="mb-6">
                     <div className={`inline-flex p-3 rounded-xl
                       ${solution.color === "indigo" ? "bg-indigo/10" :
                         solution.color === "purple" ? "bg-purple/10" :
-                        solution.color === "emerald" ? "bg-emerald/10" :
-                        solution.color === "blue" ? "bg-blue-500/10" :
-                        solution.color === "gold" ? "bg-gold/10" :
-                        "bg-white/10"}`}
+                          solution.color === "emerald" ? "bg-emerald/10" :
+                            solution.color === "blue" ? "bg-blue-500/10" :
+                              solution.color === "gold" ? "bg-gold/10" :
+                                "bg-white/10"}`}
                     >
                       <Icon className={`w-6 h-6
                         ${solution.color === "indigo" ? "text-indigo" :
                           solution.color === "purple" ? "text-purple" :
-                          solution.color === "emerald" ? "text-emerald" :
-                          solution.color === "blue" ? "text-blue-400" :
-                          solution.color === "gold" ? "text-gold" :
-                          "text-white"}`}
+                            solution.color === "emerald" ? "text-emerald" :
+                              solution.color === "blue" ? "text-blue-400" :
+                                solution.color === "gold" ? "text-gold" :
+                                  "text-white"}`}
                       />
                     </div>
                   </div>
@@ -195,10 +195,10 @@ export function SolutionsGrid() {
                   <p className={`text-lg font-medium mb-4
                     ${solution.color === "indigo" ? "text-indigo" :
                       solution.color === "purple" ? "text-purple" :
-                      solution.color === "emerald" ? "text-emerald" :
-                      solution.color === "blue" ? "text-blue-400" :
-                      solution.color === "gold" ? "text-gold" :
-                      "text-white/70"}`}
+                        solution.color === "emerald" ? "text-emerald" :
+                          solution.color === "blue" ? "text-blue-400" :
+                            solution.color === "gold" ? "text-gold" :
+                              "text-white/70"}`}
                   >
                     {solution.tagline}
                   </p>
@@ -217,10 +217,10 @@ export function SolutionsGrid() {
                           <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0
                             ${solution.color === "indigo" ? "bg-indigo" :
                               solution.color === "purple" ? "bg-purple" :
-                              solution.color === "emerald" ? "bg-emerald" :
-                              solution.color === "blue" ? "bg-blue-400" :
-                              solution.color === "gold" ? "bg-gold" :
-                              "bg-white"}`}
+                                solution.color === "emerald" ? "bg-emerald" :
+                                  solution.color === "blue" ? "bg-blue-400" :
+                                    solution.color === "gold" ? "bg-gold" :
+                                      "bg-white"}`}
                           />
                           <span className="text-sm">{example}</span>
                         </li>
@@ -244,7 +244,7 @@ export function SolutionsGrid() {
             Don't see what you need?
           </p>
           <p className="text-slate leading-relaxed">
-            These categories are just examples. We've built everything from facial recognition systems for luxury clubs to document automation for law firms. If you can describe the problem, we can engineer the solution.
+            These categories are just examples. We've built everything from custom CRM and content management systems for luxury clubs to automated dispatching for yacht charters. If you can describe the problem, we can engineer the solution.
           </p>
         </motion.div>
       </div>
