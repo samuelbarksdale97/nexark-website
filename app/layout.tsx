@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     description: "The vessel from where you are to where you're meant to be.",
     images: ["/og-image.png"],
   },
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
