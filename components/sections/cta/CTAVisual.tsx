@@ -27,8 +27,9 @@ export function CTAVisual() {
             y: number;
             z: number; // Depth for parallax
             size: number;
-            brightness: number;
+            baseAlpha: number;
             alpha: number;
+            twinkleOffset: number;
             twinkleSpeed: number;
 
             constructor(w: number, h: number) {
