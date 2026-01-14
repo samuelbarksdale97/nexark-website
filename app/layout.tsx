@@ -24,21 +24,23 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Nexark | Success is not an accident—it's engineered.",
+  title: "Nexark | Success is not an accident, it's engineered.",
   description: "The vessel from where you are to where you're meant to be. Reality Engineering for ambitious individuals and founders.",
   keywords: ["reality engineering", "transformation", "coaching", "business consulting", "AI tools", "personal development"],
   authors: [{ name: "Samuel Barksdale" }],
   openGraph: {
-    title: "Nexark | Success is not an accident—it's engineered.",
+    title: "Nexark | Success is not an accident, it's engineered.",
     description: "The vessel from where you are to where you're meant to be.",
     type: "website",
     locale: "en_US",
     siteName: "Nexark",
+    images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nexark | Success is not an accident—it's engineered.",
+    title: "Nexark | Success is not an accident, it's engineered.",
     description: "The vessel from where you are to where you're meant to be.",
+    images: ["/og-image.png"],
   },
 };
 
