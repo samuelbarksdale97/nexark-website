@@ -92,16 +92,12 @@ export function HowItWorks() {
               className="relative"
             >
               <div className={`
-                relative h-full p-8 lg:p-10 rounded-2xl border overflow-hidden
+                relative h-full p-8 lg:p-10 rounded-2xl border overflow-hidden bg-navy
                 ${phase.aesthetic === "wireframe"
-                  ? "border-white/10 bg-gradient-to-br from-white/5 to-transparent"
-                  : "border-purple/20 bg-gradient-to-br from-purple/5 to-transparent"
+                  ? "border-white/10"
+                  : "border-purple/20 shadow-[0_0_30px_rgba(99,102,241,0.1)]"
                 }
               `}>
-                {/* Giant background number */}
-                <span className="absolute -right-4 -top-8 font-display text-[180px] font-bold text-white/[0.02] select-none leading-none">
-                  {phase.number}
-                </span>
 
                 {/* Phase-specific visual treatment */}
                 {phase.aesthetic === "wireframe" && (
@@ -175,6 +171,6 @@ export function HowItWorks() {
           className="mt-20 md:mt-32 h-px w-full bg-gradient-to-r from-white/20 via-white/30 to-purple/30 origin-left"
         />
       </div>
-    </section>
+    </section >
   );
 }
