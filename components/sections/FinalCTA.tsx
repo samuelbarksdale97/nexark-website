@@ -78,10 +78,7 @@ export function FinalCTA() {
               </span>
             </Button>
 
-            {/* Secondary Lead Magnet CTA */}
-            <button className="text-sm text-slate-400 hover:text-white transition-colors border-b border-transparent hover:border-white/50 pb-0.5">
-              Not ready to build? <span className="text-indigo-300">Get the Blueprint</span>
-            </button>
+
           </motion.div>
 
           {/* Fine print */}
