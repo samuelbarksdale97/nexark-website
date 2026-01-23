@@ -53,8 +53,8 @@ export default function Home() {
         {/* 5. PROOF - Stats and Testimonials */}
         {/* <Proof /> */}
 
-        {/* 6. OFFER - myNexark vs Business */}
-        <Offerings />
+        {/* 6. OFFER - myNexark vs Business - HIDDEN */}
+        {/* <Offerings /> */}
 
         {/* 7. ROI Calculator */}
         <ROICalculator />
