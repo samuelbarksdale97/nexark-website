@@ -17,16 +17,16 @@ const mobileMenuVariants = {
     opacity: 0,
     transition: {
       duration: 0.3,
-      ease: [0.4, 0, 0.2, 1],
-      when: "afterChildren",
+      ease: "easeInOut" as const,
+      when: "afterChildren" as const,
     },
   },
   open: {
     opacity: 1,
     transition: {
       duration: 0.3,
-      ease: [0.4, 0, 0.2, 1],
-      when: "beforeChildren",
+      ease: "easeInOut" as const,
+      when: "beforeChildren" as const,
       staggerChildren: 0.05,
     },
   },
@@ -45,7 +45,7 @@ const menuItemVariants = {
     y: 0,
     transition: {
       duration: 0.3,
-      ease: [0, 0, 0.2, 1],
+      ease: "easeOut" as const,
     },
   },
 };
