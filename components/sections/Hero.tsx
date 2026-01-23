@@ -197,8 +197,8 @@ export function Hero() {
                 <Button href="https://cal.com/sam-barksdale/discovery" size="lg" showArrow className="w-full sm:w-auto bg-white text-navy hover:bg-indigo-50 border-0 h-14 md:h-auto text-base md:text-sm shadow-[0_0_20px_rgba(255,255,255,0.3)] md:shadow-none">
                   Book Strategy Session
                 </Button>
-                <Button href="#what-we-build" variant="secondary" size="lg" className="w-full sm:w-auto h-14 md:h-auto text-base md:text-sm border-white/10 bg-white/5 md:bg-transparent">
-                  See What We Build
+                <Button href="/roi-calculator" variant="secondary" size="lg" className="w-full sm:w-auto h-14 md:h-auto text-base md:text-sm border-white/10 bg-white/5 md:bg-transparent">
+                  Calculate Your ROI
                 </Button>
               </motion.div>
             </div>

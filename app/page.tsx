@@ -8,6 +8,8 @@ import { Problem } from "@/components/sections/Problem";
 import { Solution } from "@/components/sections/Solution";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Offerings } from "@/components/sections/Offerings";
+import { LeadMagnets } from "@/components/sections/LeadMagnets";
+import { ROICalculator } from "@/components/sections/ROICalculator";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Footer } from "@/components/sections/Footer";
 // import { IntroPreloader } from "@/components/ui/preloader/IntroPreloader"; // Disabled for dev
@@ -54,7 +56,13 @@ export default function Home() {
         {/* 6. OFFER - myNexark vs Business */}
         <Offerings />
 
-        {/* 7. CTA - Apply for Reality Engineering */}
+        {/* 7. ROI Calculator */}
+        <ROICalculator />
+
+        {/* 8. Lead Magnets - Free resources */}
+        <LeadMagnets />
+
+        {/* 9. CTA - Apply for Reality Engineering */}
         <FinalCTA />
 
         {/* Footer */}

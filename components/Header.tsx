@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { href: "/solutions", label: "Solutions" },
+  { href: "/roi-calculator", label: "ROI Calculator" },
 ];
 
 export function Header() {

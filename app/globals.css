@@ -158,6 +158,68 @@ body {
   color: white;
 }
 
+/* Custom Scrollbar - Premium Dark Aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6366F1 0%, #A855F7 100%);
+  border-radius: 5px;
+  border: 2px solid #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #818CF8 0%, #C084FC 100%);
+}
+
+::-webkit-scrollbar-corner {
+  background: #0a0a0f;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6366F1 #0a0a0f;
+}
+
+/* Cursor styles for interactive elements */
+button:not(:disabled),
+[role="button"],
+a,
+select,
+label[for] {
+  cursor: pointer;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  cursor: text;
+}
+
+input[type="range"] {
+  cursor: pointer;
+}
+
+input:disabled,
+button:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+}
+
 /* Custom scrollbar - minimal */
 ::-webkit-scrollbar {
   width: 6px;
