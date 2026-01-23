@@ -56,8 +56,8 @@ export default function Home() {
         {/* 6. OFFER - myNexark vs Business - HIDDEN */}
         {/* <Offerings /> */}
 
-        {/* 7. ROI Calculator */}
-        <ROICalculator />
+        {/* 7. ROI Calculator - HIDDEN (using Lead Magnets instead) */}
+        {/* <ROICalculator /> */}
 
         {/* 8. Lead Magnets - Free resources */}
         <LeadMagnets />
