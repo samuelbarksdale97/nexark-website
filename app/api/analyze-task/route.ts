@@ -1,22 +1,57 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "AIzaSyCkIaTyPpnvYTy_FTQjHDXFcFgHaRmmZaw";
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
+const ALLOWED_CATEGORIES = [
+  "General", "Communication", "Finance", "HR",
+  "Marketing", "Operations", "Sales", "Technology",
+];
+
+const FALLBACK_ANALYSIS = {
+  impactSummary: "This automation could save significant time and reduce errors in your workflow.",
+  effortSummary: "Implementation will depend on your existing systems and technical requirements.",
+  difficulty: "Moderate",
+  estimatedTime: "1-2 weeks",
+};
 
 export async function POST(request: NextRequest) {
-  try {
-    const { taskName, description, category } = await request.json();
+  // Origin validation — only accept requests from nexark.ai
+  const origin = request.headers.get("origin");
+  const isAllowedOrigin =
+    !origin ||
+    origin === "https://www.nexark.ai" ||
+    origin === "https://nexark.ai" ||
+    origin.startsWith("http://localhost");
 
-    if (!taskName) {
-      return NextResponse.json(
-        { error: "Task name is required" },
-        { status: 400 }
-      );
+  if (!isAllowedOrigin) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  if (!GEMINI_API_KEY) {
+    console.error("GEMINI_API_KEY environment variable is not set");
+    return NextResponse.json({ analysis: FALLBACK_ANALYSIS });
+  }
+
+  try {
+    const body = await request.json();
+    const { taskName, description, category } = body;
+
+    // Input validation
+    if (!taskName || typeof taskName !== "string") {
+      return NextResponse.json({ error: "Task name is required" }, { status: 400 });
     }
+    if (taskName.length > 200) {
+      return NextResponse.json({ error: "Task name must be 200 characters or less" }, { status: 400 });
+    }
+    if (description && (typeof description !== "string" || description.length > 2000)) {
+      return NextResponse.json({ error: "Description must be 2000 characters or less" }, { status: 400 });
+    }
+    const safeCategory = ALLOWED_CATEGORIES.includes(category) ? category : "General";
 
     const prompt = `You are an expert business automation consultant. Analyze this automation task and provide a brief assessment.
 
 Task: ${taskName}
-Category: ${category || "General"}
+Category: ${safeCategory}
 Description: ${description || "No description provided"}
 
 Respond in JSON format with these exact fields:
@@ -33,19 +68,9 @@ Be concise and practical. Focus on real business value.`;
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: prompt,
-                },
-              ],
-            },
-          ],
+          contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0.7,
             topK: 40,
@@ -57,71 +82,36 @@ Be concise and practical. Focus on real business value.`;
     );
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Gemini API error:", errorText);
-      
-      // Return a fallback analysis
-      return NextResponse.json({
-        analysis: {
-          impactSummary: "This task could streamline your workflow and save valuable time by automating repetitive steps.",
-          effortSummary: "Implementation complexity depends on your current systems and integration requirements.",
-          difficulty: "Moderate",
-          estimatedTime: "1-2 weeks",
-        },
-      });
+      console.error("Gemini API error:", response.status);
+      return NextResponse.json({ analysis: FALLBACK_ANALYSIS });
     }
 
     const data = await response.json();
-    
-    // Extract the text content from Gemini's response
     const textContent = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    
+
     if (!textContent) {
-      throw new Error("No content in response");
+      throw new Error("No content in Gemini response");
     }
 
-    // Parse the JSON from the response (it might be wrapped in markdown code blocks)
     let analysisJson;
     try {
-      // Try to extract JSON from markdown code blocks if present
       const jsonMatch = textContent.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
-      if (jsonMatch) {
-        analysisJson = JSON.parse(jsonMatch[1]);
-      } else {
-        analysisJson = JSON.parse(textContent);
-      }
-    } catch (parseError) {
-      console.error("Error parsing Gemini response:", parseError);
-      // Return fallback if parsing fails
-      return NextResponse.json({
-        analysis: {
-          impactSummary: "This task has potential to improve efficiency and reduce manual work.",
-          effortSummary: "Requires careful planning and testing before deployment.",
-          difficulty: "Moderate",
-          estimatedTime: "1-2 weeks",
-        },
-      });
+      analysisJson = jsonMatch ? JSON.parse(jsonMatch[1]) : JSON.parse(textContent);
+    } catch {
+      console.error("Error parsing Gemini response JSON");
+      return NextResponse.json({ analysis: FALLBACK_ANALYSIS });
     }
 
     return NextResponse.json({
       analysis: {
-        impactSummary: analysisJson.impactSummary || "Could improve workflow efficiency.",
-        effortSummary: analysisJson.effortSummary || "Requires standard implementation effort.",
+        impactSummary: analysisJson.impactSummary || FALLBACK_ANALYSIS.impactSummary,
+        effortSummary: analysisJson.effortSummary || FALLBACK_ANALYSIS.effortSummary,
         difficulty: analysisJson.difficulty || "Moderate",
         estimatedTime: analysisJson.estimatedTime || "1-2 weeks",
       },
     });
   } catch (error) {
-    console.error("Error in analyze-task API:", error);
-    
-    // Return fallback analysis on any error
-    return NextResponse.json({
-      analysis: {
-        impactSummary: "This automation could save significant time and reduce errors in your workflow.",
-        effortSummary: "Implementation will depend on your existing systems and technical requirements.",
-        difficulty: "Moderate",
-        estimatedTime: "1-2 weeks",
-      },
-    });
+    console.error("Error in analyze-task API:", error instanceof Error ? error.message : "Unknown error");
+    return NextResponse.json({ analysis: FALLBACK_ANALYSIS });
   }
 }
