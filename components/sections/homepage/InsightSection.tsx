@@ -17,7 +17,7 @@ export function InsightSection() {
             transition={{ duration: 0.8 }}
             className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-10 leading-tight tracking-tight"
           >
-            Your business is unique. Your technology should be too.
+            Every business has a next generation.
           </motion.h2>
 
           <motion.div
@@ -27,15 +27,21 @@ export function InsightSection() {
             className="space-y-6 text-lg text-text-secondary leading-relaxed"
           >
             <p>
-              Off-the-shelf tools were built for everyone, which means they were
-              built for no one in particular. You&apos;ve been adapting your
-              processes to fit the software. The software should fit you.
+              The current generation of your business is however it runs today:
+              the tools you picked up along the way, the processes that grew
+              over time, the ceiling you keep bumping into. It works. But you
+              know it could work differently.
             </p>
             <p>
-              We start with your inputs: your workflows, your team, your vision,
-              your constraints. Nobody else has your exact combination.
-              That&apos;s why a solution built specifically for yours will always
-              outperform one built for the average.
+              Your next generation is what your business becomes when those
+              limits get removed. When the technology fits how you actually
+              operate. When the systems compound instead of just keeping up.
+              When the thing you&apos;ve been describing in meetings for years
+              finally exists.
+            </p>
+            <p className="text-white/80">
+              The gap between the two is closer than it feels. You just need
+              the right engine to close it.
             </p>
           </motion.div>
         </div>

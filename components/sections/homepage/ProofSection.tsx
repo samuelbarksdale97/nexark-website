@@ -6,22 +6,22 @@ import Link from "next/link";
 
 const caseStudies = [
   {
-    client: "Takoma Station Tavern",
+    client: "A neighborhood bar",
     tag: "Membership Platform",
     description:
-      "A neighborhood institution with decades of loyal regulars and zero systems to capture that loyalty. We built a digital membership platform that turned goodwill into recurring revenue.",
+      "Their current generation was decades of loyalty with no system to capture it. Regulars showed up because of relationships that lived in people's heads. Their next generation is a digital membership platform that turned goodwill into recurring revenue and made every relationship permanent.",
   },
   {
-    client: "Park at 14th",
+    client: "An entertainment venue",
     tag: "CRM + Apple Wallet",
     description:
-      "Staff knew every regular by name, but that knowledge walked out the door with turnover. We built a membership CRM with Apple Wallet integration that made every relationship permanent, regardless of who's behind the bar on any given night.",
+      "Their current generation was a staff that knew every regular by name, but that knowledge walked out the door with turnover. Their next generation is a membership CRM with Apple Wallet integration where every relationship belongs to the business, regardless of who's working on any given night.",
   },
   {
-    client: "Eagle Group",
-    tag: "AI Compliance Platform",
+    client: "A charter boat company",
+    tag: "Operations Portal",
     description:
-      "184 open DOB violations, each taking 45 days to resolve manually. We built a platform that uploads a notice of infraction, auto-extracts the violations, routes work to contractors, and generates the final abatement report. The process dropped to 14 days.",
+      "Their current generation was managing driver onboarding, maintenance scheduling, and booking confirmations across two cities through spreadsheets and manual SMS. Their next generation is a custom operations portal with automated dispatch, real-time driver workflows, and an SMS system that handles booking confirmations without anyone touching it.",
   },
 ];
 
@@ -39,7 +39,7 @@ export function ProofSection() {
             transition={{ duration: 0.8 }}
             className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight"
           >
-            Real companies. Real results.
+            Businesses we&apos;ve taken to their next generation.
           </motion.h2>
 
           <motion.div

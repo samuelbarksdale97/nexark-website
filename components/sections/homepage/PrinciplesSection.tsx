@@ -5,24 +5,24 @@ import { motion, useInView } from "framer-motion";
 
 const principles = [
   {
-    title: "We design with intention, not default.",
+    title: "You have to be the one driving it.",
     description:
-      "Most businesses run on systems nobody chose on purpose. We help you take that apart and rebuild it deliberately.",
+      "We can build the most capable engine in the world. It only produces results when you're behind the wheel. The businesses that move fastest into their next generation are the ones that show up ready to own the outcome. We bring the technology and the methodology. You bring the decisions.",
   },
   {
-    title: "We build infrastructure that works without you in the middle.",
+    title: "Most businesses are running on a design nobody chose.",
     description:
-      "The goal is a system that produces results independent of your constant attention. If your business only runs because you're running it, we have work to do.",
-  },
-  {
-    title: "Every sprint teaches us something.",
-    description:
-      "We build, measure, and adjust. The clients who move fastest are the ones who learn from each cycle and use it to inform the next one.",
+      "The tools accumulated. The processes grew around whoever was available. Over time, it all started to feel permanent. Anything that was assembled by default can be reassembled with intention.",
   },
   {
     title: "The technology has to fit how you actually operate.",
     description:
       "We've seen what happens when you force a business into someone else's framework. It works on paper. It falls apart in practice. We build around you.",
+  },
+  {
+    title: "Speed of learning beats speed of building.",
+    description:
+      "We work in focused sprints. Build, measure, adjust. The clients who get to their next generation fastest are the ones who learn from each cycle and use it to inform the next one.",
   },
 ];
 
@@ -39,7 +39,7 @@ export function PrinciplesSection() {
           transition={{ duration: 0.8 }}
           className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-20 max-w-3xl tracking-tight"
         >
-          What drives our work
+          What we&apos;ve learned from doing this
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">

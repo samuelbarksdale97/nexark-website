@@ -6,21 +6,24 @@ import { motion, useInView } from "framer-motion";
 const phases = [
   {
     number: "01",
-    title: "Blueprint",
+    title: "Learn",
+    headline: "We learn your business before we touch anything.",
     description:
-      "We come in and map your current operation: tools, processes, revenue leaks, friction points. Then we design what needs to exist. We figure out what your business actually needs, which is usually different from what you'd ask for if we just took an order.",
+      "We come in and map your current generation: tools, processes, revenue model, team structure, where time is going. We figure out what your business actually needs to get to the next one. This is usually different from what you'd ask for if we just took an order, because we're looking at the full picture.",
   },
   {
     number: "02",
     title: "Build",
+    headline: "We build the technology that moves you forward.",
     description:
-      "Custom software, AI systems, and automation engineered around your specific workflows. We sit on top of what you already use. Your existing tools start working together instead of against each other.",
+      "Custom software, AI systems, and automation engineered around how your operation actually runs. We sit on top of what you already use. Your existing tools start working together. Your team does more with the same resources.",
   },
   {
     number: "03",
     title: "Partner",
+    headline: "We stay in your corner.",
     description:
-      "Your business changes. Your technology evolves with it. We stay in your corner for ongoing optimization, strategic consultation, and the kind of partnership where we're invested in your outcome long-term.",
+      "A transformation engine that shuts off after delivery isn't an engine. Your business evolves, and the technology has to evolve with it. Ongoing optimization, strategic consultation, and the kind of partnership where your next generation keeps getting refined as you grow into it.",
   },
 ];
 
@@ -37,7 +40,7 @@ export function HowWeWorkSection() {
           transition={{ duration: 0.8 }}
           className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-20 max-w-2xl tracking-tight"
         >
-          How we work
+          How the engine works
         </motion.h2>
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
@@ -57,6 +60,9 @@ export function HowWeWorkSection() {
                   {phase.title}
                 </h3>
               </div>
+              <p className="text-white/90 font-medium text-sm mb-4">
+                {phase.headline}
+              </p>
               <p className="text-text-secondary leading-relaxed text-[15px]">
                 {phase.description}
               </p>

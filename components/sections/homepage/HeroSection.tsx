@@ -13,7 +13,6 @@ export function HeroSection() {
       ref={ref}
       className="relative min-h-screen flex items-center pt-20 pb-24 md:pb-32"
     >
-      {/* Subtle ambient glow */}
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 pointer-events-none bg-[radial-gradient(circle,rgba(102,0,204,0.15)_0%,transparent_70%)]" />
 
       <div className="container mx-auto px-6 lg:px-12">
@@ -29,34 +28,35 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] mb-4 tracking-tight"
-          >
-            We don&apos;t just build software.
-          </motion.h1>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.8 }}
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gradient leading-[1.08] mb-10 tracking-tight"
           >
-            We engineer your next arc.
+            The transformation engine for your next generation.
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 1.0 }}
-            className="text-lg md:text-xl text-text-secondary max-w-2xl leading-relaxed mb-12 font-light"
+            className="text-lg md:text-xl text-text-secondary max-w-2xl leading-relaxed mb-6 font-light"
           >
-            We build custom software and AI systems around how your business
-            actually works, and where you&apos;re trying to take it.
+            We partner with businesses to build the custom technology that takes
+            them from where they are to where they&apos;ve always wanted to be.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 1.15 }}
+            className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed mb-12"
+          >
+            You bring the vision. We bring the engineering capability to make it
+            real.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 1.2 }}
+            transition={{ duration: 0.6, delay: 1.3 }}
             className="flex gap-4"
           >
             <Button href="/start" size="lg">
