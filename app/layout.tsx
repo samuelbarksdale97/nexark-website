@@ -1,36 +1,31 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, Cormorant_Garamond } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { NextArcVisual } from "@/components/visuals/NextArc/NextArcVisual";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const cormorantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-display-v2",
+  variable: "--font-primary",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Nexark | Success is not an accident, it's engineered.",
-  description: "The vessel from where you are to where you're meant to be. Reality Engineering for ambitious individuals and founders.",
-  keywords: ["reality engineering", "transformation", "coaching", "business consulting", "AI tools", "personal development"],
+  description:
+    "We build custom software and AI systems around how your business actually works, and where you're trying to take it.",
+  keywords: [
+    "custom software",
+    "AI systems",
+    "business automation",
+    "reality engineering",
+    "digital transformation",
+  ],
   authors: [{ name: "Samuel Barksdale" }],
   openGraph: {
     title: "Nexark | Success is not an accident, it's engineered.",
-    description: "The vessel from where you are to where you're meant to be.",
+    description:
+      "We build custom software and AI systems around how your business actually works.",
     type: "website",
     locale: "en_US",
     siteName: "Nexark",
@@ -39,7 +34,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nexark | Success is not an accident, it's engineered.",
-    description: "The vessel from where you are to where you're meant to be.",
+    description:
+      "We build custom software and AI systems around how your business actually works.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -53,8 +49,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${cormorantGaramond.variable}`}>
-      <body className="min-h-screen bg-navy text-white antialiased relative selection:bg-indigo-500/30">
+    <html lang="en" className={montserrat.variable}>
+      <body className="min-h-screen text-white antialiased relative selection:bg-purple-500/30" style={{ backgroundColor: '#050508' }}>
         <NextArcVisual />
         <SmoothScroll>{children}</SmoothScroll>
       </body>

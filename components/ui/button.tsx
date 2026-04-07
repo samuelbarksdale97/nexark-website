@@ -24,26 +24,23 @@ export function Button({
 }: ButtonProps) {
   const baseStyles = cn(
     "inline-flex items-center justify-center gap-2",
-    "font-medium tracking-wide",
+    "font-semibold tracking-wide",
     "rounded-full transition-all duration-300 cursor-pointer",
-    "focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+    "focus:outline-none focus-visible:ring-2 focus-visible:ring-nexark-purple/40"
   );
 
   const variants = {
     primary: cn(
-      "bg-white text-navy",
+      "bg-white text-bg-primary",
       "hover:bg-white/90",
-      "shadow-sm hover:shadow-md"
+      "shadow-sm hover:shadow-md hover:shadow-nexark-purple/10"
     ),
     secondary: cn(
       "bg-transparent text-white",
-      "border border-white/20",
-      "hover:border-white/40 hover:bg-white/5"
+      "border border-white/15",
+      "hover:border-nexark-purple/50 hover:bg-nexark-purple/5"
     ),
-    ghost: cn(
-      "bg-transparent text-white/70",
-      "hover:text-white"
-    ),
+    ghost: cn("bg-transparent text-text-secondary", "hover:text-white"),
   };
 
   const sizes = {
