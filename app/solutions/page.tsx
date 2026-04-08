@@ -274,30 +274,14 @@ export default function SolutionsPage() {
                     <td className="py-4 px-4">2-3 weeks</td>
                     <td className="py-4 px-4">3-4 weeks</td>
                   </tr>
-                  <tr>
-                    <td className="py-4 pr-6 font-medium text-white/80">
-                      Investment
-                    </td>
-                    <td className="py-4 px-4 text-white font-medium">
-                      $7,500 - $10,000
-                    </td>
-                    <td className="py-4 px-4 text-white font-medium">
-                      $15,000 - $20,000
-                    </td>
-                    <td className="py-4 px-4 text-white font-medium">
-                      $25,000 - $40,000+
-                    </td>
-                  </tr>
+                  {/* Investment row removed — pricing discussed in conversation */}
                 </tbody>
               </table>
             </div>
 
             <p className="text-sm text-slate/70 mb-6">
-              A Starter audit often reveals issues that cross boundaries. If
-              that happens, we offer to upgrade to Growth with 50-75% of the
-              Starter fee credited. The audit is a standalone deliverable. You
-              pay for the diagnosis, then decide whether to engage us for the
-              treatment.
+              The audit is a standalone deliverable. We scope and price it based
+              on what we learn about your situation in the first conversation.
             </p>
 
             <p className="text-sm text-slate">
@@ -367,11 +351,8 @@ export default function SolutionsPage() {
               </ul>
             </div>
 
-            <p className="text-white font-display font-semibold">
-              Sprints start at $5,000.{" "}
-              <span className="text-slate font-normal">
-                Scoped after the audit.
-              </span>
+            <p className="text-slate">
+              Scoped and priced after the audit.
             </p>
           </div>
         </div>
@@ -432,11 +413,9 @@ export default function SolutionsPage() {
               </ul>
             </div>
 
-            <p className="text-white font-display font-semibold">
-              Projects scoped individually.{" "}
-              <span className="text-slate font-normal">
-                Typically $10,000-$50,000 depending on complexity.
-              </span>
+            <p className="text-slate">
+              Every project is scoped individually based on what we learn about
+              your vision and what it takes to build it.
             </p>
           </div>
         </div>
@@ -463,9 +442,7 @@ export default function SolutionsPage() {
                   performance, handle dependency updates, and run quarterly
                   optimization reviews. Proactive, not reactive.
                 </p>
-                <p className="text-white/70 text-sm font-medium">
-                  Starting at $1,500/month
-                </p>
+                {/* Pricing discussed in conversation */}
               </div>
 
               <div>
@@ -473,14 +450,10 @@ export default function SolutionsPage() {
                   Fractional CTO
                 </h3>
                 <p className="text-slate leading-relaxed mb-2">
-                  Strategic technology leadership without the $400K salary.
+                  Strategic technology leadership without the full-time hire.
                   Architecture decisions, vendor management, roadmap
                   development, team oversight. We show up to the meetings that
                   matter.
-                </p>
-                <p className="text-white/70 text-sm font-medium">
-                  Advisory: $3,000/month · Embedded: $7,500/month · Leadership:
-                  $15,000/month
                 </p>
               </div>
 
@@ -495,9 +468,7 @@ export default function SolutionsPage() {
                   about who we partner with because when we come in as a venture
                   partner, our interests and yours are the same.
                 </p>
-                <p className="text-white/70 text-sm font-medium">
-                  Structure determined case-by-case
-                </p>
+                {/* Pricing discussed in conversation */}
               </div>
             </div>
           </div>
