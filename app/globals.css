@@ -1,41 +1,58 @@
 @import "tailwindcss";
 
-/* Nexark Custom Theme - Premium Dark Mode */
+/* ==========================================================================
+   NEXARK BRAND SYSTEM
+   Source of truth: directives/branding/nexark_premium_brand_book.md
+   Font: Montserrat (all text)
+   Colors: #6600CC purple, #FF00EA magenta, #5B18B0 deep purple
+   ========================================================================== */
+
 @theme {
-  /* Colors - Deeper, more premium darks */
-  --color-navy: #030305;
-  --color-navy-light: #0a0a0f;
-  --color-navy-lighter: #121218;
-  --color-slate: #71717a;
-  --color-white: #fafafa;
-  --color-indigo: #6366F1;
-  --color-indigo-light: #818CF8;
+  /* Brand Colors — Nexark Premium Brand Book */
+  --color-nexark-purple: #6600CC;
+  --color-nexark-magenta: #FF00EA;
+  --color-nexark-deep: #5B18B0;
+  --color-nexark-navy: #00008E;
+  --color-nexark-dark: #000052;
+
+  /* Backgrounds */
+  --color-bg-primary: #050508;
+  --color-bg-elevated: #0a0a12;
+  --color-bg-card: #0d0d18;
+  --color-bg-card-hover: #12121f;
+
+  /* Text */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B8B8C8;
+  --color-text-muted: #8888A0;
+  --color-text-subtle: #5A5A72;
+
+  /* Borders */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-border-accent: rgba(102, 0, 204, 0.3);
+
+  /* Legacy aliases for existing components */
+  --color-navy: #050508;
+  --color-navy-light: #0a0a12;
+  --color-slate: #B8B8C8;
+  --color-white: #FFFFFF;
+  --color-indigo: #6600CC;
+  --color-indigo-light: #8833DD;
+  --color-purple: #5B18B0;
+  --color-purple-light: #8844DD;
   --color-emerald: #10B981;
   --color-emerald-light: #34D399;
-  --color-purple: #A855F7;
-  --color-purple-light: #C084FC;
-  --color-gold: #F59E0B;
-
-  /* v2 Colors - Navy + Gold Constellation Theme */
-  --color-navy-deep: #0B0B45;
-  --color-navy-elevated: #1D2545;
-  --color-gold-bright: #D3AF37;
-  --color-gold-muted: #A48111;
 
   /* Typography */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-display-v2: 'Cormorant Garamond', serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-primary: 'Montserrat', sans-serif;
 
   /* Animations */
   --animate-fade-in: fade-in 0.6s ease-out forwards;
-  --animate-fade-up: fade-up 0.6s ease-out forwards;
+  --animate-fade-up: fade-up 0.8s ease-out forwards;
   --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
-  --animate-aurora: aurora 60s linear infinite;
-  --animate-meteor-effect: meteor 5s linear infinite;
   --animate-shimmer: shimmer 2s linear infinite;
-  --animate-border-beam: border-beam 4s linear infinite;
-  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -43,14 +60,8 @@
   }
 
   @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes pulse-slow {
@@ -58,138 +69,217 @@
     50% { opacity: 0.7; }
   }
 
-  @keyframes aurora {
-    from {
-      background-position: 50% 50%, 50% 50%;
-    }
-    to {
-      background-position: 350% 50%, 350% 50%;
-    }
-  }
-
-  @keyframes meteor {
-    0% {
-      transform: rotate(215deg) translateX(0);
-      opacity: 1;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(215deg) translateX(-500px);
-      opacity: 0;
-    }
-  }
-
   @keyframes shimmer {
-    from {
-      background-position: 0 0;
-    }
-    to {
-      background-position: -200% 0;
-    }
-  }
-
-  @keyframes border-beam {
-    from {
-      offset-distance: 0%;
-    }
-    to {
-      offset-distance: 100%;
-    }
+    from { background-position: 0 0; }
+    to { background-position: -200% 0; }
   }
 
   @keyframes glow-pulse {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(99, 102, 241, 0.6), 0 0 60px rgba(168, 85, 247, 0.3);
-    }
+    0%, 100% { box-shadow: 0 0 20px rgba(102, 0, 204, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(102, 0, 204, 0.4), 0 0 80px rgba(255, 0, 234, 0.15); }
   }
 }
 
-/* Premium Typography Scale */
-.text-display-xl {
-  font-size: clamp(4rem, 10vw, 8rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-}
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
 
-.text-display-lg {
-  font-size: clamp(3rem, 7vw, 6rem);
-  line-height: 1;
-  letter-spacing: -0.025em;
-}
-
-.text-display-md {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.text-hero {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-}
-
-/* Base styles */
 html {
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  scroll-behavior: auto;
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: transparent; /* Handled by NextArcVisual for global star field */
-  color: var(--color-white);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  background-color: #050508 !important;
+  color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Display font class */
-.font-display {
-  font-family: var(--font-display);
-}
-
-/* Selection styling */
 ::selection {
-  background-color: var(--color-indigo);
+  background-color: rgba(102, 0, 204, 0.4);
   color: white;
 }
 
-/* Custom Scrollbar - Premium Dark Aesthetic */
+/* Font weight utility */
+.font-primary { font-family: var(--font-primary); }
+
+/* Legacy display font class — now maps to Montserrat */
+.font-display { font-family: var(--font-primary); }
+
+/* ==========================================================================
+   TYPOGRAPHY SCALE — Montserrat Weight Hierarchy
+   800 ExtraBold: Hero text, page titles
+   700 Bold:      Section headings, card titles
+   500 Medium:    Subheadings, lead paragraphs
+   400 Regular:   Body copy
+   300 Light:     Captions, metadata
+   ========================================================================== */
+
+.text-display-xl {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.text-display-lg {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.text-display-md {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   BRAND GRADIENTS
+   ========================================================================== */
+
+.text-gradient {
+  background: linear-gradient(135deg, #6600CC 0%, #FF00EA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-subtle {
+  background: linear-gradient(135deg, #8833DD 0%, #BB44EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient-brand {
+  background: linear-gradient(135deg, #6600CC, #FF00EA);
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(180deg, #000052 0%, #050508 100%);
+}
+
+.border-gradient-brand {
+  border-image: linear-gradient(135deg, rgba(102, 0, 204, 0.5), rgba(255, 0, 234, 0.3)) 1;
+}
+
+/* ==========================================================================
+   CARD SYSTEM
+   ========================================================================== */
+
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-border-hover);
+}
+
+.card-glow {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-accent);
+  border-radius: 1rem;
+  box-shadow: 0 0 30px rgba(102, 0, 204, 0.08), 0 0 60px rgba(102, 0, 204, 0.04);
+  transition: all 0.3s ease;
+}
+
+.card-glow:hover {
+  border-color: rgba(102, 0, 204, 0.5);
+  box-shadow: 0 0 40px rgba(102, 0, 204, 0.15), 0 0 80px rgba(255, 0, 234, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   GLASSMORPHISM
+   ========================================================================== */
+
+.glass {
+  background: rgba(10, 10, 18, 0.9);
+  border: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+  .glass {
+    background: rgba(13, 13, 24, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+  }
+}
+
+/* ==========================================================================
+   GLOW EFFECTS
+   ========================================================================== */
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.3), 0 0 60px rgba(102, 0, 204, 0.1);
+}
+
+.glow-magenta {
+  box-shadow: 0 0 20px rgba(255, 0, 234, 0.3), 0 0 60px rgba(255, 0, 234, 0.1);
+}
+
+/* ==========================================================================
+   ACCENT LINE — Purple left border with glow
+   ========================================================================== */
+
+.accent-line {
+  border-left: 2px solid rgba(102, 0, 204, 0.6);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.accent-line::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #6600CC, #FF00EA);
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   SCROLLBAR
+   ========================================================================== */
+
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0f;
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #6366F1 0%, #A855F7 100%);
-  border-radius: 5px;
-  border: 2px solid #0a0a0f;
+  background: rgba(102, 0, 204, 0.3);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #818CF8 0%, #C084FC 100%);
+  background: rgba(102, 0, 204, 0.5);
 }
 
-::-webkit-scrollbar-corner {
-  background: #0a0a0f;
-}
-
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #6366F1 #0a0a0f;
+  scrollbar-color: rgba(102, 0, 204, 0.3) transparent;
 }
 
-/* Cursor styles for interactive elements */
+/* ==========================================================================
+   INTERACTIVE ELEMENTS
+   ========================================================================== */
+
 button:not(:disabled),
 [role="button"],
 a,
@@ -209,154 +299,9 @@ textarea {
   cursor: text;
 }
 
-input[type="range"] {
-  cursor: pointer;
-}
-
 input:disabled,
 button:disabled,
 select:disabled,
 textarea:disabled {
   cursor: not-allowed;
-}
-
-/* Custom scrollbar - minimal */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Gradient text utility - enhanced */
-.text-gradient {
-  background: linear-gradient(135deg, #818CF8 0%, #A855F7 50%, #6366F1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-emerald {
-  background: linear-gradient(135deg, #34D399 0%, #10B981 50%, #059669 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Animated gradient text */
-.text-gradient-animated {
-  background: linear-gradient(90deg, #fff, #818CF8, #A855F7, #818CF8, #fff);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
-}
-
-/* Glow effects - premium */
-.glow-indigo {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), 0 0 40px rgba(99, 102, 241, 0.1);
-}
-
-.glow-emerald {
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), 0 0 40px rgba(16, 185, 129, 0.1);
-}
-
-.glow-purple {
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.1);
-}
-
-/* Background patterns removed for cleaner aesthetic */
-
-/* Glassmorphism utilities */
-.glass {
-  /* Mobile: Solid background for performance (no expensive blur) */
-  background: rgba(10, 10, 15, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Desktop: Expensive backdrop blur only on larger screens */
-@media (min-width: 768px) {
-  .glass {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-}
-
-.glass-hover:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Premium border */
-.border-gradient {
-  position: relative;
-}
-
-.border-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.1), transparent);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-}
-
-/* Noise texture removed for cleaner aesthetic */
-
-/* Premium button glow */
-.btn-glow {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-glow::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.4), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.btn-glow:hover::before {
-  opacity: 1;
-  animation: shimmer 1.5s linear infinite;
-}
-
-/* v2 Constellation Theme Utilities */
-.v2-active {
-  --color-navy: var(--color-navy-deep);
-  --color-navy-light: var(--color-navy-elevated);
-}
-
-.font-display-v2 {
-  font-family: var(--font-display-v2);
-}
-
-.text-gradient-gold {
-  background: linear-gradient(135deg, var(--color-gold-bright) 0%, var(--color-gold-muted) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.glow-gold {
-  box-shadow: 0 0 20px rgba(211, 175, 55, 0.3), 0 0 40px rgba(211, 175, 55, 0.1);
 }
