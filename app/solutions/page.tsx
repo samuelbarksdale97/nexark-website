@@ -55,11 +55,12 @@ export default function SolutionsPage() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="text-lg md:text-xl text-slate leading-relaxed"
             >
-              We figure out what your business actually needs, whether
-              that&apos;s making your current operation run without you in the
-              middle of it, or building something that doesn&apos;t exist yet.
-              We start by understanding where you are and where you want to go.
-              Then we build the technology to close the gap.
+              We help businesses transition into their next generation through
+              technology and long-term partnership. Whether you need your current
+              operation to run without you in the middle of it, or you want to
+              build something that doesn&apos;t exist yet, the first step is the
+              same: we learn where you are and where you want to go. Then we
+              build the technology to close the gap.
             </motion.p>
           </div>
         </div>
@@ -317,7 +318,7 @@ export default function SolutionsPage() {
               Optimize
             </h2>
             <p className="font-display text-lg text-white/80 mb-8">
-              Your business works. We make it work without you in the middle.
+              Take your current operation to its next generation.
             </p>
 
             <div className="text-slate leading-relaxed space-y-4 mb-10">
@@ -330,8 +331,9 @@ export default function SolutionsPage() {
               <p>
                 We sit on top of what you already use and build custom software
                 that fits how your operation actually runs. Your existing tools
-                start working together instead of against each other. Your team
-                does more with less.
+                start working together. Your team does more with the same
+                resources. The current generation of your operation becomes the
+                foundation for the next one.
               </p>
             </div>
 
@@ -383,7 +385,7 @@ export default function SolutionsPage() {
               Innovate
             </h2>
             <p className="font-display text-lg text-white/80 mb-8">
-              You have an idea you&apos;ve been sitting on. We build it.
+              Build the next generation of what your business could be.
             </p>
 
             <div className="text-slate leading-relaxed space-y-4 mb-10">
@@ -391,13 +393,16 @@ export default function SolutionsPage() {
                 You see an opportunity. A product your industry needs. A
                 membership model that turns one-time customers into recurring
                 revenue. A platform that creates a new line of business
-                entirely. The vision is clear. You need someone who can hear
-                what you&apos;re describing and turn it into something real.
+                entirely. The vision is clear. You need a technology partner who
+                can hear what you&apos;re describing and turn it into something
+                real.
               </p>
               <p>
                 We take your idea through discovery, architecture, and build,
-                and we stay in your corner after launch. We engineer the product
-                with revenue designed in from day one.
+                and we stay in your corner after launch. This is where the
+                partnership matters most: we&apos;re engineering a product with
+                revenue designed in from day one, and we&apos;re invested in its
+                success long-term.
               </p>
             </div>
 
@@ -445,7 +450,7 @@ export default function SolutionsPage() {
               Partner
             </h2>
             <p className="font-display text-lg text-white/80 mb-12">
-              Your business changes. Your technology needs to change with it.
+              When you grow, we grow. That&apos;s how partnership works.
             </p>
 
             <div className="space-y-10">
@@ -504,13 +509,14 @@ export default function SolutionsPage() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6">
-              Two starting points. One framework.
+              What&apos;s the next generation of your business?
             </h2>
             <p className="text-lg text-slate leading-relaxed mb-10">
-              Whether you&apos;re fixing what&apos;s broken or building
-              what&apos;s next, the first step is the same: a conversation about
-              where you are and where you want to go. We&apos;ll tell you what
-              we see and how we can help.
+              Whether you&apos;re optimizing what you have or building something
+              new, the first step is the same: a conversation about where you
+              are and where you&apos;ve always wanted to take it. We&apos;ll dig
+              into the details and start mapping out what it would take to get
+              there.
             </p>
             <Button href="/start" size="lg">
               Start with a Conversation

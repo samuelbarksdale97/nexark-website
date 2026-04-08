@@ -60,13 +60,14 @@ export default function MethodologyPage() {
                 The tools don&apos;t talk to each other, so the team fills the
                 gaps manually.
               </p>
-              <p>Over time, everyone just accepted it as how things work.</p>
+              <p>Over time, everyone just accepted it as how things work. That&apos;s the current generation.</p>
               <p className="text-white/90">
-                From our experience, if the way your business runs today was
-                assembled by default, by circumstance, by decisions that just
-                accumulated, then it can be taken apart and put back together
-                with intention. That&apos;s the starting point for everything we
-                do.
+                From our experience, that&apos;s exactly where the opportunity
+                lives. Because if the way your business runs today was assembled
+                by default, by circumstance, by decisions that just accumulated,
+                then it can be taken apart and put back together with intention.
+                The next generation of your business starts with seeing that
+                clearly.
               </p>
             </motion.div>
           </div>
@@ -236,7 +237,8 @@ export default function MethodologyPage() {
             <p className="text-lg text-slate leading-relaxed">
               The idea is simple: the way your business runs today was assembled
               over time by decisions, defaults, and circumstances. We help you
-              take that apart and put it back together on purpose.
+              take that apart and put it back together on purpose. That&apos;s
+              how we take businesses to their next generation.
             </p>
           </div>
         </div>
@@ -255,8 +257,8 @@ export default function MethodologyPage() {
             </p>
 
             <p className="text-xl text-white font-display font-semibold mb-10">
-              You bring what makes your business yours. We engineer the path
-              forward.
+              You bring your vision. We bring the transformation engine.
+              Together, we build what comes next.
             </p>
 
             <Button href="/start" size="lg">

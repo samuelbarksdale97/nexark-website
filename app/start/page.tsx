@@ -89,8 +89,8 @@ export default function StartPage() {
               <p className="text-lg text-slate leading-relaxed mb-4">
                 We&apos;ll review what you shared and come back within 48 hours
                 with our initial thoughts on how we&apos;d approach your
-                situation. We&apos;re looking forward to learning more about what
-                you&apos;re building.
+                situation. We&apos;re looking forward to learning about your
+                business and what its next generation could look like.
               </p>
 
               <p className="text-slate leading-relaxed mb-10">
