@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Fraunces, Inter } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { NextArcVisual } from "@/components/visuals/NextArc/NextArcVisual";
 import "./globals.css";
+import "./refresh.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-primary",
+  display: "swap",
+});
+
+// Refresh design-system fonts — used by the `.nx` redesign pages (scoped in refresh.css)
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -49,7 +66,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={montserrat.variable}>
+    <html lang="en" className={`${montserrat.variable} ${fraunces.variable} ${inter.variable}`}>
       <body className="min-h-screen text-white antialiased relative selection:bg-purple-500/30" style={{ backgroundColor: '#050508' }}>
         <NextArcVisual />
         <SmoothScroll>{children}</SmoothScroll>

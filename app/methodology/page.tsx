@@ -1,274 +1,153 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/sections/Footer";
-import { Button } from "@/components/ui/button";
-
-function AnimatedSection({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  return (
-    <motion.section
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8 }}
-      className={`py-20 md:py-28 ${className}`}
-    >
-      {children}
-    </motion.section>
-  );
-}
+import Link from "next/link";
+import { RefreshShell } from "@/components/refresh/RefreshShell";
 
 export default function MethodologyPage() {
   return (
-    <main className="min-h-screen">
-      <Header />
-
-      {/* Hero */}
-      <section className="pt-32 md:pt-40 pb-16 md:pb-24">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-            >
-              You say success is engineered. Here&apos;s what we mean by that.
-            </motion.h1>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="space-y-6 text-lg md:text-xl text-slate leading-relaxed"
-            >
-              <p>
-                Most businesses we work with are running on systems nobody
-                designed on purpose. The CRM was picked three years ago because
-                someone found it on a Google search. The workflows grew around
-                whoever was available, not around what actually needed to happen.
-                The tools don&apos;t talk to each other, so the team fills the
-                gaps manually.
-              </p>
-              <p>Over time, everyone just accepted it as how things work. That&apos;s the current generation.</p>
-              <p className="text-white/90">
-                From our experience, that&apos;s exactly where the opportunity
-                lives. Because if the way your business runs today was assembled
-                by default, by circumstance, by decisions that just accumulated,
-                then it can be taken apart and put back together with intention.
-                The next generation of your business starts with seeing that
-                clearly.
-              </p>
-            </motion.div>
+    <RefreshShell active="methodology">
+      {/* HERO */}
+      <section className="hero hero-page">
+        <div className="hero-bg" style={{ backgroundImage: "url('/refresh/assets/page-methodology.png')" }} />
+        <div className="hero-scrim" />
+        <div className="wrap">
+          <div className="hero-copy">
+            <span className="eyebrow">The spark that reignites possibility</span>
+            <h1>
+              You say success is engineered. <em>Here&apos;s what we mean by that.</em>
+            </h1>
           </div>
         </div>
       </section>
 
-      {/* What We've Found to Be True */}
-      <AnimatedSection className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-16">
-            What we&apos;ve found to be true
-          </h2>
-
-          <div className="space-y-16 max-w-3xl">
-            <div>
-              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-4">
-                You are the one driving this.
-              </h3>
-              <p className="text-slate leading-relaxed text-lg">
-                We can build the best system in the world. It only works if
-                you&apos;re driving it. We take constraints seriously: the
-                market, the budget, the team you have today. But within those
-                constraints, you&apos;re the one making the calls. From our
-                lens, the people who move fastest through transformation are the
-                ones who show up ready to own the outcome. We bring the
-                methodology and the build capability. You bring the
-                decision-making.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-4">
-                We need to know where you&apos;re going before we touch
-                anything.
-              </h3>
-              <p className="text-slate leading-relaxed text-lg">
-                Before we write a line of code, we sit down and get specific
-                about what success actually looks like for you. What does your
-                day look like when this works? How many hours a week are you
-                working? What are you known for? What have you stopped doing? We
-                push on this until the picture is vivid enough to make decisions
-                against. When you can describe your destination with that kind of
-                precision, the path to get there starts to reveal itself. Without
-                it, you&apos;re building toward a feeling, and feelings shift.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-4">
-                Success compounds when you build it into a system.
-              </h3>
-              <p className="text-slate leading-relaxed text-lg">
-                The businesses that produce results consistently have built
-                systems for how they make decisions, how they operate, how they
-                capture value. Those systems compound over time. We approach
-                success the same way we&apos;d approach any complex system: you
-                can design it, build it, test it, and optimize it. We&apos;ve
-                done this enough times to know it works.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-display text-xl md:text-2xl font-bold text-white mb-4">
-                Things will go wrong. We build for that.
-              </h3>
-              <div className="text-slate leading-relaxed text-lg space-y-4">
-                <p>
-                  Markets shift. Key people leave. Plans meet reality and reality
-                  wins. Most approaches pretend this won&apos;t happen. We think
-                  about it differently. Chaos is permanent. So we build systems
-                  that hold up when conditions change.
-                </p>
-                <p>
-                  We went into a venue with decades of loyal regulars and zero
-                  systems to capture that loyalty. Staff turnover meant
-                  relationships walked out the door every six months. The system
-                  we built made those relationships permanent, regardless of
-                  who&apos;s behind the bar on any given night. When disruption
-                  hit, the system held.
-                </p>
-              </div>
-            </div>
-          </div>
+      {/* NARRATIVE */}
+      <section className="band">
+        <span className="connector" />
+        <div className="wrap band-narrow">
+          <p className="lead-para reveal">
+            Most businesses we work with are running on systems nobody designed on purpose. The CRM was
+            picked three years ago because someone found it on a Google search. The workflows grew
+            around whoever was available, not around what actually needed to happen. The tools
+            don&apos;t talk to each other, so the team fills the gaps manually.
+          </p>
+          <p className="lead-para reveal d1">
+            Over time, everyone just accepted it as how things work. That&apos;s the current
+            generation.
+          </p>
+          <p className="lead-para reveal d2">
+            From our experience, that&apos;s exactly where the opportunity lives. Because if the way
+            your business runs today was assembled by default — by circumstance, by decisions that just
+            accumulated — then it can be taken apart and put back together with intention.{" "}
+            <strong>The next generation of your business starts with seeing that clearly.</strong>
+          </p>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* How This Works in Practice */}
-      <AnimatedSection className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-16">
-            How this works in practice
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-14 max-w-5xl">
-            <div className="border-l-2 border-indigo/40 pl-6">
-              <h3 className="font-display text-lg font-semibold text-white mb-3">
-                We start with a diagnostic.
-              </h3>
-              <p className="text-slate leading-relaxed">
-                We come in and map where you actually are: your operations,
-                revenue model, team structure, how time is being spent, what
-                tools you&apos;re running. What&apos;s working, what&apos;s
-                working by accident, and what&apos;s quietly costing you. We
-                come in without the same blinders, without understanding the
-                internal politics or the history. We look at it for what it is.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-indigo/40 pl-6">
-              <h3 className="font-display text-lg font-semibold text-white mb-3">
-                We build systems, not one-off fixes.
-              </h3>
-              <p className="text-slate leading-relaxed">
-                We went into a property management company dealing with 184 open
-                DOB violations, each taking 45 days to resolve manually. We
-                built a platform that uploads a notice of infraction,
-                auto-extracts the violations, routes work to contractors, and
-                generates the final abatement report. The process dropped to 14
-                days.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-indigo/40 pl-6">
-              <h3 className="font-display text-lg font-semibold text-white mb-3">
-                We work in sprints and adjust as we learn.
-              </h3>
-              <p className="text-slate leading-relaxed">
-                We work in focused cycles: build, measure, adjust. Every cycle
-                teaches us something specific about what works for your
-                situation. The clients who move fastest are the ones who learn
-                from each iteration and use that to inform the next one.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-indigo/40 pl-6">
-              <h3 className="font-display text-lg font-semibold text-white mb-3">
-                We capture what works so your operation gets smarter over time.
-              </h3>
-              <p className="text-slate leading-relaxed">
-                Every engagement produces patterns: what strategies worked for
-                your specific business, what decisions led to the best outcomes,
-                what can be reused. We document all of it. Nine times out of
-                ten, the organizations that struggle are the ones that created a
-                solution and expected it to stay the solution. We build the
-                evolution in from the start.
-              </p>
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* The Name - Reality Engineering Reveal */}
-      <AnimatedSection className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <p className="text-lg text-slate leading-relaxed mb-8">
-              That approach, taking your business as it is today, understanding
-              where you want it to go, reverse-engineering the path, and
-              building the technology to close the gap. We&apos;ve been doing
-              this long enough that we gave it a name.
-            </p>
-
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-gradient mb-6">
-              We call it Reality Engineering.
+      {/* FOUR MOVES */}
+      <section className="band tint">
+        <div className="wrap">
+          <div className="sec-head wide reveal">
+            <span className="eyebrow">How we work</span>
+            <h2>
+              Reality first. <em>Then the build.</em>
             </h2>
-
-            <p className="text-lg text-slate leading-relaxed">
-              The idea is simple: the way your business runs today was assembled
-              over time by decisions, defaults, and circumstances. We help you
-              take that apart and put it back together on purpose. That&apos;s
-              how we take businesses to their next generation.
-            </p>
+          </div>
+          <div className="steps four">
+            <div className="step reveal">
+              <div className="idx">01</div>
+              <h3>See it clearly</h3>
+              <p>
+                Before we recommend anything, we map how your business actually operates today — not how
+                the org chart says it does. The real workflows, the real handoffs, the real places time
+                and money leak out.
+              </p>
+            </div>
+            <div className="step reveal d1">
+              <div className="idx">02</div>
+              <h3>Name the dream</h3>
+              <p>
+                We ask where you want this to go. That destination becomes the anchor. Every decision
+                after it is measured against whether it moves you closer to the business you&apos;ve
+                always wanted to run.
+              </p>
+            </div>
+            <div className="step reveal d2">
+              <div className="idx">03</div>
+              <h3>Engineer the path</h3>
+              <p>
+                We build the technology that closes the gap — custom software and intelligent systems
+                shaped around how you actually operate, sequenced so the highest-leverage wins come
+                first.
+              </p>
+            </div>
+            <div className="step reveal d3">
+              <div className="idx">04</div>
+              <h3>Stay in your corner</h3>
+              <p>
+                Your business keeps evolving, so the technology has to as well. We stay on to refine,
+                optimize, and extend — the partnership is where the compounding happens.
+              </p>
+            </div>
           </div>
         </div>
-      </AnimatedSection>
+      </section>
+
+      {/* PRINCIPLES */}
+      <section className="band">
+        <div className="wrap">
+          <div className="sec-head wide reveal">
+            <span className="eyebrow muted">What we believe</span>
+            <h2>
+              The principles underneath <em>the work.</em>
+            </h2>
+          </div>
+          <div className="learn">
+            <div className="lesson reveal">
+              <h3>You have to be the one driving it.</h3>
+              <p>
+                We bring the technology and the methodology. You bring the decisions. The engine only
+                produces results when the person who owns the outcome is behind the wheel.
+              </p>
+            </div>
+            <div className="lesson reveal d1">
+              <h3>Anything assembled by default can be rebuilt with intention.</h3>
+              <p>
+                The way your business runs today wasn&apos;t chosen — it accumulated. That&apos;s not a
+                failure. It&apos;s the opening. What grew by circumstance can be redesigned on purpose.
+              </p>
+            </div>
+            <div className="lesson reveal d2">
+              <h3>The technology has to fit how you actually operate.</h3>
+              <p>
+                Forcing a business into someone else&apos;s framework works on paper and falls apart in
+                practice. We build around you, not the other way around.
+              </p>
+            </div>
+            <div className="lesson reveal d3">
+              <h3>Speed of learning beats speed of building.</h3>
+              <p>
+                We work in focused sprints — build, measure, adjust. The businesses that reach their
+                next generation fastest are the ones that learn from each cycle.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
-      <AnimatedSection className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-lg text-slate leading-relaxed mb-8">
-              The strategic intelligence that used to require a boardroom of
-              executives is now accessible to one person with the right
-              methodology and the right tools. AI made that possible. Your
-              situation, your constraints, your specific combination of inputs.
-              Nobody else is asking your exact question.
-            </p>
-
-            <p className="text-xl text-white font-display font-semibold mb-10">
-              You bring your vision. We bring the transformation engine.
-              Together, we build what comes next.
-            </p>
-
-            <Button href="/start" size="lg">
-              Start a Conversation
-            </Button>
-          </div>
+      <section className="cta">
+        <div className="wrap reveal">
+          <span className="eyebrow center">Reigniting what&apos;s possible</span>
+          <h2 style={{ marginTop: 26 }}>
+            Ready to see your business <em>clearly?</em>
+          </h2>
+          <p>
+            The first conversation is just us understanding where you are and where you&apos;ve always
+            wanted to take it — well enough to give you something useful.
+          </p>
+          <Link href="/start" className="btn btn-primary">
+            Start Your Journey <span className="arw">→</span>
+          </Link>
         </div>
-      </AnimatedSection>
-
-      <Footer />
-    </main>
+      </section>
+    </RefreshShell>
   );
 }
