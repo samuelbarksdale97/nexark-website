@@ -20,228 +20,195 @@ export default function Home() {
               The transformation engine for your <em>next generation.</em>
             </h1>
             <p className="lede">
-              We combine strategy, software, and intelligent systems to engineer the journey from
-              where your business is to where it&apos;s always wanted to be.
+              We combine strategy, software, and intelligent systems to drive real business
+              transformation.
             </p>
             <div className="hero-actions">
               <Link href="/start" className="btn btn-primary">
                 Start Your Journey <span className="arw">→</span>
               </Link>
-              <Link href="/solutions" className="btn btn-ghost">
-                See Solutions
+              <Link href="/#roadmap" className="btn btn-ghost">
+                See How It Works
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* EVERY BUSINESS */}
-      <section className="band" id="about">
+      {/* THESIS + 3 CARDS */}
+      <section className="band">
         <span className="connector" />
-        <div className="wrap band-narrow">
-          <div className="sec-head reveal">
-            <span className="eyebrow muted">Possibility → Transformation</span>
-            <h2>
-              Every business has a <em>next generation.</em>
-            </h2>
-          </div>
-          <p className="lead-para reveal d1">
-            The current generation of your business is however it runs today: the tools you picked up
-            along the way, the processes that grew over time, the ceiling you keep bumping into. It
-            works. But you know it could work differently.
-          </p>
-          <p className="lead-para reveal d2">
-            Your <strong>next generation</strong> is what your business becomes when those limits get
-            removed — when the technology fits how you actually operate, when the systems compound
-            instead of just keeping up, when the thing you&apos;ve been describing in meetings for
-            years finally exists.
-          </p>
-          <p className="lead-para reveal d3">
-            The gap between the two is closer than it feels. You just need the right engine to close
-            it.
-          </p>
-        </div>
-      </section>
-
-      {/* WHO WE BUILD WITH */}
-      <section className="band tint" id="work">
         <div className="wrap">
           <div className="sec-head wide reveal">
-            <span className="eyebrow">Centered on people</span>
+            <span className="eyebrow muted">The difference</span>
             <h2>
-              We build around the people, <em>not the org chart.</em>
+              A tool isn&apos;t the same as <em>an advantage.</em>
             </h2>
           </div>
-          <div className="people">
-            <div className="person reveal">
-              <div className="num">01</div>
-              <h3>Founders</h3>
-              <p>You saw something before anyone else did. We build the engine that makes it real.</p>
+          <div className="benefits">
+            <div className="bcard reveal">
+              <div className="ic">
+                <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" /></svg>
+              </div>
+              <h3>Runs without you</h3>
+              <p>The busywork handles itself, so your team does the work only they can do.</p>
             </div>
-            <div className="person reveal d1">
-              <div className="num">02</div>
-              <h3>Operators</h3>
-              <p>You keep it all running. We take the weight off the parts that shouldn&apos;t need you.</p>
+            <div className="bcard reveal d1">
+              <div className="ic">
+                <svg viewBox="0 0 24 24"><path d="M12 3 3 7.5 12 12l9-4.5L12 3Z" /><path d="M3 12l9 4.5L21 12M3 16.5 12 21l9-4.5" /></svg>
+              </div>
+              <h3>One source of truth</h3>
+              <p>Every tool agrees. Everything your business knows, in one place.</p>
             </div>
-            <div className="person reveal d2">
-              <div className="num">03</div>
-              <h3>Innovators</h3>
-              <p>You see the next move. We turn the idea you&apos;ve been sitting on into something people can use.</p>
-            </div>
-            <div className="person reveal d3">
-              <div className="num">04</div>
-              <h3>Builders</h3>
-              <p>You&apos;ve outgrown the tools you started with. We build the ones that fit how you actually work.</p>
-            </div>
-            <div className="person reveal d4">
-              <div className="num">05</div>
-              <h3>Dreamers</h3>
-              <p>You&apos;ve pictured what this could become. We engineer the path from possibility to transformation.</p>
+            <div className="bcard reveal d2">
+              <div className="ic">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+              </div>
+              <h3>Answers in seconds</h3>
+              <p>Ask your business a question. Get an answer from your real data.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CASES */}
-      <section className="band">
+      {/* ROADMAP */}
+      <section className="band tint" id="roadmap">
         <div className="wrap">
-          <div
-            className="sec-head reveal"
-            style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 20 }}
-          >
-            <div style={{ maxWidth: 720 }}>
-              <span className="eyebrow muted">The work</span>
-              <h2 style={{ marginTop: 20 }}>
-                Businesses we&apos;ve taken to their <em>next generation.</em>
-              </h2>
+          <div className="sec-head wide reveal">
+            <span className="eyebrow">How it works</span>
+            <h2>
+              A working system in <em>weeks, not quarters.</em>
+            </h2>
+          </div>
+          <div className="roadmap">
+            <div className="phase reveal">
+              <div className="pn">Phase 01</div>
+              <h3>Learn</h3>
+              <p>We map how your business runs and where it&apos;s going.</p>
+              <span className="out">A clear plan</span>
             </div>
-            <Link href="/#work" style={{ color: "var(--amber)", fontSize: 14, letterSpacing: "0.06em" }}>
-              See our work →
-            </Link>
+            <div className="phase reveal d1">
+              <div className="pn">Phase 02</div>
+              <h3>Build</h3>
+              <p>Custom systems, engineered around how you actually operate.</p>
+              <span className="out">Built to fit</span>
+            </div>
+            <div className="phase reveal d2">
+              <div className="pn">Phase 03</div>
+              <h3>Partner</h3>
+              <p>We stay in your corner as your business evolves.</p>
+              <span className="out">Always sharpening</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* OWN vs USE */}
+      <section className="band">
+        <div className="wrap split">
+          <div className="reveal">
+            <span className="eyebrow muted">Own it</span>
+            <h2 style={{ fontSize: "clamp(30px,3.4vw,48px)", marginTop: 18 }}>
+              Built around your business — <em>not the other way around.</em>
+            </h2>
+            <ul className="checklist">
+              <li><span className="ck">✓</span> Off-the-shelf tools give your competitors the same thing.</li>
+              <li><span className="ck">✓</span> We turn how you work into an advantage.</li>
+              <li><span className="ck">✓</span> The system fits your operation, not a template.</li>
+              <li><span className="ck">✓</span> You own the outcome.</li>
+            </ul>
+          </div>
+          <div className="split-visual reveal d1" />
+        </div>
+      </section>
+
+      {/* PROOF */}
+      <section className="band tint">
+        <div className="wrap">
+          <div className="sec-head wide reveal">
+            <span className="eyebrow">The work</span>
+            <h2>
+              Outcomes, <em>not dashboards.</em>
+            </h2>
           </div>
           <div className="cases">
             <div className="case reveal">
               <span className="tag">Membership Platform</span>
               <h3>A neighborhood bar</h3>
-              <p>
-                Their current generation was decades of loyalty with no system to capture it. Regulars
-                showed up because of relationships that lived in people&apos;s heads. Their next
-                generation is a digital membership platform that turned goodwill into recurring revenue
-                and made every relationship permanent.
-              </p>
+              <p>Decades of loyalty, no way to capture it. Now: a membership platform that turned goodwill into recurring revenue.</p>
             </div>
             <div className="case reveal d1">
               <span className="tag">CRM + Apple Wallet</span>
               <h3>An entertainment venue</h3>
-              <p>
-                Their current generation was a staff that knew every regular by name — but that
-                knowledge walked out the door with turnover. Their next generation is a membership CRM
-                with Apple Wallet integration where every relationship belongs to the business,
-                regardless of who&apos;s working any given night.
-              </p>
+              <p>Regulars known by name — until turnover. Now: a CRM where every relationship belongs to the business.</p>
             </div>
             <div className="case reveal d2">
               <span className="tag">Operations Portal</span>
               <h3>A charter boat company</h3>
-              <p>
-                Their current generation was driver onboarding, maintenance scheduling, and bookings
-                across two cities run on spreadsheets and manual SMS. Their next generation is a custom
-                operations portal with automated dispatch, real-time driver workflows, and an SMS
-                system that handles confirmations without anyone touching it.
-              </p>
+              <p>Two cities run on spreadsheets and texts. Now: an operations portal that dispatches and confirms itself.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* HOW THE ENGINE WORKS */}
-      <section className="band tint">
-        <div className="wrap">
-          <div className="sec-head wide reveal">
-            <span className="eyebrow">The engine</span>
-            <h2>
-              How we carry you <em>forward.</em>
-            </h2>
-          </div>
-          <div className="steps">
-            <div className="step reveal">
-              <div className="idx">01</div>
-              <h3>Learn</h3>
-              <div className="sub">We learn your business before we touch anything.</div>
-              <p>
-                We map your current generation: tools, processes, revenue model, team structure, where
-                time is going. We figure out what your business actually needs to get to the next one —
-                usually different from what you&apos;d ask for if we just took an order, because
-                we&apos;re looking at the full picture.
-              </p>
-            </div>
-            <div className="step reveal d1">
-              <div className="idx">02</div>
-              <h3>Build</h3>
-              <div className="sub">We build the technology that moves you forward.</div>
-              <p>
-                Custom software, intelligent systems, and automation engineered around how your
-                operation actually runs. We sit on top of what you already use. Your existing tools
-                start working together. Your team does more with the same resources.
-              </p>
-            </div>
-            <div className="step reveal d2">
-              <div className="idx">03</div>
-              <h3>Partner</h3>
-              <div className="sub">We stay in your corner.</div>
-              <p>
-                A transformation engine that shuts off after delivery isn&apos;t an engine. Your
-                business evolves, and the technology has to evolve with it — ongoing optimization,
-                strategic counsel, and the kind of partnership where your next generation keeps getting
-                refined as you grow into it.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* LEARNINGS */}
+      {/* OLD WAY vs NEXARK WAY */}
       <section className="band">
         <div className="wrap">
           <div className="sec-head wide reveal">
-            <span className="eyebrow muted">What we&apos;ve learned</span>
+            <span className="eyebrow muted">The choice</span>
             <h2>
-              What doing this <em>teaches you.</em>
+              The old way, and <em>the Nexark way.</em>
             </h2>
           </div>
-          <div className="learn">
-            <div className="lesson reveal">
-              <h3>You have to be the one driving it.</h3>
-              <p>
-                We can build the most capable engine in the world. It only produces results when
-                you&apos;re behind the wheel. The businesses that move fastest into their next
-                generation are the ones that show up ready to own the outcome. We bring the technology
-                and the methodology. You bring the decisions.
-              </p>
+          <div className="compare">
+            <div className="col before reveal">
+              <h4>The old way</h4>
+              <ul>
+                <li>Generic tools bolted together</li>
+                <li>Built around whoever was free</li>
+                <li>You&apos;re the glue holding it together</li>
+                <li>Works on paper</li>
+              </ul>
             </div>
-            <div className="lesson reveal d1">
-              <h3>Most businesses run on a design nobody chose.</h3>
-              <p>
-                The tools accumulated. The processes grew around whoever was available. Over time, it
-                all started to feel permanent. Anything that was assembled by default can be reassembled
-                with intention.
-              </p>
+            <div className="col after reveal d1">
+              <h4>The Nexark way</h4>
+              <ul>
+                <li>Built around how you operate</li>
+                <li>Runs without you in the middle</li>
+                <li>One source of truth</li>
+                <li>Works in practice</li>
+              </ul>
             </div>
-            <div className="lesson reveal d2">
-              <h3>The technology has to fit how you actually operate.</h3>
-              <p>
-                We&apos;ve seen what happens when you force a business into someone else&apos;s
-                framework. It works on paper. It falls apart in practice. We build around you.
-              </p>
-            </div>
-            <div className="lesson reveal d3">
-              <h3>Speed of learning beats speed of building.</h3>
-              <p>
-                We work in focused sprints. Build, measure, adjust. The clients who reach their next
-                generation fastest are the ones who learn from each cycle and use it to inform the next
-                one.
-              </p>
-            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="band tint">
+        <div className="wrap">
+          <div className="sec-head wide reveal" style={{ textAlign: "center", margin: "0 auto 56px" }}>
+            <span className="eyebrow center">Questions</span>
+            <h2 style={{ marginTop: 18 }}>
+              Got questions? <em>We&apos;ve got answers.</em>
+            </h2>
+          </div>
+          <div className="faq reveal">
+            <details open>
+              <summary>How long does it take?</summary>
+              <p>Most audits run one to four weeks. Builds happen in focused sprints after that — working pieces in weeks, not quarters.</p>
+            </details>
+            <details>
+              <summary>Do I need to know exactly what I need?</summary>
+              <p>No. Most clients start with the audit because they don&apos;t. We find the real problem before anyone builds anything.</p>
+            </details>
+            <details>
+              <summary>What if I already have tools I like?</summary>
+              <p>Good. We build on top of what you use and make it all work together.</p>
+            </details>
+            <details>
+              <summary>Who owns what you build?</summary>
+              <p>You do. The system, the data, the advantage — it&apos;s yours.</p>
+            </details>
           </div>
         </div>
       </section>
@@ -253,13 +220,9 @@ export default function Home() {
           <h2 style={{ marginTop: 26 }}>
             What&apos;s the next generation of <em>your business?</em>
           </h2>
-          <p>
-            That&apos;s the question every engagement starts with. Tell us where you are and where
-            you&apos;ve always wanted to take it — the first conversation is just us understanding your
-            situation well enough to give you something useful.
-          </p>
+          <p>Tell us where you are and where you want to go.</p>
           <Link href="/start" className="btn btn-primary">
-            Start a Conversation <span className="arw">→</span>
+            Start Your Journey <span className="arw">→</span>
           </Link>
         </div>
       </section>
