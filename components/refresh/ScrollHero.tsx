@@ -55,10 +55,13 @@ const PANELS: Panel[] = [
     head: "Or we build the thing that",
     em: "doesn't exist yet.",
     sub: "The app, the platform, the product you can't buy off a shelf — from a blank page to something in your customers' hands.",
+    // build-app: purpose-built product shot (legible in-app UI via the text-frame pipeline).
+    // TODO: build-whiteboard + build-laptop (people-building scenes) are generated as start
+    // frames and animate in as soon as Higgsfield's video endpoint recovers (522 outage at
+    // build time); until then clip-dashboard holds the second slot.
     clips: [
+      C("build-app", "The Nexark app, built from a blank page, in a founder's hand"),
       C("clip-dashboard", "An owner glances at her day's numbers and nods"),
-      C("clip-ticketing", "A door host fastens a wristband and waves a guest through"),
-      C("clip-multisite", "An operator stepping between two locations, greeting a neighbor"),
     ],
   },
   {
