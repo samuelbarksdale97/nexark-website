@@ -732,3 +732,80 @@
   .nx .arc-word { animation: none; }
   .nx .arc-tile { transition: none; }
 }
+
+/* ============================================================
+   HOW IT WORKS — a track, not a grid. Gold on black; purple stays on the logo.
+   ============================================================ */
+.nx .hiw { background: var(--bg-2); padding: clamp(80px, 11vh, 140px) 0; }
+.nx .hiw-track { position: relative; margin-top: clamp(44px, 6vh, 72px); }
+
+/* the line. A transform on a gradient bar, not an SVG — it flips orientation with one rule
+   and the scroll handler never has to read layout. */
+.nx .hiw-rail {
+  position: absolute; left: 0; right: 0; top: 13px; height: 1px;
+  background: rgba(226, 210, 184, 0.16); overflow: hidden;
+}
+.nx .hiw-rail-fill {
+  display: block; height: 100%; width: 100%;
+  background: linear-gradient(90deg, var(--amber-deep), var(--amber) 40%, var(--amber-hi));
+  transform: scaleX(var(--p, 0)); transform-origin: left center;
+  transition: transform 0.15s linear;
+}
+
+.nx .hiw-steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 54px); }
+.nx .hiw-step { position: relative; padding-top: 46px; }
+
+.nx .hiw-node {
+  position: absolute; top: 6px; left: 0; width: 15px; height: 15px; border-radius: 50%;
+  border: 1px solid var(--hair-strong); background: var(--bg-2);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+}
+.nx .hiw-node::after {
+  content: ""; position: absolute; inset: 4px; border-radius: 50%;
+  background: var(--amber); opacity: 0; transform: scale(0.4);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2,0.7,0.2,1);
+}
+.nx .hiw-step.lit .hiw-node { border-color: var(--amber); box-shadow: 0 0 0 5px rgba(255,181,82,0.09); }
+.nx .hiw-step.lit .hiw-node::after { opacity: 1; transform: scale(1); }
+
+.nx .hiw-when {
+  display: inline-block; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); transition: color 0.5s ease;
+}
+.nx .hiw-step.lit .hiw-when { color: var(--amber); }
+
+.nx .hiw-step h3 {
+  font-size: clamp(26px, 2.6vw, 36px); margin: 12px 0 14px;
+  display: flex; align-items: baseline; gap: 14px;
+}
+.nx .hiw-idx {
+  font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.16em;
+  color: var(--muted); transition: color 0.5s ease;
+}
+.nx .hiw-step.lit .hiw-idx { color: var(--amber-hi); }
+.nx .hiw-step p { font-size: 15px; color: var(--body); line-height: 1.68; max-width: 34ch; margin-bottom: 22px; }
+
+.nx .hiw-out {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12.5px; letter-spacing: 0.06em; color: var(--ivory);
+  padding: 9px 16px; border-radius: 100px;
+  border: 1px solid var(--hair); background: rgba(255,238,214,0.03);
+  transition: border-color 0.5s ease, color 0.5s ease, background 0.5s ease;
+}
+.nx .hiw-out::before { content: "→"; color: var(--muted); transition: color 0.5s ease; }
+.nx .hiw-step.lit .hiw-out { border-color: rgba(255,181,82,0.4); background: rgba(255,181,82,0.07); }
+.nx .hiw-step.lit .hiw-out::before { color: var(--amber); }
+
+/* the sequence reads top-to-bottom on a phone; the rail turns with it */
+@media (max-width: 860px) {
+  .nx .hiw-steps { grid-template-columns: 1fr; gap: 38px; }
+  .nx .hiw-step { padding-top: 0; padding-left: 34px; }
+  .nx .hiw-rail { left: 7px; right: auto; top: 6px; bottom: 6px; width: 1px; height: auto; }
+  .nx .hiw-rail-fill { width: 100%; height: 100%; transform: scaleY(var(--p, 0)); transform-origin: center top;
+    background: linear-gradient(180deg, var(--amber-deep), var(--amber) 40%, var(--amber-hi)); }
+  .nx .hiw-node { top: 2px; }
+  .nx .hiw-step p { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nx .hiw-rail-fill, .nx .hiw-node, .nx .hiw-node::after, .nx .hiw-when, .nx .hiw-idx, .nx .hiw-out { transition: none; }
+}

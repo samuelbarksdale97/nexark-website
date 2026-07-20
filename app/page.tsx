@@ -3,6 +3,7 @@ import { RefreshShell } from "@/components/refresh/RefreshShell";
 import { ScrollHero } from "@/components/refresh/ScrollHero";
 import { SystemStack } from "@/components/refresh/SystemStack";
 import { ArcWheel } from "@/components/refresh/ArcWheel";
+import { Roadmap } from "@/components/refresh/Roadmap";
 
 export default function Home() {
   return (
@@ -66,36 +67,8 @@ export default function Home() {
       </section>
 
       {/* ROADMAP */}
-      <section className="band tint" data-nav="dark" id="roadmap">
-        <div className="wrap">
-          <div className="sec-head wide reveal">
-            <span className="eyebrow">How it works</span>
-            <h2>
-              A working system in <em>weeks, not quarters.</em>
-            </h2>
-          </div>
-          <div className="roadmap">
-            <div className="phase reveal">
-              <div className="pn">Phase 01</div>
-              <h3>Learn</h3>
-              <p>We map how your business runs and where it&apos;s going.</p>
-              <span className="out">A clear plan</span>
-            </div>
-            <div className="phase reveal d1">
-              <div className="pn">Phase 02</div>
-              <h3>Build</h3>
-              <p>Custom systems, engineered around how you actually operate.</p>
-              <span className="out">Built to fit</span>
-            </div>
-            <div className="phase reveal d2">
-              <div className="pn">Phase 03</div>
-              <h3>Partner</h3>
-              <p>We stay in your corner as your business evolves.</p>
-              <span className="out">Always sharpening</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* HOW IT WORKS — a sequence, rendered as one */}
+      <Roadmap />
 
       {/* OWN vs USE */}
       <section className="band" data-nav="dark">
