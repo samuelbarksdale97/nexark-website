@@ -18,12 +18,38 @@ const NAV = [
 export function RefreshShell({ active, children }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  /**
+   * The nav takes the theme of whatever section is currently behind it — white bar with dark
+   * ink over a light section, black bar with light ink over a dark one. Sections declare
+   * their own ground with `data-nav="light" | "dark"`, so adding a section never means
+   * touching this logic.
+   */
+  const [navTheme, setNavTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+
+      // probe just below the header for the section under it
+      const header = document.querySelector<HTMLElement>(".nx header");
+      const probeY = (header?.offsetHeight ?? 74) + 4;
+      let theme: "light" | "dark" = "dark";
+      const zones = document.querySelectorAll<HTMLElement>("[data-nav]");
+      for (const z of zones) {
+        const r = z.getBoundingClientRect();
+        if (r.top <= probeY && r.bottom > probeY) {
+          theme = (z.dataset.nav as "light" | "dark") ?? "dark";
+        }
+      }
+      setNavTheme((t) => (t === theme ? t : theme));
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -44,11 +70,14 @@ export function RefreshShell({ active, children }: Props) {
 
   return (
     <div className="nx">
-      <header className={scrolled ? "scrolled" : ""}>
+      <header className={`nav-${navTheme}${scrolled ? " scrolled" : ""}`}>
         <div className="wrap nav">
           <Link href="/" className="brand">
+            {/* The brand-book SVG, not the PNG: the PNG carries a white plate behind the
+                mark, which reads as a sticker bolted onto the header. This one is
+                transparent — 5 paths, zero white fills. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/refresh/assets/nexark-mark.png" alt="Nexark" />
+            <img src="/nexark-mark.svg" alt="Nexark" />
             <span className="wordmark">
               <b>NEXARK</b>
               <span>SUCCESS ENGINEERED</span>

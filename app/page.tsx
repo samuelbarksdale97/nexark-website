@@ -1,42 +1,36 @@
 import Link from "next/link";
 import { RefreshShell } from "@/components/refresh/RefreshShell";
+import { ScrollHero } from "@/components/refresh/ScrollHero";
+import { SystemStack } from "@/components/refresh/SystemStack";
+import { ArcWheel } from "@/components/refresh/ArcWheel";
 
 export default function Home() {
   return (
     <RefreshShell active="home">
-      {/* HERO */}
-      <section className="hero hero-home">
-        <div className="hero-bg" style={{ backgroundImage: "url('/refresh/assets/hero-a.png')" }} />
-        <div className="hero-scrim" />
-        <div className="rail">
-          <div>Technology</div>
-          <div>People</div>
-          <div>Transformation</div>
-        </div>
-        <div className="wrap">
-          <div className="hero-copy">
-            <span className="eyebrow">Reigniting what&apos;s possible</span>
-            <h1>
-              The transformation engine for your <em>next generation.</em>
-            </h1>
-            <p className="lede">
-              We combine strategy, software, and intelligent systems to drive real business
-              transformation.
-            </p>
-            <div className="hero-actions">
-              <Link href="/start" className="btn btn-primary">
-                Start Your Journey <span className="arw">→</span>
-              </Link>
-              <Link href="/#roadmap" className="btn btn-ghost">
-                See How It Works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* DARK — hero: the engine assembles beneath the human, then recedes */}
+      <ScrollHero />
+
+      {/* DARK — the layers under the moment: what's actually running */}
+      <SystemStack
+        slides={[
+          { key: "clip-scan", src: "/refresh/clips/clip-scan.jpg", alt: "A guest taps a phone at the door and is recognized", label: "Membership · entry" },
+          { key: "clip-property", src: "/refresh/clips/clip-property.jpg", alt: "A property manager walking a vacant unit", label: "Property · compliance" },
+          { key: "clip-restaurant", src: "/refresh/clips/clip-restaurant.jpg", alt: "A bartender and server at close", label: "Restaurant · close-out" },
+          { key: "clip-ticketing", src: "/refresh/clips/clip-ticketing.jpg", alt: "A door host fastening a wristband", label: "Nightlife · door" },
+          { key: "clip-yacht", src: "/refresh/clips/clip-yacht.jpg", alt: "A charter captain at the helm", label: "Charter · dispatch" },
+        ]}
+        eyebrow="Under the hood"
+        heading="Every calm moment has"
+        em="layers underneath."
+        body="A guest arrives and is recognized. The visit is recorded, the payment settles, the books reconcile, and the summary reaches you. One tap at the door, four systems agreeing behind it — and nobody standing over any of them."
+        cta={{ label: "See what we build", href: "/solutions" }}
+      />
+
+      {/* LIGHT — Nex·ARK → your next ARC: the industries riding a literal arc */}
+      <ArcWheel />
 
       {/* THESIS + 3 CARDS */}
-      <section className="band">
+      <section className="band" data-nav="dark">
         <span className="connector" />
         <div className="wrap">
           <div className="sec-head wide reveal">
@@ -72,7 +66,7 @@ export default function Home() {
       </section>
 
       {/* ROADMAP */}
-      <section className="band tint" id="roadmap">
+      <section className="band tint" data-nav="dark" id="roadmap">
         <div className="wrap">
           <div className="sec-head wide reveal">
             <span className="eyebrow">How it works</span>
@@ -104,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* OWN vs USE */}
-      <section className="band">
+      <section className="band" data-nav="dark">
         <div className="wrap split">
           <div className="reveal">
             <span className="eyebrow muted">Own it</span>
@@ -123,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* PROOF */}
-      <section className="band tint">
+      <section className="band tint" data-nav="dark">
         <div className="wrap">
           <div className="sec-head wide reveal">
             <span className="eyebrow">The work</span>
@@ -152,7 +146,7 @@ export default function Home() {
       </section>
 
       {/* OLD WAY vs NEXARK WAY */}
-      <section className="band">
+      <section className="band" data-nav="dark">
         <div className="wrap">
           <div className="sec-head wide reveal">
             <span className="eyebrow muted">The choice</span>
@@ -184,7 +178,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section className="band tint">
+      <section className="band tint" data-nav="dark">
         <div className="wrap">
           <div className="sec-head wide reveal" style={{ textAlign: "center", margin: "0 auto 56px" }}>
             <span className="eyebrow center">Questions</span>
@@ -214,7 +208,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="cta">
+      <section className="cta" data-nav="dark">
         <div className="wrap reveal">
           <span className="eyebrow center">The spark that reignites possibility</span>
           <h2 style={{ marginTop: 26 }}>
