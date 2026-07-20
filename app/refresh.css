@@ -757,13 +757,46 @@
   font-size: clamp(34px, 5vw, 74px); line-height: 1.07; color: var(--ink);
   display: grid; gap: 0;
 }
-.nx .arc-rotor { display: block; }
-.nx .arc-real { color: var(--ink); }
-.nx .arc-word {
-  color: var(--ink-accent); display: inline-block;
-  animation: arcIn 0.5s cubic-bezier(0.2,0.7,0.2,1);
+/* THE ROTOR — the row is centred, so transitioning the slot's width is what slides "Real".
+   One geometry change drives both movements; there is no second animation to keep in sync. */
+.nx .arc-rotor {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 0.28em;
+  perspective: 900px;
 }
-@keyframes arcIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.nx .arc-real { color: var(--ink); }
+.nx .arc-slot {
+  position: relative; display: inline-block; text-align: left;
+  height: 1.1em; /* the words rotate through this box, so it must not collapse */
+  transition: width 0.62s cubic-bezier(0.22, 0.72, 0.24, 1);
+  transform-style: preserve-3d;
+}
+.nx .arc-word {
+  color: var(--ink-accent); display: inline-block; white-space: nowrap;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+.nx .arc-slot .arc-word { position: absolute; left: 0; top: 0; }
+.nx .arc-slot .arc-word.in { animation: arcRotateIn 0.52s cubic-bezier(0.22, 0.72, 0.24, 1) both; z-index: 1; }
+.nx .arc-slot .arc-word.out { animation: arcRotateOut 0.3s cubic-bezier(0.4, 0, 0.7, 0.3) both; z-index: 0; }
+@keyframes arcRotateIn {
+  from { opacity: 0; transform: translateY(0.32em) rotateX(-72deg); }
+  to   { opacity: 1; transform: none; }
+}
+/* the exit is deliberately quicker and shallower than the entrance — a full counter-rotation
+   on the way out reads busy, and this section's job is to feel calm */
+@keyframes arcRotateOut {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(-0.22em) rotateX(42deg); }
+}
+/* the hidden ruler: laid out for measurement, never painted, never read by AT */
+.nx .arc-measure {
+  position: absolute; visibility: hidden; pointer-events: none;
+  white-space: nowrap; height: 0; overflow: hidden;
+}
+/* inline-block, NOT block: a block child of a shrink-to-fit box inherits that box's resolved
+   width, so every word measured identically (104px each) and nothing had a reason to slide. */
+.nx .arc-measure .arc-word { position: static; display: inline-block; }
 .nx .arc-blurb { margin: 18px auto 0; max-width: 44ch; color: var(--ink-2); }
 .nx .arc-cta {
   margin-top: 26px; pointer-events: auto;
@@ -804,7 +837,9 @@
   .nx .arc-core h2 { font-size: clamp(30px, 8.4vw, 44px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .nx .arc-word { animation: none; }
+  .nx .arc-slot { transition: none; }
+  .nx .arc-slot .arc-word.in, .nx .arc-slot .arc-word.out { animation: none; }
+  .nx .arc-slot .arc-word.out { display: none; }
   .nx .arc-tile { transition: none; }
 }
 

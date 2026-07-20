@@ -47,19 +47,19 @@ const INDUSTRIES: Industry[] = [
     blurb: "Buildings, compliance, and the evidence that proves it happened." },
   { word: "HVAC", img: "hvac", ink: "#215C63",
     blurb: "Dispatch, service history, and invoices that leave with the tech." },
-  { word: "Membership", img: "clip-scan", ink: "#8A5A2B",
+  { word: "Members", img: "clip-scan", ink: "#8A5A2B",
     blurb: "Loyalty that belongs to the business, not to one person's memory." },
-  { word: "Auto Service", img: "autoservice", ink: "#7A3B45",
+  { word: "Auto Shops", img: "autoservice", ink: "#7A3B45",
     blurb: "Estimates, approvals, and a bay schedule nobody has to babysit." },
   { word: "Nightlife", img: "clip-ticketing", ink: "#4A2E7A",
     blurb: "Doors, lists, and ticketing that hold up on the busiest night." },
-  { word: "Fitness", img: "fitness", ink: "#2E5A78",
+  { word: "Gyms", img: "fitness", ink: "#2E5A78",
     blurb: "Memberships, check-ins, and billing that stops leaking quietly." },
   { word: "Restaurants", img: "clip-restaurant", ink: "#8C3B2E",
     blurb: "Service, close-out, and reconciliation that finishes itself." },
   { word: "Barbershops", img: "barbershop", ink: "#6B4326",
     blurb: "Chairs, walk-ins, and regulars who never re-introduce themselves." },
-  { word: "Charter", img: "clip-yacht", ink: "#1F5673",
+  { word: "Charters", img: "clip-yacht", ink: "#1F5673",
     blurb: "Bookings and turnarounds for operators who are rarely at a desk." },
   { word: "Multi-site", img: "clip-multisite", ink: "#3D4A7A",
     blurb: "Two locations or ten, running off one source of truth." },
@@ -250,6 +250,46 @@ export function ArcWheel() {
   const active = pinned ?? i;
   const ind = INDUSTRIES[active];
 
+  /* THE ROTOR.
+     "Real" has to slide left/right as the word beside it changes length, not jump. That means
+     the slot the word sits in needs an explicit width to transition BETWEEN — and a width can
+     only transition between two numbers, never to `auto`. So every word is measured once, up
+     front, exactly as the checklist demands of any generated layout: know the geometry before
+     the animation, never solve it per frame.
+
+     The row is centre-justified, so animating the slot width moves "Real" outward as the word
+     grows and inward as it shrinks — the sliding is a consequence of the geometry, not a
+     second animation that has to be kept in sync with the first. */
+  const measureRef = useRef<HTMLDivElement | null>(null);
+  const [widths, setWidths] = useState<number[]>([]);
+  const [prev, setPrev] = useState<number | null>(null);
+
+  useEffect(() => {
+    const host = measureRef.current;
+    if (!host) return;
+    const measure = () => {
+      const spans = host.querySelectorAll<HTMLElement>("span");
+      setWidths(Array.from(spans, (el) => el.getBoundingClientRect().width));
+    };
+    measure();
+    // Re-measure once webfonts land — measuring against the fallback face yields widths that
+    // are wrong by enough to make the first slide visibly overshoot.
+    document.fonts?.ready.then(measure).catch(() => {});
+    const ro = new ResizeObserver(measure); // the type is vw-based, so width tracks the viewport
+    ro.observe(host);
+    return () => ro.disconnect();
+  }, []);
+
+  // hold the outgoing word just long enough to rotate it out from under the incoming one
+  const lastActive = useRef(active);
+  useEffect(() => {
+    if (lastActive.current === active) return;
+    setPrev(lastActive.current);
+    lastActive.current = active;
+    const t = window.setTimeout(() => setPrev(null), 460);
+    return () => window.clearTimeout(t);
+  }, [active]);
+
   return (
     <section className="arc-band" data-nav="light" style={{ ["--ink-accent" as string]: ind.ink }}>
       <div className="arc-orbit">
@@ -273,13 +313,31 @@ export function ArcWheel() {
           ))}
         </div>
 
+        {/* Measured once, never per frame. Same class as the live word so it inherits the
+            identical font, weight, tracking and size. */}
+        <div className="arc-measure" ref={measureRef} aria-hidden="true">
+          {INDUSTRIES.map((x) => (
+            <span key={x.word} className="arc-word">{x.word}</span>
+          ))}
+        </div>
+
         <div className="wrap arc-stage">
           <div className="arc-core" ref={coreRef}>
             <h2>
               <span className="arc-fixed">Artificial Intelligence</span>
               <span className="arc-rotor">
-                <span className="arc-real">Real </span>
-                <span key={active} className="arc-word">{ind.word}</span>
+                <span className="arc-real">Real</span>
+                <span
+                  className="arc-slot"
+                  style={widths[active] ? { width: `${widths[active]}px` } : undefined}
+                >
+                  {prev !== null && (
+                    <span key={`out-${prev}`} className="arc-word out" aria-hidden="true">
+                      {INDUSTRIES[prev].word}
+                    </span>
+                  )}
+                  <span key={active} className="arc-word in">{ind.word}</span>
+                </span>
               </span>
             </h2>
             <p className="arc-blurb" aria-live="polite">{ind.blurb}</p>
