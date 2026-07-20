@@ -1,531 +1,295 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/sections/Footer";
-import { Button } from "@/components/ui/button";
-
-function AnimatedSection({
-  children,
-  className = "",
-  id,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  id?: string;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  return (
-    <motion.section
-      ref={ref}
-      id={id}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8 }}
-      className={`py-20 md:py-28 ${className}`}
-    >
-      {children}
-    </motion.section>
-  );
-}
+import Link from "next/link";
+import { RefreshShell } from "@/components/refresh/RefreshShell";
 
 export default function SolutionsPage() {
   return (
-    <main className="min-h-screen">
-      <Header />
-
-      {/* Hero */}
-      <section className="pt-32 md:pt-40 pb-16 md:pb-24">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gradient mb-6 leading-tight"
-            >
-              Success is not an accident. It&apos;s engineered.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-lg md:text-xl text-slate leading-relaxed"
-            >
-              We help businesses transition into their next generation through
-              technology and long-term partnership. Whether you need your current
-              operation to run without you in the middle of it, or you want to
-              build something that doesn&apos;t exist yet, the first step is the
-              same: we learn where you are and where you want to go. Then we
-              build the technology to close the gap.
-            </motion.p>
+    <RefreshShell active="solutions">
+      {/* HERO */}
+      <section className="hero hero-page">
+        <div className="hero-bg" style={{ backgroundImage: "url('/refresh/assets/page-solutions.png')" }} />
+        <div className="hero-scrim" />
+        <div className="wrap">
+          <div className="hero-copy">
+            <span className="eyebrow">The journey from possibility to transformation</span>
+            <h1>
+              Success is not an accident. <em>It&apos;s engineered.</em>
+            </h1>
+            <p className="lede">
+              We help businesses transition into their next generation through technology and long-term
+              partnership. Whether you need your operation to run without you in the middle of it, or
+              you want to build something that doesn&apos;t exist yet, the first step is the same: we
+              learn where you are and where you want to go. Then we build the technology to close the
+              gap.
+            </p>
+            <Link href="/start" className="btn btn-primary">
+              Start Your Journey <span className="arw">→</span>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* The Nexark Audit */}
-      <AnimatedSection id="audit" className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-4xl">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Start here: The Nexark Audit
-            </h2>
-            <p className="text-slate text-lg mb-8">
-              Most of our clients start here.
-            </p>
+      {/* THE AUDIT */}
+      <section className="band tint">
+        <div className="wrap band-narrow">
+          <div className="sec-head reveal">
+            <span className="eyebrow">Start here</span>
+            <h2>The Nexark Audit</h2>
+          </div>
+          <p className="lead-para reveal d1" style={{ marginBottom: 16 }}>
+            Most of our clients start here.
+          </p>
+          <p className="lead-para reveal d1">
+            You might know exactly what&apos;s broken. You might have an idea you&apos;ve been sitting
+            on. Either way, we start in the same place: understanding what&apos;s actually going on
+            before we commit to building anything. We&apos;ve found that businesses arrive from one of
+            two starting points.
+          </p>
 
-            <div className="space-y-6 text-lg text-slate leading-relaxed mb-12">
+          <div className="two-cards reveal d2" style={{ marginTop: 44 }}>
+            <div className="qcard">
+              <h3>“Something in my business isn&apos;t working the way it should.”</h3>
               <p>
-                You might know exactly what&apos;s broken. You might have an
-                idea you&apos;ve been sitting on. Either way, we start in the
-                same place: understanding what&apos;s actually going on before we
-                commit to building anything.
+                You&apos;re spending time on work that shouldn&apos;t need you. Processes are slow,
+                tools don&apos;t talk to each other, and you&apos;ve been too busy running the business
+                to stop and fix what&apos;s underneath it.
               </p>
-
+            </div>
+            <div className="qcard">
+              <h3>“I have an idea for something I want to build.”</h3>
               <p>
-                We&apos;ve found that businesses fall into one of two starting
-                points:
+                You see an opportunity. A product, a platform, a new revenue model. The vision is clear
+                — but you need someone who can hear what you&apos;re describing and actually build it.
               </p>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="glass p-6 rounded-xl border border-white/5">
-                  <p className="text-white font-semibold mb-3">
-                    &ldquo;Something in my business isn&apos;t working the way
-                    it should.&rdquo;
-                  </p>
-                  <p className="text-sm text-slate">
-                    You&apos;re spending time on work that shouldn&apos;t need
-                    you. Processes are slow, tools don&apos;t talk to each other,
-                    and you&apos;ve been too busy running the business to stop
-                    and fix what&apos;s underneath it.
-                  </p>
-                </div>
-                <div className="glass p-6 rounded-xl border border-white/5">
-                  <p className="text-white font-semibold mb-3">
-                    &ldquo;I have an idea for something I want to build.&rdquo;
-                  </p>
-                  <p className="text-sm text-slate">
-                    You see an opportunity. A product, a platform, a new revenue
-                    model. The vision is clear but you need someone who can hear
-                    what you&apos;re describing and actually build it.
-                  </p>
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
 
-            {/* Four Phases */}
-            <h3 className="font-display text-xl font-bold text-white mb-8">
-              How the audit works
-            </h3>
-            <div className="space-y-8 mb-12">
-              <div className="flex gap-4">
-                <span className="text-sm font-medium text-indigo tracking-widest mt-1 shrink-0">
-                  01
-                </span>
-                <div>
-                  <h4 className="font-display font-semibold text-white mb-2">
-                    Discovery
-                  </h4>
-                  <p className="text-slate leading-relaxed">
-                    We start with the pain or the opportunity. What brought you
-                    here? What&apos;s costing you time, money, or sleep? Or:
-                    what&apos;s the thing you&apos;d build tomorrow if you had
-                    the capability? We listen. We ask the questions that surface
-                    what&apos;s underneath the stated problem.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <span className="text-sm font-medium text-indigo tracking-widest mt-1 shrink-0">
-                  02
-                </span>
-                <div>
-                  <h4 className="font-display font-semibold text-white mb-2">
-                    Scope
-                  </h4>
-                  <p className="text-slate leading-relaxed">
-                    We map where this actually lives. Pain points rarely stay in
-                    one lane. A founder says &ldquo;our marketing isn&apos;t
-                    working&rdquo; and the real issue is that delivery takes so
-                    long they can&apos;t handle more leads anyway. We scope the
-                    right problem, not just the stated one. We look at the full
-                    life cycle, including the people and communication inside it.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <span className="text-sm font-medium text-indigo tracking-widest mt-1 shrink-0">
-                  03
-                </span>
-                <div>
-                  <h4 className="font-display font-semibold text-white mb-2">
-                    Dream
-                  </h4>
-                  <p className="text-slate leading-relaxed">
-                    Once we see reality clearly, we ask: where do you want this
-                    to be? The dream becomes the anchor for everything that
-                    follows. Every recommendation, every priority, every dollar
-                    of ROI is measured against that destination.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <span className="text-sm font-medium text-indigo tracking-widest mt-1 shrink-0">
-                  04
-                </span>
-                <div>
-                  <h4 className="font-display font-semibold text-white mb-2">
-                    Fix
-                  </h4>
-                  <p className="text-slate leading-relaxed">
-                    Every friction point and opportunity gets scored by impact
-                    and effort. Quick Wins first. Big Swings next. We tell you
-                    what to prioritize and what to deprioritize. You can&apos;t
-                    fix 15 things at once. What&apos;s first? What&apos;s
-                    second? The roadmap answers that.
-                  </p>
-                </div>
-              </div>
+        <div className="wrap" style={{ marginTop: 72 }}>
+          <div className="sec-head wide reveal">
+            <span className="eyebrow muted">How the audit works</span>
+          </div>
+          <div className="steps four">
+            <div className="step reveal">
+              <div className="idx">01</div>
+              <h3>Discovery</h3>
+              <p>
+                We start with the pain or the opportunity. What brought you here? What&apos;s costing
+                you time, money, or sleep? We listen, and we ask the questions that surface what&apos;s
+                underneath the stated problem.
+              </p>
             </div>
-
-            {/* Deliverables */}
-            <div className="glass p-8 rounded-2xl border border-white/5 mb-10">
-              <h3 className="font-display text-lg font-bold text-white mb-4">
-                What you walk away with
-              </h3>
-              <ul className="space-y-3 text-slate">
-                <li className="flex gap-3">
-                  <span className="text-indigo mt-1">•</span>
-                  Executive summary (1-2 pages) with the headlines
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo mt-1">•</span>
-                  Full findings report (10-15 pages) with data, visuals, and
-                  prioritized recommendations
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo mt-1">•</span>
-                  A reverse roadmap from current state to dream state, phased
-                  into sprints
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo mt-1">•</span>
-                  ROI summary: total investment vs. total Year 1 value
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo mt-1">•</span>
-                  A roadmap you can execute with or without Nexark
-                </li>
-              </ul>
+            <div className="step reveal d1">
+              <div className="idx">02</div>
+              <h3>Scope</h3>
+              <p>
+                We map where this actually lives. Pain points rarely stay in one lane. We scope the
+                right problem, not just the stated one — including the people and communication inside
+                it.
+              </p>
             </div>
-
-            {/* Pricing Table */}
-            <div className="overflow-x-auto mb-10">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="py-4 pr-6 text-white font-display font-semibold" />
-                    <th className="py-4 px-4 text-white font-display font-semibold">
-                      Starter
-                    </th>
-                    <th className="py-4 px-4 text-white font-display font-semibold">
-                      Growth
-                    </th>
-                    <th className="py-4 px-4 text-white font-display font-semibold">
-                      Enterprise
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="text-slate">
-                  <tr className="border-b border-white/5">
-                    <td className="py-4 pr-6 font-medium text-white/80">
-                      Focus
-                    </td>
-                    <td className="py-4 px-4">One pain point, one area</td>
-                    <td className="py-4 px-4">
-                      Full operation + people and culture
-                    </td>
-                    <td className="py-4 px-4">
-                      Multi-department, cross-functional
-                    </td>
-                  </tr>
-                  <tr className="border-b border-white/5">
-                    <td className="py-4 pr-6 font-medium text-white/80">
-                      Best for
-                    </td>
-                    <td className="py-4 px-4">
-                      &ldquo;I know exactly where it hurts&rdquo;
-                    </td>
-                    <td className="py-4 px-4">
-                      &ldquo;I don&apos;t know what I don&apos;t know&rdquo;
-                    </td>
-                    <td className="py-4 px-4">
-                      Complex orgs, M&amp;A due diligence
-                    </td>
-                  </tr>
-                  <tr className="border-b border-white/5">
-                    <td className="py-4 pr-6 font-medium text-white/80">
-                      Timeline
-                    </td>
-                    <td className="py-4 px-4">1 week</td>
-                    <td className="py-4 px-4">2-3 weeks</td>
-                    <td className="py-4 px-4">3-4 weeks</td>
-                  </tr>
-                  <tr>
-                    <td className="py-4 pr-6 font-medium text-white/80">
-                      Investment
-                    </td>
-                    <td className="py-4 px-4 text-white font-medium">
-                      $7,500 - $10,000
-                    </td>
-                    <td className="py-4 px-4 text-white font-medium">
-                      $15,000 - $20,000
-                    </td>
-                    <td className="py-4 px-4 text-white font-medium">
-                      $25,000 - $40,000+
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="step reveal d2">
+              <div className="idx">03</div>
+              <h3>Dream</h3>
+              <p>
+                Once we see reality clearly, we ask: where do you want this to be? The dream becomes the
+                anchor for everything that follows — every recommendation, every priority, every dollar
+                of ROI is measured against that destination.
+              </p>
             </div>
+            <div className="step reveal d3">
+              <div className="idx">04</div>
+              <h3>Fix</h3>
+              <p>
+                Every friction point and opportunity gets scored by impact and effort. Quick wins first,
+                big swings next. We tell you what to prioritize and what to deprioritize. The roadmap
+                answers what&apos;s first.
+              </p>
+            </div>
+          </div>
 
-            <p className="text-sm text-slate/70 mb-6">
-              A Starter audit often reveals issues that cross boundaries. If
-              that happens, we offer to upgrade to Growth with 50-75% of the
-              Starter fee credited. The audit is a standalone deliverable. You
-              pay for the diagnosis, then decide whether to engage us for the
-              treatment.
-            </p>
+          <div className="what-box reveal" style={{ marginTop: 44 }}>
+            <h4>What you walk away with</h4>
+            <ul>
+              <li>Executive summary with the headlines</li>
+              <li>Full findings report with data, visuals, and prioritized recommendations</li>
+              <li>A reverse roadmap from current state to dream state, phased into sprints</li>
+              <li>An ROI summary: total investment vs. total Year-1 value</li>
+              <li>A roadmap you can execute with or without Nexark</li>
+            </ul>
+          </div>
 
-            <p className="text-sm text-slate">
-              Already know what you need?{" "}
-              <a href="#optimize" className="text-indigo hover:text-white transition-colors">
-                Jump to our services ↓
-              </a>
+          <div className="reveal" style={{ marginTop: 56, overflowX: "auto" }}>
+            <table className="ptable">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Starter</th>
+                  <th>Growth</th>
+                  <th>Enterprise</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Focus</th>
+                  <td>One pain point, one area</td>
+                  <td>Full operation + people and culture</td>
+                  <td>Multi-department, cross-functional</td>
+                </tr>
+                <tr>
+                  <th>Best for</th>
+                  <td>“I know exactly where it hurts”</td>
+                  <td>“I don&apos;t know what I don&apos;t know”</td>
+                  <td>Complex orgs, M&amp;A due diligence</td>
+                </tr>
+                <tr>
+                  <th>Timeline</th>
+                  <td>About a week</td>
+                  <td>Two to three weeks</td>
+                  <td>Three to four weeks</td>
+                </tr>
+                <tr>
+                  <th>Deliverable</th>
+                  <td>Standalone diagnosis</td>
+                  <td>Full operation + roadmap</td>
+                  <td>Cross-functional roadmap</td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="lead-para" style={{ fontSize: 15, color: "var(--muted)", marginTop: 24, maxWidth: 760 }}>
+              A Starter audit often reveals issues that cross boundaries. If that happens, we credit
+              your audit toward a deeper engagement. The audit is a standalone deliverable — the
+              diagnosis stands on its own, and you decide whether to bring us in for the build.
             </p>
           </div>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* Optimize */}
-      <AnimatedSection id="optimize" className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Optimize
-            </h2>
-            <p className="font-display text-lg text-white/80 mb-8">
-              Take your current operation to its next generation.
-            </p>
-
-            <div className="text-slate leading-relaxed space-y-4 mb-10">
+      {/* OFFERINGS */}
+      <section className="band">
+        <div className="wrap">
+          <div className="offer reveal">
+            <span className="eyebrow muted">01 · Optimize</span>
+            <h2 style={{ marginTop: 18 }}>Optimize</h2>
+            <div className="kicker">Take your current operation to its next generation.</div>
+            <div className="body-copy">
               <p>
-                You&apos;ve outgrown your tools. Your team is patching systems
-                together that were never meant to talk to each other. There are
-                bottlenecks you&apos;ve normalized because you&apos;ve been too
-                busy running the business to stop and look at them.
+                You&apos;ve outgrown your tools. Your team is patching systems together that were never
+                meant to talk to each other. There are bottlenecks you&apos;ve normalized because
+                you&apos;ve been too busy running the business to stop and look at them.
               </p>
               <p>
-                We sit on top of what you already use and build custom software
-                that fits how your operation actually runs. Your existing tools
-                start working together. Your team does more with the same
-                resources. The current generation of your operation becomes the
-                foundation for the next one.
+                We sit on top of what you already use and build custom software that fits how your
+                operation actually runs. Your existing tools start working together. Your team does more
+                with the same resources. The current generation of your operation becomes the foundation
+                for the next one.
               </p>
             </div>
-
-            <div className="glass p-6 rounded-xl border border-white/5 mb-8">
-              <h3 className="font-display font-semibold text-white mb-4">
-                What this looks like
-              </h3>
-              <ul className="space-y-2 text-slate text-sm">
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  Custom CRMs built around your actual sales process
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  Agentic workflows that handle multi-step tasks without someone
-                  manually pushing things along
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  Dashboards that show what matters to your business, not what a
-                  template decided
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  System integrations that replace the Zapier duct tape
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  Compliance and reporting automation
-                </li>
+            <div className="what-box">
+              <h4>What this looks like</h4>
+              <ul>
+                <li>Custom CRMs built around your actual sales process</li>
+                <li>Agentic workflows that handle multi-step tasks without someone manually pushing things along</li>
+                <li>Dashboards that show what matters to your business, not what a template decided</li>
+                <li>System integrations that replace the duct tape</li>
+                <li>Compliance and reporting automation</li>
               </ul>
             </div>
-
-            <p className="text-white font-display font-semibold">
-              Sprints start at $5,000.{" "}
-              <span className="text-slate font-normal">
-                Scoped after the audit.
-              </span>
-            </p>
+            <div className="price-line">
+              Scoped after the audit. <span>Priced to the work, not a template.</span>
+            </div>
           </div>
-        </div>
-      </AnimatedSection>
 
-      {/* Innovate */}
-      <AnimatedSection id="innovate" className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Innovate
-            </h2>
-            <p className="font-display text-lg text-white/80 mb-8">
-              Build the next generation of what your business could be.
-            </p>
-
-            <div className="text-slate leading-relaxed space-y-4 mb-10">
+          <div className="offer reveal">
+            <span className="eyebrow muted">02 · Innovate</span>
+            <h2 style={{ marginTop: 18 }}>Innovate</h2>
+            <div className="kicker">Build the next generation of what your business could be.</div>
+            <div className="body-copy">
               <p>
-                You see an opportunity. A product your industry needs. A
-                membership model that turns one-time customers into recurring
-                revenue. A platform that creates a new line of business
-                entirely. The vision is clear. You need a technology partner who
-                can hear what you&apos;re describing and turn it into something
-                real.
+                You see an opportunity. A product your industry needs. A membership model that turns
+                one-time customers into recurring revenue. A platform that creates a new line of
+                business entirely. The vision is clear. You need a technology partner who can hear what
+                you&apos;re describing and turn it into something real.
               </p>
               <p>
-                We take your idea through discovery, architecture, and build,
-                and we stay in your corner after launch. This is where the
-                partnership matters most: we&apos;re engineering a product with
-                revenue designed in from day one, and we&apos;re invested in its
-                success long-term.
+                We take your idea through discovery, architecture, and build, and we stay in your corner
+                after launch. This is where the partnership matters most: we&apos;re engineering a
+                product with revenue designed in from day one, and we&apos;re invested in its success
+                long-term.
               </p>
             </div>
-
-            <div className="glass p-6 rounded-xl border border-white/5 mb-8">
-              <h3 className="font-display font-semibold text-white mb-4">
-                What this looks like
-              </h3>
-              <ul className="space-y-2 text-slate text-sm">
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  Mobile apps from concept to App Store
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  Membership platforms with digital wallets, automated billing,
-                  and member management
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  SaaS products built for your specific market
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-indigo">•</span>
-                  AI-native tools that give your business capabilities nobody
-                  else in your space has
-                </li>
+            <div className="what-box">
+              <h4>What this looks like</h4>
+              <ul>
+                <li>Mobile apps from concept to App Store</li>
+                <li>Membership platforms with digital wallets, automated billing, and member management</li>
+                <li>SaaS products built for your specific market</li>
+                <li>Intelligent tools that give your business capabilities nobody else in your space has</li>
               </ul>
             </div>
-
-            <p className="text-white font-display font-semibold">
-              Projects scoped individually.{" "}
-              <span className="text-slate font-normal">
-                Typically $10,000-$50,000 depending on complexity.
-              </span>
-            </p>
+            <div className="price-line">
+              Projects scoped individually. <span>Sized to the opportunity, not a menu.</span>
+            </div>
           </div>
-        </div>
-      </AnimatedSection>
 
-      {/* Partner */}
-      <AnimatedSection id="partner" className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Partner
-            </h2>
-            <p className="font-display text-lg text-white/80 mb-12">
-              When you grow, we grow. That&apos;s how partnership works.
-            </p>
-
-            <div className="space-y-10">
-              <div>
-                <h3 className="font-display text-xl font-bold text-white mb-3">
-                  Maintenance and Optimization
-                </h3>
-                <p className="text-slate leading-relaxed mb-2">
-                  Your systems stay current, secure, and evolving. We monitor
-                  performance, handle dependency updates, and run quarterly
-                  optimization reviews. Proactive, not reactive.
+          <div className="offer reveal">
+            <span className="eyebrow muted">03 · Partner</span>
+            <h2 style={{ marginTop: 18 }}>Partner</h2>
+            <div className="kicker">When you grow, we grow. That&apos;s how partnership works.</div>
+            <div className="two-cards" style={{ marginTop: 26 }}>
+              <div className="qcard">
+                <h3>Maintenance &amp; Optimization</h3>
+                <p>
+                  Your systems stay current, secure, and evolving. We monitor performance, handle
+                  dependency updates, and run quarterly optimization reviews. Proactive, not reactive.
                 </p>
-                <p className="text-white/70 text-sm font-medium">
-                  Starting at $1,500/month
-                </p>
+                <div className="price-line" style={{ fontSize: 15, marginTop: 16, color: "var(--muted)" }}>
+                  Ongoing monthly partnership
+                </div>
               </div>
-
-              <div>
-                <h3 className="font-display text-xl font-bold text-white mb-3">
-                  Fractional CTO
-                </h3>
-                <p className="text-slate leading-relaxed mb-2">
-                  Strategic technology leadership without the $400K salary.
-                  Architecture decisions, vendor management, roadmap
-                  development, team oversight. We show up to the meetings that
+              <div className="qcard">
+                <h3>Fractional CTO</h3>
+                <p>
+                  Strategic technology leadership without the full-time salary. Architecture decisions,
+                  vendor management, roadmap development, team oversight. We show up to the meetings that
                   matter.
                 </p>
-                <p className="text-white/70 text-sm font-medium">
-                  Advisory: $3,000/month · Embedded: $7,500/month · Leadership:
-                  $15,000/month
-                </p>
+                <div className="price-line" style={{ fontSize: 15, marginTop: 16, color: "var(--muted)" }}>
+                  Advisory, embedded, or leadership — scoped to how deep you need us
+                </div>
               </div>
-
-              <div>
-                <h3 className="font-display text-xl font-bold text-white mb-3">
-                  Venture Partner
-                </h3>
-                <p className="text-slate leading-relaxed mb-2">
-                  For founders who want a technical co-founder, not a vendor. We
-                  invest our engineering in exchange for equity and build
-                  alongside you with real skin in the game. We&apos;re selective
-                  about who we partner with because when we come in as a venture
-                  partner, our interests and yours are the same.
-                </p>
-                <p className="text-white/70 text-sm font-medium">
-                  Structure determined case-by-case
-                </p>
+            </div>
+            <div className="qcard reveal" style={{ marginTop: 22 }}>
+              <h3>Venture Partner</h3>
+              <p>
+                For founders who want a technical co-founder, not a vendor. We invest our engineering in
+                exchange for equity and build alongside you with real skin in the game. We&apos;re
+                selective about who we partner with, because when we come in as a venture partner, our
+                interests and yours are the same.
+              </p>
+              <div className="price-line" style={{ fontSize: 15, marginTop: 16, color: "var(--muted)" }}>
+                Structure determined case-by-case
               </div>
             </div>
           </div>
         </div>
-      </AnimatedSection>
+      </section>
 
       {/* CTA */}
-      <AnimatedSection className="border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6">
-              What&apos;s the next generation of your business?
-            </h2>
-            <p className="text-lg text-slate leading-relaxed mb-10">
-              Whether you&apos;re optimizing what you have or building something
-              new, the first step is the same: a conversation about where you
-              are and where you&apos;ve always wanted to take it. We&apos;ll dig
-              into the details and start mapping out what it would take to get
-              there.
-            </p>
-            <Button href="/start" size="lg">
-              Start with a Conversation
-            </Button>
-          </div>
+      <section className="cta">
+        <div className="wrap reveal">
+          <span className="eyebrow center">The spark that reignites possibility</span>
+          <h2 style={{ marginTop: 26 }}>
+            Not sure where you fit? <em>Start with a conversation.</em>
+          </h2>
+          <p>
+            Tell us where you are and where you&apos;ve always wanted to take it. The first conversation
+            is just us understanding your situation well enough to give you something useful.
+          </p>
+          <Link href="/start" className="btn btn-primary">
+            Start Your Journey <span className="arw">→</span>
+          </Link>
         </div>
-      </AnimatedSection>
-
-      <Footer />
-    </main>
+      </section>
+    </RefreshShell>
   );
 }
