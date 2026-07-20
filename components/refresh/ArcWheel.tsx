@@ -234,16 +234,35 @@ export function ArcWheel() {
       return () => ro.disconnect();
     }
 
-    // Hovering pauses the orbit. Rather than stopping the clock (which would jump when it
-    // restarted), we hold the elapsed time still while paused, so motion resumes exactly where
-    // it stopped.
+    // Hovering pauses the orbit. Two things matter here:
+    //
+    // 1. We hold ELAPSED TIME still rather than stopping the clock, so motion resumes exactly
+    //    where it stopped instead of jumping forward by however long the cursor rested.
+    // 2. The stop is EASED, not binary. A speed multiplier glides between 1 and 0 instead of
+    //    snapping, so the orbit slows to a halt and lifts off again — an abrupt stop reads as
+    //    a dropped frame, which is the opposite of the calm this section is going for.
+    //
+    // The glide is exponential smoothing keyed to real elapsed time, so it behaves the same on
+    // a 120Hz display as on a 60Hz one. It approaches zero asymptotically and never quite
+    // arrives, so we settle it once it is imperceptible — otherwise the tiles creep forever.
+    // Asymmetric on purpose: it settles fairly promptly so the stop reads as deliberate, and
+    // lifts off more gently so resuming never feels like a lurch. A single long constant left
+    // the tiles still creeping at ~15% speed a second after the cursor landed, which reads as
+    // a leak rather than a halt.
+    const STOP_MS = 130;
+    const START_MS = 520;
     let start = 0;
     let held = 0;
     let last = 0;
+    let speed = 1;
     const step = (t: number) => {
       if (!start) { start = t; last = t; }
-      if (!hoverRef.current) held += t - last;
+      const dt = t - last;
       last = t;
+      const target = hoverRef.current ? 0 : 1;
+      speed += (target - speed) * (1 - Math.exp(-dt / (target === 0 ? STOP_MS : START_MS)));
+      if (target === 0 && speed < 0.05) speed = 0;
+      held += dt * speed;
       render((held / (ORBIT_SECONDS * 1000)) % 1);
       rafRef.current = requestAnimationFrame(step);
     };
