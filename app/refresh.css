@@ -813,7 +813,10 @@
   position: relative; z-index: 50; text-align: center; margin: clamp(30px, 5vh, 56px) auto 0;
   font-size: clamp(15px, 1.3vw, 18px); color: #6a6057;
 }
-.nx .arc-kicker em { font-family: var(--serif); font-style: italic; color: var(--ink-accent); }
+/* NOT --ink-accent: that rotates with the active industry, so this word's contrast changed
+   twelve times a cycle and was only passing by luck (the old purple happened to be dark
+   enough; gold is not). A fixed deep gold — 5.37:1 on this ground — cannot regress. */
+.nx .arc-kicker em { font-family: var(--serif); font-style: italic; color: #7a5514; }
 
 /* the mobile-only industry list — on a phone the orbit is decoration, this is the content */
 .nx .arc-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; position: relative; z-index: 50; }
