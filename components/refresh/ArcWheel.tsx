@@ -73,6 +73,12 @@ const INDUSTRIES: Industry[] = [
     blurb: "Routes, proof of service, and invoices that follow the work." },
   { word: "Fleets", img: "logistics", ink: "#4A4535",
     blurb: "Vehicles, drivers, and a dispatch board nobody has to rebuild." },
+  { word: "Dental Offices", img: "dental", ink: "#2C5566",
+    blurb: "Recalls, treatment plans, and a chair that is never quietly empty." },
+  { word: "Landscapers", img: "landscaping", ink: "#3F5730",
+    blurb: "Routes, seasonal contracts, and crews who log the work as they go." },
+  { word: "Security Teams", img: "security", ink: "#43474F",
+    blurb: "Posts, incident reports, and coverage you can prove after the fact." },
 ];
 
 const TAU = Math.PI * 2;
@@ -162,10 +168,12 @@ function buildPath(W: number, H: number, copy: { w: number; h: number }, tileW: 
   // Express each corner of the keep-out rect in the ellipse's own frame and require it inside.
   const ct = Math.cos(TILT);
   const st = Math.sin(TILT);
-  // A tighter oval: the tips come in, the perimeter shortens, and twelve-plus tiles sit closer
-  // together. Narrower costs height (containment forces ry up as rx comes down), so this is the
-  // knee of that curve — measurable bleed almost gone, spacing roughly halved.
-  const rx0 = (W * 0.44) / hMin;
+  // A tight oval. Narrowing costs height, because containment forces ry up as rx comes down —
+  // and below about W*0.38 the trade stops paying: the loop turns circular and gets taller
+  // without getting any tighter (spacing 97 -> 94 -> 96px while the section climbs 1049 ->
+  // 1100 -> 1195). So this is the floor for a loop that still reads as a wide arc, and it also
+  // brings the bleed to ~6px, which ends the tiles clipping off the page.
+  const rx0 = (W * 0.38) / hMin;
   let ry0 = b;
   for (const sy of [1, -1]) {
     const u = a * ct + sy * b * st;
