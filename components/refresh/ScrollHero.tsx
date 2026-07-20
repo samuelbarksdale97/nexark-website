@@ -36,29 +36,36 @@ const PANELS: Panel[] = [
     ],
   },
   {
-    head: "Behind every calm room, a system is",
-    em: "doing the work.",
-    sub: "The check-in. The record. The reconciliation. None of it needs a person standing over it.",
-    clips: [
-      C("clip-scan", "A guest taps a phone at the door and is recognized"),
-      C("clip-ticketing", "A door host fastens a wristband and waves a guest through"),
-      C("clip-dashboard", "An owner glances at her day's numbers and nods"),
-    ],
-  },
-  {
-    head: "Reconciliation that took half a Saturday",
-    em: "now takes seconds.",
-    sub: "Twenty hours a week of compliance work became five. The busywork stopped being someone's job.",
+    // DOOR ONE — transform. The operational-transformation buyer.
+    head: "We rebuild how your business",
+    em: "actually runs.",
+    sub: "The busywork, the records, the systems that never quite talk to each other — engineered into one operation that runs itself.",
     clips: [
       C("clip-property", "A property manager walking her building, unhurried"),
       C("clip-restaurant", "A bartender and server sharing a laugh at close"),
+      C("clip-scan", "A guest taps a phone at the door and is recognized"),
+    ],
+  },
+  {
+    // DOOR TWO — build. The app/product buyer (how Park at 14th and Sir Davis started). Named
+    // clients stay out of public copy per the anonymization lock; this speaks to the buyer.
+    // NOTE: these clips are the most product/tech-forward we have, but the panel really wants
+    // footage that reads as *making something new* — a screen being designed, an app in a hand,
+    // a launch. Generating that set is a Higgsfield job on Sam's go (~30 credits/clip).
+    head: "Or we build the thing that",
+    em: "doesn't exist yet.",
+    sub: "The app, the platform, the product you can't buy off a shelf — from a blank page to something in your customers' hands.",
+    clips: [
+      C("clip-dashboard", "An owner glances at her day's numbers and nods"),
+      C("clip-ticketing", "A door host fastens a wristband and waves a guest through"),
       C("clip-multisite", "An operator stepping between two locations, greeting a neighbor"),
     ],
   },
   {
-    head: "So you can just",
-    em: "be present.",
-    sub: "The technology does its best work out of sight — so the people can do what only people can do.",
+    // THE HANDOFF — poses the fork the assessment then captures.
+    head: "So — what brings you",
+    em: "to Nexark?",
+    sub: "Two minutes tells you where you stand, and tells us whether we're the right team for it.",
     cta: true,
     clips: [
       C("clip-family", "A father laughing with his daughter on the front steps, phone face-down"),
