@@ -55,13 +55,14 @@ const PANELS: Panel[] = [
     head: "Or we build the thing that",
     em: "doesn't exist yet.",
     sub: "The app, the platform, the product you can't buy off a shelf — from a blank page to something in your customers' hands.",
-    // build-app: purpose-built product shot (legible in-app UI via the text-frame pipeline).
-    // TODO: build-whiteboard + build-laptop (people-building scenes) are generated as start
-    // frames and animate in as soon as Higgsfield's video endpoint recovers (522 outage at
-    // build time); until then clip-dashboard holds the second slot.
+    // People building, not an object-in-hand. The app-in-hand shot was dropped (Sam): a rigid
+    // phone held in a hand is the worst case for image-to-video — it warps and jitters. Human
+    // scenes hide model motion (we expect people to move) and match the other panels. Generated
+    // as text-capable start frames, animated on kling3_0 PRO (not turbo) for stable motion.
     clips: [
-      C("build-app", "The Nexark app, built from a blank page, in a founder's hand"),
-      C("clip-dashboard", "An owner glances at her day's numbers and nods"),
+      C("build-whiteboard", "Two builders mapping a product on a glass whiteboard"),
+      C("build-laptop", "Two builders shipping code together at a laptop"),
+      C("build-consult", "A Nexark consultation — understanding the work before building"),
     ],
   },
   {
