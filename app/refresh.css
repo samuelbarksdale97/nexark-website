@@ -5,10 +5,13 @@
   --bg: #000;
   --bg-2: #070707;
   --bg-3: #101010;
-  --panel: rgba(255, 255, 255, 0.032);
-  --panel-hi: rgba(255, 255, 255, 0.055);
-  --hair: rgba(255, 255, 255, 0.13);
-  --hair-strong: rgba(255, 255, 255, 0.24);
+  /* Real surfaces, not translucent hints. At 3% white on a pure-black ground a card is
+     invisible — it reads as the page. Checklist rule 20: a component's background may never
+     match or approximate the page background. These are opaque steps up from #000. */
+  --panel: #202020;
+  --panel-hi: #2b2b2b;
+  --hair: rgba(255, 255, 255, 0.17);
+  --hair-strong: rgba(255, 255, 255, 0.3);
 
   --ivory: #f7f4ef;
   --body: #cfcac2;
@@ -1031,7 +1034,12 @@
   position: relative; display: flex; flex-direction: column;
   border-radius: 20px; padding: clamp(22px, 1.9vw, 30px);
   background: var(--panel); border: 1px solid var(--hair);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
   min-height: 210px;
+  transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+.nx .shelf-card:not(.own):hover {
+  background: var(--panel-hi); border-color: var(--hair-strong); transform: translateY(-2px);
 }
 .nx .shelf-tag {
   font-family: var(--sans); font-size: 10.5px; font-weight: 500;
