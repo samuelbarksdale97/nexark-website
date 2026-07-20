@@ -63,6 +63,16 @@ const INDUSTRIES: Industry[] = [
     blurb: "Bookings and turnarounds for operators who are rarely at a desk." },
   { word: "Multi-site", img: "clip-multisite", ink: "#3D4A7A",
     blurb: "Two locations or ten, running off one source of truth." },
+  // Four more added 07-20 to tighten the spacing along the loop. Every one has its own photo —
+  // no image is used twice, which Sam has already called out once.
+  { word: "Caterers", img: "catering", ink: "#7B4A2A",
+    blurb: "Head counts, timelines, and a kitchen that knows what leaves when." },
+  { word: "Salons", img: "salon", ink: "#6E3F55",
+    blurb: "Chairs, colour histories, and clients who rebook themselves." },
+  { word: "Cleaning Crews", img: "cleaning", ink: "#2F5A5E",
+    blurb: "Routes, proof of service, and invoices that follow the work." },
+  { word: "Fleets", img: "logistics", ink: "#4A4535",
+    blurb: "Vehicles, drivers, and a dispatch board nobody has to rebuild." },
 ];
 
 const TAU = Math.PI * 2;
@@ -152,7 +162,10 @@ function buildPath(W: number, H: number, copy: { w: number; h: number }, tileW: 
   // Express each corner of the keep-out rect in the ellipse's own frame and require it inside.
   const ct = Math.cos(TILT);
   const st = Math.sin(TILT);
-  const rx0 = (W * 0.6) / hMin;
+  // A tighter oval: the tips come in, the perimeter shortens, and twelve-plus tiles sit closer
+  // together. Narrower costs height (containment forces ry up as rx comes down), so this is the
+  // knee of that curve — measurable bleed almost gone, spacing roughly halved.
+  const rx0 = (W * 0.44) / hMin;
   let ry0 = b;
   for (const sy of [1, -1]) {
     const u = a * ct + sy * b * st;
