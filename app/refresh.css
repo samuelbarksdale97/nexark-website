@@ -615,6 +615,79 @@
 .nx .lstack-copy h2 em { color: var(--amber-hi); }
 .nx .lstack-copy p { color: var(--body); max-width: 42ch; margin-bottom: 30px; }
 
+
+.nx .hiw-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+/* the chip is LIGHTER than the panel — the surface ladder running upward, per the reference */
+.nx .hiw-chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 54px; height: 54px; border-radius: 16px;
+  background: #fff;
+  font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+  color: var(--ink-3, #8a7d6c);
+  transition: color 0.6s ease, box-shadow 0.6s ease;
+}
+.nx .hiw-panel.lit .hiw-chip {
+  color: var(--gold-deep, #9a6f22);
+  box-shadow: 0 0 0 1px rgba(154, 111, 34, 0.22);
+}
+.nx .hiw-dur {
+  font-family: var(--sans); font-size: 11.5px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3, #8a7d6c);
+}
+
+/* THE VOID — where a feature grid would put filler. It holds the artifact instead. */
+.nx .hiw-void {
+  flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
+  min-height: 132px; padding: clamp(16px, 2.4vh, 30px) 0;
+}
+.nx .hiw-art { width: 100%; height: auto; max-height: 168px; overflow: visible; }
+
+.nx .hiw-panel h3 {
+  font-size: clamp(28px, 2.7vw, 40px); color: var(--ink, #17120c); margin-bottom: 14px;
+}
+.nx .hiw-panel p {
+  font-size: 15px; line-height: 1.68; color: var(--ink-2, #554c40);
+  margin-bottom: 22px; max-width: 34ch;
+}
+
+.nx .hiw-out {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: 12.5px; letter-spacing: 0.05em;
+  color: var(--ink, #17120c);
+  padding: 11px 18px; border-radius: 100px;
+  background: rgba(255, 255, 255, 0.72);
+  transition: background 0.6s ease, box-shadow 0.6s ease;
+}
+.nx .hiw-out::before { content: "→"; color: var(--ink-3, #8a7d6c); transition: color 0.6s ease; }
+.nx .hiw-panel.lit .hiw-out { background: #fff; box-shadow: 0 0 0 1px rgba(154, 111, 34, 0.18); }
+.nx .hiw-panel.lit .hiw-out::before { color: var(--gold-deep, #9a6f22); }
+
+/* hover inversion is declared AFTER the .lit resting state — equal specificity, so
+   source order decides which wins. */
+.nx .hiw-panel h3, .nx .hiw-panel p, .nx .hiw-dur, .nx .hiw-out { transition: color 0.42s ease 0.1s, background 0.42s ease 0.1s, box-shadow 0.42s ease; }
+.nx .hiw-panel:hover h3, .nx .hiw-panel:focus-within h3 { color: #f7f1e6; }
+.nx .hiw-panel:hover p, .nx .hiw-panel:focus-within p { color: #d5cbba; }
+.nx .hiw-panel:hover .hiw-dur, .nx .hiw-panel:focus-within .hiw-dur { color: var(--amber-hi); }
+.nx .hiw-panel:hover .hiw-chip, .nx .hiw-panel:focus-within .hiw-chip { color: #17120c; box-shadow: none; }
+/* the action inverts to solid, the way the reference flips its button on a filled card */
+.nx .hiw-panel:hover .hiw-out, .nx .hiw-panel:focus-within .hiw-out {
+  background: var(--amber); color: #1a1207; box-shadow: none;
+}
+.nx .hiw-panel:hover .hiw-out::before, .nx .hiw-panel:focus-within .hiw-out::before { color: #1a1207; }
+/* the diagram brightens — it is the same drawing, now lit from inside the panel */
+.nx .hiw-panel:hover .hiw-art .s-line, .nx .hiw-panel:focus-within .hiw-art .s-line,
+.nx .hiw-panel:hover .hiw-art .s-thin, .nx .hiw-panel:focus-within .hiw-art .s-thin,
+.nx .hiw-panel:hover .hiw-art .s-box, .nx .hiw-panel:focus-within .hiw-art .s-box,
+.nx .hiw-panel:hover .hiw-art .s-wire, .nx .hiw-panel:focus-within .hiw-art .s-wire,
+.nx .hiw-panel:hover .hiw-art .s-rule, .nx .hiw-panel:focus-within .hiw-art .s-rule { stroke: var(--amber); }
+.nx .hiw-panel:hover .hiw-art .s-dot, .nx .hiw-panel:focus-within .hiw-art .s-dot { fill: var(--amber-hi); }
+.nx .hiw-panel:hover .hiw-art .s-label, .nx .hiw-panel:focus-within .hiw-art .s-label { fill: #bdb09c; }
+.nx .hiw-art .s-line, .nx .hiw-art .s-thin, .nx .hiw-art .s-box,
+.nx .hiw-art .s-wire, .nx .hiw-art .s-rule { transition: stroke 0.42s ease 0.1s; }
+.nx .hiw-art .s-dot, .nx .hiw-art .s-label { transition: fill 0.42s ease 0.1s, opacity 0.8s ease 0.55s; }
+
 @media (max-width: 980px) {
   .nx .lstack-grid { grid-template-columns: 1fr; gap: 44px; }
   .nx .lstack { perspective: 1200px; }
@@ -734,78 +807,134 @@
 }
 
 /* ============================================================
-   HOW IT WORKS — a track, not a grid. Gold on black; purple stays on the logo.
+   HOW IT WORKS — tall panels whose void carries the work.
+   Reference decode: scale.com card band. Light ground, no borders, big radius, and the
+   content deliberately occupying under half the panel. Gold stays hairline-only on light
+   ground (it fails contrast as text); ink does the reading.
    ============================================================ */
-.nx .hiw { background: var(--bg-2); padding: clamp(80px, 11vh, 140px) 0; }
-.nx .hiw-track { position: relative; margin-top: clamp(44px, 6vh, 72px); }
-
-/* the line. A transform on a gradient bar, not an SVG — it flips orientation with one rule
-   and the scroll handler never has to read layout. */
-.nx .hiw-rail {
-  position: absolute; left: 0; right: 0; top: 13px; height: 1px;
-  background: rgba(226, 210, 184, 0.16); overflow: hidden;
+.nx .hiw {
+  /* light-section tokens are scoped per section in this file; declare ours explicitly */
+  --paper: #faf7f2;
+  --card: #efeae1;
+  --ink: #17120c;
+  --ink-2: #554c40;
+  --ink-3: #736858; /* 5.18:1 on the paper ground — #7d7264 measured 4.47 and failed 1.4.3 */
+  --gold-deep: #8f6519;
+  background: var(--paper);
+  color: var(--ink-2);
+  padding: clamp(84px, 12vh, 150px) 0;
 }
-.nx .hiw-rail-fill {
+.nx .hiw .eyebrow { color: var(--ink-3, #8a7d6c); }
+.nx .hiw .eyebrow::before { color: var(--gold-line); }
+.nx .hiw h2 { color: var(--ink, #17120c); }
+.nx .hiw h2 em { color: var(--gold-deep, #9a6f22); }
+
+.nx .hiw-deck-line {
+  margin-top: 18px; font-size: clamp(15px, 1.4vw, 18px); color: var(--ink-3, #7d7264);
+}
+.nx .hiw-deck { position: relative; margin-top: clamp(46px, 6vh, 76px); }
+
+/* the thread through the number chips — the only element asserting order */
+.nx .hiw-thread {
+  position: absolute; left: 0; right: 0; top: 60px; height: 1px;
+  background: rgba(154, 111, 34, 0.16); overflow: hidden; pointer-events: none;
+}
+.nx .hiw-thread i {
   display: block; height: 100%; width: 100%;
-  background: linear-gradient(90deg, var(--amber-deep), var(--amber) 40%, var(--amber-hi));
+  background: linear-gradient(90deg, var(--gold-deep, #9a6f22), var(--gold-line));
   transform: scaleX(var(--p, 0)); transform-origin: left center;
-  transition: transform 0.15s linear;
+  transition: transform 0.2s linear;
 }
 
-.nx .hiw-steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 54px); }
-.nx .hiw-step { position: relative; padding-top: 46px; }
+.nx .hiw-panels {
+  list-style: none; display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 1.8vw, 30px);
+}
 
-.nx .hiw-node {
-  position: absolute; top: 6px; left: 0; width: 15px; height: 15px; border-radius: 50%;
-  border: 1px solid var(--hair-strong); background: var(--bg-2);
-  transition: border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+.nx .hiw-panel {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--card, #f0ebe3);
+  border-radius: 26px;
+  padding: clamp(26px, 2.4vw, 40px);
+  min-height: clamp(460px, 46vw, 620px);
+  opacity: 0.55; transform: translateY(14px);
+  transition: opacity 0.7s cubic-bezier(0.2,0.7,0.2,1), transform 0.7s cubic-bezier(0.2,0.7,0.2,1);
 }
-.nx .hiw-node::after {
-  content: ""; position: absolute; inset: 4px; border-radius: 50%;
-  background: var(--amber); opacity: 0; transform: scale(0.4);
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2,0.7,0.2,1);
-}
-.nx .hiw-step.lit .hiw-node { border-color: var(--amber); box-shadow: 0 0 0 5px rgba(255,181,82,0.09); }
-.nx .hiw-step.lit .hiw-node::after { opacity: 1; transform: scale(1); }
+.nx .hiw-panel.lit { opacity: 1; transform: none; }
 
-.nx .hiw-when {
-  display: inline-block; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--muted); transition: color 0.5s ease;
+/* THE FILL — the panel fills from the floor on hover, like the phase completing.
+   Reference does this with a different hue per card; our palette is locked to black/white/
+   gold, so the fill is ink and the panel INVERTS instead. Same pop, no new colour, and it
+   means something: the work filling in. Nothing is conveyed by hover alone (checklist 30) —
+   this is emphasis on content already fully readable at rest. */
+.nx .hiw-panel::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, #221a10, var(--ink, #17120c) 55%);
+  transform: scaleY(0); transform-origin: center bottom;
+  transition: transform 0.62s cubic-bezier(0.22, 0.75, 0.24, 1);
 }
-.nx .hiw-step.lit .hiw-when { color: var(--amber); }
+.nx .hiw-panel:hover::before,
+.nx .hiw-panel:focus-within::before { transform: scaleY(1); }
 
-.nx .hiw-step h3 {
-  font-size: clamp(26px, 2.6vw, 36px); margin: 12px 0 14px;
-  display: flex; align-items: baseline; gap: 14px;
+/* ---- the artifacts: hairline diagrams, same stroke language as the schematics upstairs ---- */
+.nx .hiw-art .s-line,
+.nx .hiw-art .s-thin,
+.nx .hiw-art .s-box,
+.nx .hiw-art .s-wire,
+.nx .hiw-art .s-rule { fill: none; stroke: var(--gold-line); vector-effect: non-scaling-stroke; }
+.nx .hiw-art .s-line { stroke-width: 1.25; opacity: 0.85; }
+.nx .hiw-art .s-thin { stroke-width: 1; opacity: 0.4; }
+.nx .hiw-art .s-rule { stroke-width: 1; opacity: 0.3; }
+.nx .hiw-art .s-box { stroke-width: 1; opacity: 0.75; }
+.nx .hiw-art .s-wire { stroke-width: 1; opacity: 0.55; stroke-dasharray: 3 3; }
+.nx .hiw-art .s-dot { fill: var(--gold-deep, #9a6f22); stroke: none; }
+.nx .hiw-art .s-label {
+  font-family: var(--sans); font-size: 7px; font-weight: 500; letter-spacing: 0.16em;
+  fill: var(--ink-3, #8a7d6c); stroke: none;
 }
-.nx .hiw-idx {
-  font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.16em;
-  color: var(--muted); transition: color 0.5s ease;
-}
-.nx .hiw-step.lit .hiw-idx { color: var(--amber-hi); }
-.nx .hiw-step p { font-size: 15px; color: var(--body); line-height: 1.68; max-width: 34ch; margin-bottom: 22px; }
 
-.nx .hiw-out {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 12.5px; letter-spacing: 0.06em; color: var(--ivory);
-  padding: 9px 16px; border-radius: 100px;
-  border: 1px solid var(--hair); background: rgba(255,238,214,0.03);
-  transition: border-color 0.5s ease, color 0.5s ease, background 0.5s ease;
-}
-.nx .hiw-out::before { content: "→"; color: var(--muted); transition: color 0.5s ease; }
-.nx .hiw-step.lit .hiw-out { border-color: rgba(255,181,82,0.4); background: rgba(255,181,82,0.07); }
-.nx .hiw-step.lit .hiw-out::before { color: var(--amber); }
+/* LEARN: the plan draws itself, then the annotations land */
+.nx .hiw-art .a-plan path { stroke-dasharray: 460; stroke-dashoffset: 460; transition: stroke-dashoffset 1.5s cubic-bezier(0.3,0.8,0.3,1); }
+.nx .hiw-panel.lit .hiw-art .a-plan path { stroke-dashoffset: 0; }
+.nx .hiw-art .s-box, .nx .hiw-art .s-wire, .nx .hiw-art .s-dot, .nx .hiw-art .s-label { opacity: 0; transition: opacity 0.8s ease 0.55s; }
+.nx .hiw-panel.lit .hiw-art .s-box { opacity: 0.75; }
+.nx .hiw-panel.lit .hiw-art .s-wire { opacity: 0.55; }
+.nx .hiw-panel.lit .hiw-art .s-dot { opacity: 1; }
+.nx .hiw-panel.lit .hiw-art .s-label { opacity: 1; }
 
-/* the sequence reads top-to-bottom on a phone; the rail turns with it */
-@media (max-width: 860px) {
-  .nx .hiw-steps { grid-template-columns: 1fr; gap: 38px; }
-  .nx .hiw-step { padding-top: 0; padding-left: 34px; }
-  .nx .hiw-rail { left: 7px; right: auto; top: 6px; bottom: 6px; width: 1px; height: auto; }
-  .nx .hiw-rail-fill { width: 100%; height: 100%; transform: scaleY(var(--p, 0)); transform-origin: center top;
-    background: linear-gradient(180deg, var(--amber-deep), var(--amber) 40%, var(--amber-hi)); }
-  .nx .hiw-node { top: 2px; }
-  .nx .hiw-step p { max-width: none; }
+/* BUILD: the planes slide into register */
+.nx .hiw-art .a-stack .pl { transition: transform 0.9s cubic-bezier(0.2,0.7,0.2,1), opacity 0.9s ease; opacity: 0; }
+.nx .hiw-art .a-stack .p1 { transform: translate(-16px, -14px); }
+.nx .hiw-art .a-stack .p2 { transform: translate(0, 0); transition-delay: 0.1s; }
+.nx .hiw-art .a-stack .p3 { transform: translate(16px, 14px); transition-delay: 0.2s; }
+.nx .hiw-panel.lit .hiw-art .a-stack .pl { transform: none; opacity: 1; }
+
+/* PARTNER: the one artifact that never resolves. The tiles travel the ellipse itself —
+   offset-path, not rotation, so they cannot leave the line. */
+.nx .hiw-art .a-orbit rect {
+  offset-path: path("M 36,75 a 94,46 0 1,0 188,0 a 94,46 0 1,0 -188,0");
+  offset-rotate: 0deg;
+  animation: hiw-orbit 30s linear infinite;
+}
+.nx .hiw-art .a-orbit .o0 { animation-delay: 0s; }
+.nx .hiw-art .a-orbit .o1 { animation-delay: -7.5s; }
+.nx .hiw-art .a-orbit .o2 { animation-delay: -15s; }
+.nx .hiw-art .a-orbit .o3 { animation-delay: -22.5s; }
+@keyframes hiw-orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+
+@media (max-width: 980px) {
+  .nx .hiw-panels { grid-template-columns: 1fr; gap: 16px; }
+  .nx .hiw-panel { min-height: 0; }
+  .nx .hiw-panel p { max-width: none; }
+  .nx .hiw-void { min-height: 150px; }
+  /* The thread is a desktop device: panels go full-width here, so a vertical line has no
+     gutter to live in and would sit behind them unseen. The numbered chips carry the order. */
+  .nx .hiw-thread { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .nx .hiw-rail-fill, .nx .hiw-node, .nx .hiw-node::after, .nx .hiw-when, .nx .hiw-idx, .nx .hiw-out { transition: none; }
+  .nx .hiw-panel, .nx .hiw-thread i, .nx .hiw-chip, .nx .hiw-out,
+  .nx .hiw-art .a-plan path, .nx .hiw-art .a-stack .pl,
+  .nx .hiw-art .s-box, .nx .hiw-art .s-wire, .nx .hiw-art .s-dot, .nx .hiw-art .s-label { transition: none; }
+  .nx .hiw-art .a-orbit > g { animation: none; }
 }
