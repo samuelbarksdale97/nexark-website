@@ -93,6 +93,79 @@ export function ScrollHero() {
   const [clipIdx, setClipIdx] = useState(0);
   const [reduced, setReduced] = useState(false);
 
+  /**
+   * REAL VIEWPORT HEIGHT.
+   *
+   * `svh` is the right idea but it is a *static* guess at the browser's chrome. iOS Safari's
+   * bottom bar OVERLAYS the viewport, and how much it takes varies by version, by orientation
+   * and by whether the bar is expanded — which is why the copy still ended up behind it on a
+   * real phone when it fit in every simulator.
+   *
+   * `visualViewport.height` is the only value that reports what is ACTUALLY visible. We take
+   * it once and only update on a large change (orientation), never on the small ones the
+   * collapsing toolbar produces — otherwise the hero would resize mid-scroll.
+   */
+  useEffect(() => {
+    const root = document.documentElement;
+    let applied = 0;
+    const setVh = (force = false) => {
+      const vv = window.visualViewport;
+      const h = Math.min(vv?.height ?? window.innerHeight, window.innerHeight);
+      if (!h) return;
+      if (!force && applied && Math.abs(h - applied) < 120) return; // ignore toolbar collapse
+      applied = h;
+      root.style.setProperty("--app-vh", `${Math.round(h)}px`);
+    };
+    setVh(true);
+    const onOrient = () => setTimeout(() => setVh(true), 250);
+    window.addEventListener("orientationchange", onOrient);
+    window.visualViewport?.addEventListener("resize", () => setVh());
+    return () => {
+      window.removeEventListener("orientationchange", onOrient);
+    };
+  }, []);
+
+  /**
+   * FIT GUARD. Percentages and breakpoints cannot guarantee the copy fits — the panel's
+   * height depends on the device, the browser chrome, the user's text-size setting and the
+   * copy itself. So measure it: compare the tallest panel against the space actually
+   * available and scale the type down until it fits. Self-correcting on any screen, including
+   * ones we never tested.
+   */
+  useEffect(() => {
+    const inner = document.querySelector<HTMLElement>(".sh-inner");
+    const stage = document.querySelector<HTMLElement>(".sh-stage");
+    if (!inner || !stage) return;
+
+    const apply = () => {
+      stage.style.setProperty("--fit", "1");
+      const cs = getComputedStyle(inner);
+      const avail =
+        inner.clientHeight - parseFloat(cs.paddingTop || "0") - parseFloat(cs.paddingBottom || "0");
+      if (avail <= 0) return;
+      let needed = 0;
+      inner.querySelectorAll<HTMLElement>(".sh-panel").forEach((el) => {
+        if (el.scrollHeight > needed) needed = el.scrollHeight;
+      });
+      if (!needed) return;
+      // floor at 0.7 — below that the type is too small to be worth showing
+      const fit = Math.max(0.7, Math.min(1, avail / needed));
+      stage.style.setProperty("--fit", fit.toFixed(3));
+    };
+
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(inner);
+    window.addEventListener("resize", apply);
+    window.addEventListener("orientationchange", apply);
+    document.fonts?.ready.then(apply).catch(() => {});
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", apply);
+      window.removeEventListener("orientationchange", apply);
+    };
+  }, []);
+
   // respect prefers-reduced-motion: stills only, system shown at rest
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");

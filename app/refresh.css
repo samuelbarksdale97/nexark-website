@@ -354,10 +354,20 @@
    SCROLL HERO — the engine assembles beneath the human, then recedes.
    One hero finish for the whole page; everything below stays quiet.
    ============================================================ */
-.nx .scroll-hero { height: 520vh; height: 520svh; position: relative; background: #faf9f6; }
-.nx .sh-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+/* height comes from the MEASURED visible viewport where available; svh is the fallback */
+.nx .scroll-hero {
+  height: 520vh; height: 520svh;
+  height: calc(var(--app-vh, 100svh) * 5.2);
+  position: relative; background: #faf9f6;
+}
+.nx .sh-stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh; height: var(--app-vh, 100svh);
+  overflow: hidden;
+}
 .nx .sh-plate {
-  position: absolute; inset: 84px 24px 24px 24px;
+  position: absolute;
+  inset: 84px 24px max(24px, env(safe-area-inset-bottom)) 24px;
   border-radius: 20px; overflow: hidden; background: #0a0806;
 }
 .nx .sh-media {
@@ -401,7 +411,8 @@
 }
 
 .nx .sh-inner {
-  position: absolute; inset: 84px 24px 24px 24px; z-index: 6;
+  position: absolute;
+  inset: 84px 24px max(24px, env(safe-area-inset-bottom)) 24px; z-index: 6;
   display: flex; align-items: flex-end; justify-content: center; text-align: center;
   padding-bottom: clamp(64px, 8vh, 104px);
 }
@@ -417,12 +428,12 @@
 }
 
 .nx .sh-panel h1 {
-  font-size: clamp(38px, 5.6vw, 80px); letter-spacing: -0.035em;
+  font-size: calc(clamp(38px, 5.6vw, 80px) * var(--fit, 1)); letter-spacing: -0.035em;
   text-shadow: 0 2px 30px rgba(6,4,3,0.85);
 }
 .nx .sh-panel h1 em { color: var(--amber-hi); font-weight: 400; }
 .nx .sh-panel p {
-  font-size: clamp(16px, 1.4vw, 20px); color: var(--ivory);
+  font-size: calc(clamp(16px, 1.4vw, 20px) * var(--fit, 1)); color: var(--ivory);
   max-width: 580px; margin: 24px auto 0; text-shadow: 0 1px 18px rgba(6,4,3,0.9);
 }
 .nx .sh-panel .eyebrow { margin-bottom: 20px; }
@@ -474,10 +485,13 @@
   .nx .sh-media { height: 50%; top: 0; bottom: auto; }
   /* anchored under the footage band, NOT to the bottom of the plate — bottom anchoring put
      the copy behind the browser toolbar and ran it off the screen */
-  .nx .sh-inner { align-items: flex-start; padding-bottom: 0; }
-  .nx .sh-panel { top: 52%; bottom: auto; }
-  .nx .sh-panel h1 { font-size: clamp(25px, 7vw, 36px); }
-  .nx .sh-panel p { font-size: 14.5px; margin-top: 14px; max-width: 34ch; }
+  /* Bottom-anchored, so if the copy ever exceeds its band it grows UPWARD into the footage
+     (harmless) instead of downward off the screen (what Sam kept seeing). The stage is
+     svh-sized and the inset respects the safe area, so "bottom" is above the browser bar. */
+  .nx .sh-inner { align-items: flex-end; padding-bottom: 52px; }
+  .nx .sh-panel { top: auto; bottom: 0; }
+  .nx .sh-panel h1 { font-size: calc(clamp(24px, 6.6vw, 34px) * var(--fit, 1)); line-height: 1.1; }
+  .nx .sh-panel p { font-size: calc(14.5px * var(--fit, 1)); margin-top: 12px; max-width: 34ch; }
   .nx .sh-panel .eyebrow { margin-bottom: 12px; font-size: 11px; }
   .nx .sh-panel .btn { margin-top: 18px; padding: 13px 22px; font-size: 12px; }
   .nx .sh-copybed {
