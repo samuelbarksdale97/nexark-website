@@ -75,12 +75,19 @@ const COMPACT_W = 860;
 // reads as depth. Ours were 0.42-1.0 on a 172px base, which at a glance looked like one size.
 const SCALE_MIN = 0.26;
 const SCALE_MAX = 1.05;
-// The field runs on a diagonal rather than sitting square to the viewport: near at lower-left,
-// far at upper-right.
-const AXIS_DEG = -21;
-const AXIS = (AXIS_DEG * Math.PI) / 180;
+// The field runs on a diagonal: near at lower-left, far at upper-right.
+//
+// These were one constant, and that was the mistake. Tilting the LOOP is expensive — the copy
+// box stays axis-aligned to the viewport, so every degree of tilt forces the ellipse to grow to
+// keep encircling it (-15 degrees cost a 1438px section; -6 degrees cost 878px). But the
+// diagonal READ comes almost entirely from the size gradient, which is free. So the shape tilts
+// gently and the depth axis stays steep.
+const TILT_DEG = -7;
+const DEPTH_DEG = -24;
+const TILT = (TILT_DEG * Math.PI) / 180;
+const AXIS = (DEPTH_DEG * Math.PI) / 180;
 
-type Path = { xs: number[]; ys: number[]; cum: number[]; total: number; minU: number; maxU: number };
+type Path = { xs: number[]; ys: number[]; cum: number[]; total: number; minU: number; maxU: number; needH: number };
 
 /**
  * Build the shared loop. Everything that shapes it is a function of θ alone — that is what
@@ -93,65 +100,116 @@ function buildPath(W: number, H: number, copy: { w: number; h: number }, tileW: 
   const ry = H * 0.45;
   const halfW = (tileW * SCALE_MAX) / 2;
   const halfH = (tileH * SCALE_MAX) / 2;
-  // the loop may not exceed this or tiles leave the section
-  const limX = Math.max(40, W / 2 - halfW - 6);
-  const limY = Math.max(40, H / 2 - halfH - 6);
-  // ...nor come inside this, or it lands on the headline.
-  const clrX = copy.w / 2 + halfW + 30;
-  const clrY = copy.h / 2 + halfH + 30;
-  // The copy is a RECTANGLE, so the keep-out must be one too. The old boundary was an ellipse
-  // (the 2-norm), which under-protects the diagonals: near 45 degrees it sits closer to the
-  // centre than the rectangle's own corner does, so tiles were free to graze the "A" at the
-  // headline's top-left even though the top and left edges themselves looked fine.
+  // ------------------------------------------------------------------------------------
+  // NO CLAMPING. This is the whole redesign.
   //
-  // A superellipse does not fix it either — at P=3.6 the worst gap is still -34px, and no
-  // finite exponent ever fully reaches the corner. The exact answer is the ray/rectangle
-  // intersection: the smaller of the two axis crossings is precisely where this angle's ray
-  // leaves the box. Measured over 3600 angles, that holds the full pad at every one of them.
-  const EPS = 1e-6;
-  const clearRadius = (c: number, s: number) =>
-    Math.min(clrX / Math.max(Math.abs(c), EPS), clrY / Math.max(Math.abs(s), EPS));
+  // Every previous version computed a natural ellipse radius and then clamped it outward
+  // whenever it would cross the copy:
+  //
+  //     r = min(max(shaped, clearance), max(limit, clearance))
+  //
+  // That does not produce an arc that avoids the words. It produces an arc that BECOMES the
+  // outline of the words wherever the two overlap — the path leaves the curve, traces the
+  // keep-out boundary, and rejoins. Sam described it exactly: up, then left, then up, then
+  // right. Making the keep-out rectangular (to fix a corner-clipping bug) made it worse still,
+  // because a rectangle contributes straight runs and hard corners to the traced section.
+  //
+  // A clamp can only ever dodge. So the loop is now sized so that nothing needs dodging: build
+  // the curve first, then scale the WHOLE thing uniformly until the copy sits inside it. Uniform
+  // scaling about the centre preserves the shape exactly — a scaled ellipse is still an ellipse
+  // — so the result is smooth everywhere by construction, with no special case anywhere on it.
+  //
+  // The section then grows to fit the result. Sam: "If we need to enlarge the area we're working
+  // within in order to give us a proper arc, then let's do that."
+  // ------------------------------------------------------------------------------------
+
+  // the keep-out rectangle: the copy, plus a tile's half-size, plus breathing room
+  const PAD = 26;
+  const a = copy.w / 2 + halfW + PAD;
+  const b = copy.h / 2 + halfH + PAD;
+
+  // The base ellipse is DERIVED from the keep-out rather than picked and then inflated to fit.
+  // The smallest ellipse through a rectangle's corners is the rectangle scaled by root two, so
+  // that is the starting size; dividing by the harmonics' minimum keeps the dipped sections
+  // outside too. Choosing an arbitrary ellipse and scaling it up until it cleared produced a
+  // loop nearly twice as large as it needed to be (a 1474px section).
+  //
+  // Harmonics are gentler than before (0.06/0.03, was 0.11/0.06). The loop should read as an
+  // arc with some life in it, not as a wobble — and a deeper dip forces a bigger ellipse for
+  // the same clearance, so restraint here buys compactness for free.
+  const H1 = 0.06;
+  const H2 = 0.03;
+  const harmonic = (t: number) => 1 + H1 * Math.cos(2 * t + 0.6) + H2 * Math.cos(3 * t - 1.1);
+  let hMin = 1;
+  for (let k = 0; k <= 360; k++) hMin = Math.min(hMin, harmonic((k / 360) * TAU));
+  // Containment needs (a/rx)^2 + (b/ry)^2 <= 1. The root-two pair (a*sqrt2, b*sqrt2) satisfies
+  // it but is far from the cheapest solution: a WIDER loop needs proportionally less height,
+  // and height is what costs us section length. So fix the width generously — tiles bleeding
+  // past the viewport edge is correct here, the reference does exactly that — and solve for the
+  // smallest height that still encircles the copy.
+  // Containment must be solved for the TILTED ellipse, not solved upright and then rotated —
+  // rotating afterwards breaks it and the scale pass then inflates the loop to compensate.
+  // Express each corner of the keep-out rect in the ellipse's own frame and require it inside.
+  const ct = Math.cos(TILT);
+  const st = Math.sin(TILT);
+  const rx0 = (W * 0.6) / hMin;
+  let ry0 = b;
+  for (const sy of [1, -1]) {
+    const u = a * ct + sy * b * st;
+    const v = -a * st + sy * b * ct;
+    const slack = 1 - Math.min(0.95, (u / rx0) ** 2);
+    const need = Math.abs(v) / Math.sqrt(Math.max(0.05, slack));
+    if (need > ry0) ry0 = need;
+  }
+  ry0 /= hMin;
 
   const xs: number[] = [];
   const ys: number[] = [];
   const cum: number[] = [0];
-  // extent along the DIAGONAL axis, which is what depth is measured against
-  let minU = Infinity;
-  let maxU = -Infinity;
 
+  // pass 1 — the pure curve, and the single scale factor that clears the copy
+  const px: number[] = [];
+  const py: number[] = [];
+  let f = 1;
   for (let k = 0; k <= SAMPLES; k++) {
     const t = (k / SAMPLES) * TAU;
-    // The SHAPE is evaluated in its own frame and the point is placed in the SCREEN frame one
-    // rotation later. Rotating the finished path instead would tilt the keep-out box with it and
-    // silently void the clearance guarantee — the copy is axis-aligned to the viewport, so the
-    // clearance and the field limit must both be evaluated at the on-screen angle.
     const c0 = Math.cos(t);
     const s0 = Math.sin(t);
-    const th = t + AXIS;
-    const c = Math.cos(th);
-    const s = Math.sin(th);
+    // the shape is defined in its own frame; the point is placed one rotation later, so the
+    // field runs on a diagonal without the shape itself being skewed
+    const th = t + TILT;
+    const base = 1 / Math.hypot(c0 / rx0, s0 / ry0);
+    // gentle harmonics: irregular in θ, and identical for every tile
+    const r = base * harmonic(t);
+    const dx = Math.cos(th) * r;
+    const dy = Math.sin(th) * r;
+    px.push(dx);
+    py.push(dy);
+    // this point is clear once |dx| >= a OR |dy| >= b, so the smallest scale that clears it is
+    // the easier of the two escapes; the loop as a whole needs the largest of those.
+    const need = Math.min(a / Math.max(Math.abs(dx), 1e-6), b / Math.max(Math.abs(dy), 1e-6));
+    if (need > f) f = need;
+  }
 
-    // base ellipse radius at this angle, in the shape's own frame
-    const base = 1 / Math.hypot(c0 / rx, s0 / ry);
-    // gentle harmonics: the loop is irregular, but irregular in θ — identical for every tile
-    const shaped = base * (1 + 0.11 * Math.cos(2 * t + 0.6) + 0.06 * Math.cos(3 * t - 1.1));
-    // the copy box and the field edge, expressed as radii along the SCREEN angle
-    const clearance = clearRadius(c, s);
-    const limit = 1 / Math.hypot(c / limX, s / limY);
-
-    const r = Math.min(Math.max(shaped, clearance), Math.max(limit, clearance));
-    const x = cx + c * r;
-    const y = cy + s * r;
+  // pass 2 — place the scaled curve and build the arc-length table
+  let minU = Infinity;
+  let maxU = -Infinity;
+  let maxAbsY = 0;
+  for (let k = 0; k <= SAMPLES; k++) {
+    const x = cx + px[k] * f;
+    const y = cy + py[k] * f;
     xs.push(x);
     ys.push(y);
+    if (Math.abs(y - cy) > maxAbsY) maxAbsY = Math.abs(y - cy);
     const u = (x - cx) * Math.cos(AXIS) + (y - cy) * Math.sin(AXIS);
     if (u < minU) minU = u;
     if (u > maxU) maxU = u;
-    if (k > 0) {
-      cum.push(cum[k - 1] + Math.hypot(x - xs[k - 1], y - ys[k - 1]));
-    }
+    if (k > 0) cum.push(cum[k - 1] + Math.hypot(x - xs[k - 1], y - ys[k - 1]));
   }
-  return { xs, ys, cum, total: cum[SAMPLES], minU, maxU };
+
+  // what the section must be tall enough to hold
+  const needH = 2 * (maxAbsY + halfH) + 40;
+  return { xs, ys, cum, total: cum[SAMPLES], minU, maxU, needH };
 }
 
 /** point at a given distance along the loop — binary search, no allocation */
@@ -225,10 +283,41 @@ export function ArcWheel() {
         });
         return;
       }
-      const c = coreRef.current?.getBoundingClientRect();
+      // Measure what is actually PAINTED, not its container. .arc-core is a fixed 860px box
+      // that the headline only partly fills, so using its rect reserved a keep-out far wider
+      // than the words — which is more of the loop deformed for no reason.
+      const core = coreRef.current;
+      // NOT the h2: it contains the hidden word-ruler, and a Range over its contents measures
+      // all twelve industry words laid out on one nowrap line (4785px). Measure the visible
+      // spans, each of which is content-sized.
+      const marks = core
+        ? [core.querySelector(".arc-fixed"), core.querySelector(".arc-rotor"), core.querySelector(".arc-cta")]
+        : [];
+      let cw = 0;
+      let ch = 0;
+      let top = Infinity;
+      let bot = -Infinity;
+      for (const m of marks) {
+        if (!m) continue;
+        const r = m.getBoundingClientRect();
+        if (r.width > cw) cw = r.width;
+        if (r.top < top) top = r.top;
+        if (r.bottom > bot) bot = r.bottom;
+      }
+      ch = bot > top ? bot - top : 0;
       const tw = nodes[0].offsetWidth || 172;
       const th = nodes[0].offsetHeight || 136;
-      path = buildPath(W, H, { w: c?.width ?? 700, h: c?.height ?? 300 }, tw, th);
+      path = buildPath(W, H, { w: cw || 700, h: ch || 300 }, tw, th);
+
+      // The section grows to hold the finished curve rather than the curve being squeezed to
+      // fit the section. Guarded so the ResizeObserver this triggers cannot oscillate.
+      const stage = core?.closest(".arc-stage") as HTMLElement | null;
+      if (stage) {
+        const want = Math.round(path.needH);
+        if (Math.abs((parseFloat(stage.style.minHeight) || 0) - want) > 2) {
+          stage.style.minHeight = `${want}px`;
+        }
+      }
     };
 
     const render = (turn: number) => {

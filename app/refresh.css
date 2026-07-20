@@ -731,11 +731,17 @@
 /* the orbiting field sits behind the copy and fills the section */
 /* The orbit box: full-bleed horizontally so the ring has the whole viewport to travel in,
    but bounded vertically so tiles never wander down onto the kicker line. */
-.nx .arc-orbit { position: relative; }
+.nx .arc-orbit {
+  position: relative;
+  /* Tiles are meant to run past the section edges — the reference does the same. The section
+     clips them itself rather than leaning on an ancestor's overflow, so the container never
+     reports a 223px horizontal overflow (a11y-gate, content-overflow-x). */
+  overflow-x: clip;
+}
 /* NOT 100vw: that includes the scrollbar gutter and overflows the document by ~10px on
    every scrollbar platform. .arc-orbit is already a direct child of the section, so it is
    full-width by construction and inset:0 is all this needs. */
-.nx .arc-field { position: absolute; inset: 0; pointer-events: none; }
+.nx .arc-field { position: absolute; inset: 0; pointer-events: none; overflow-x: clip; }
 .nx .arc-tile {
   position: absolute; width: 172px; height: 136px; border-radius: 15px; overflow: hidden;
   pointer-events: auto; cursor: pointer; padding: 0; border: 0; background: none;
@@ -762,7 +768,8 @@
 /* THE ROTOR — the row is centred, so transitioning the slot's width is what slides "Real".
    One geometry change drives both movements; there is no second animation to keep in sync. */
 .nx .arc-rotor {
-  display: flex; align-items: baseline; justify-content: center;
+  /* inline-flex so the rect is the lockup's real width — the keep-out is measured from it */
+  display: inline-flex; justify-self: center; align-items: baseline; justify-content: center;
   gap: 0.28em;
   perspective: 900px;
 }
