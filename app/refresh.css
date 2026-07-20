@@ -1,15 +1,18 @@
 .nx {
-  --bg: #14100c;
-  --bg-2: #1a150f;
-  --bg-3: #221b13;
-  --panel: rgba(255, 238, 214, 0.028);
-  --panel-hi: rgba(255, 238, 214, 0.05);
-  --hair: rgba(226, 210, 184, 0.12);
-  --hair-strong: rgba(226, 210, 184, 0.22);
+  /* BLACK, not brown (Sam, 07-20). The layer-stack band was already #000 and read correctly;
+     every other dark section was a warm brown that muddied next to it. The page now alternates
+     black and cream, with gold as the only accent. */
+  --bg: #000;
+  --bg-2: #070707;
+  --bg-3: #101010;
+  --panel: rgba(255, 255, 255, 0.032);
+  --panel-hi: rgba(255, 255, 255, 0.055);
+  --hair: rgba(255, 255, 255, 0.13);
+  --hair-strong: rgba(255, 255, 255, 0.24);
 
-  --ivory: #f6efe3;
-  --body: #d9d0c1;
-  --muted: #a99d8a;
+  --ivory: #f7f4ef;
+  --body: #cfcac2;
+  --muted: #9c968d;
 
   --amber: #ffb552;
   --amber-hi: #ffd08a;
@@ -463,6 +466,17 @@
 }
 .nx .sh-cue span { width: 30px; height: 1px; background: var(--amber); display: block; }
 
+
+/* the hero card uses its full width: claim left, explanation right */
+@media (min-width: 901px) {
+  .nx .shelf-card.own {
+    display: grid; grid-template-columns: 1.05fr 1fr;
+    column-gap: clamp(32px, 4vw, 72px); align-items: start;
+  }
+  .nx .shelf-card.own .shelf-tag { grid-column: 1 / -1; }
+  .nx .shelf-card.own h3 { margin-top: 24px; margin-bottom: 0; }
+  .nx .shelf-card.own p { margin-top: 30px; }
+}
 
 @media (max-width: 900px) {
   .nx .scroll-hero { height: 400vh; }
@@ -998,80 +1012,79 @@
 }
 
 /* ============================================================
-   THE DIFFERENCE — "the strongest case against us" (argument).
-   Housing is the argument: the counterexample is the section's only card; the claim gets bare
-   ground. At the turn the card's surface leaves and the sentence stays put.
+   THE DIFFERENCE — the shelf. Three interchangeable commodity cards, then one that breaks the
+   set. The layout carries the argument; the copy only confirms it.
    ============================================================ */
-.nx .cx-band { padding: clamp(88px, 13vh, 160px) 0; }
-.nx .cx { max-width: 1100px; }           /* hard-left spine — nothing here is centred */
-
-.nx .cx-eyebrow {
-  font-family: var(--sans); font-size: 12px; font-weight: 500;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-line);
-  margin-bottom: 20px;
+.nx .shelf-band { background: var(--bg); padding: clamp(84px, 12vh, 150px) 0; }
+.nx .shelf-band .sec-head { max-width: none; }
+.nx .shelf-band h2 {
+  font-size: clamp(28px, 3.1vw, 46px); line-height: 1.12; max-width: 20ch; color: var(--ivory);
 }
 
-/* the ONLY housed object in the section */
-.nx .cx-exhibit {
-  max-width: 640px; padding: 34px 32px; border-radius: 22px;
-  background: #1a1611;
-  border: 1px solid rgba(201, 154, 87, 0.28);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
-  /* Only paint transitions. Padding, width and position never change, so the surface reads as
-     LEAVING rather than as a box collapsing — zero layout shift, nothing reflows. */
-  transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
-}
-.nx .cx-exhibit p {
-  font-size: clamp(21px, 2.5vw, 33px); font-weight: 500; line-height: 1.28; color: #fff;
-  transition: color 0.5s ease;
-}
-.nx .cx-exhibit.dissolved {
-  background: transparent; border-color: transparent; box-shadow: none;
-}
-.nx .cx-exhibit.dissolved p { color: var(--body); }
-
-.nx .cx-rule {
-  display: block; width: 1px; height: 88px; margin: 4px 0 0;
-  background: linear-gradient(180deg, var(--gold-line), transparent);
-}
-.nx .cx-turn {
-  font-size: clamp(15px, 1.3vw, 18px); color: var(--body); max-width: 46ch; margin-top: 4px;
+.nx .shelf {
+  margin-top: clamp(40px, 5.5vh, 64px);
+  display: grid; gap: clamp(14px, 1.4vw, 20px);
+  grid-template-columns: repeat(3, 1fr);
 }
 
-/* the claim: unhoused, on raw ground, LARGER than the sentence in the card */
-.nx .cx-claim {
-  margin-top: 38px;
-  font-size: clamp(32px, 4.4vw, 58px); font-weight: 500; line-height: 1.06;
-  max-width: 16ch; color: #fff;
+.nx .shelf-card {
+  position: relative; display: flex; flex-direction: column;
+  border-radius: 20px; padding: clamp(22px, 1.9vw, 30px);
+  background: var(--panel); border: 1px solid var(--hair);
+  min-height: 210px;
 }
-.nx .cx-claim em { color: var(--gold-line); font-style: italic; }
+.nx .shelf-tag {
+  font-family: var(--sans); font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: auto;
+}
+.nx .shelf-card h3 {
+  font-size: clamp(17px, 1.45vw, 21px); font-weight: 500; color: var(--ivory);
+  margin: 26px 0 10px; line-height: 1.28;
+}
+.nx .shelf-card p { font-size: 14.5px; line-height: 1.6; color: var(--muted); max-width: 34ch; }
 
-.nx .cx-lead {
-  margin-top: clamp(52px, 7vh, 84px); margin-bottom: 6px;
-  font-size: 13px; letter-spacing: 0.04em; color: var(--muted);
+/* The one that breaks the set. It spans the full row, inverts to cream, and is the only place
+   on this ground where the surface is light — so the eye reaches it before any reading starts. */
+.nx .shelf-card.own {
+  grid-column: 1 / -1;
+  background: #f7f4ef; border-color: transparent; color: #0e0e0e;
+  padding: clamp(30px, 3vw, 46px);
+  min-height: 0;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+.nx .shelf-card.own .shelf-tag { color: #8f6519; }
+.nx .shelf-card.own h3 {
+  color: #0e0e0e; font-size: clamp(24px, 3vw, 40px); max-width: 18ch; margin-top: 22px;
+}
+.nx .shelf-card.own p { color: #4a453d; font-size: clamp(15px, 1.25vw, 17px); max-width: 60ch; }
+/* a single gold hairline along the top edge — the one finish in the section */
+.nx .shelf-card.own .shelf-mark {
+  position: absolute; left: 0; right: 0; top: 0; height: 2px; border-radius: 20px 20px 0 0;
+  background: linear-gradient(90deg, var(--gold-line), rgba(201, 154, 87, 0));
 }
 
-/* Residue, NOT peers: hairline rows, no cards, no icons, and deliberately unequal mass — the
-   first row is the one the counterexample is most vulnerable to. If these ever become equal
-   again the section has quietly reverted to the icon trinity it replaced. */
-.nx .cx-residue { list-style: none; }
-.nx .cx-residue li {
-  border-top: 1px solid var(--hair);
-  padding: 26px 0;
-  display: grid; gap: 10px;
+.nx .shelf-claim {
+  margin-top: clamp(34px, 4.5vh, 54px);
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(19px, 2vw, 28px); line-height: 1.35; color: var(--ivory); max-width: 30ch;
 }
-.nx .cx-residue li h3 { font-size: 17px; font-weight: 500; color: var(--ivory); line-height: 1.3; }
-.nx .cx-residue li p { font-size: 15px; color: var(--body); line-height: 1.65; max-width: 62ch; }
-.nx .cx-residue li.lead { padding: 34px 0; }
-.nx .cx-residue li.lead h3 { font-size: clamp(20px, 2vw, 27px); }
-.nx .cx-residue li.lead p { font-size: 16.5px; }
+.nx .shelf-claim em { color: var(--gold-line); font-style: normal; }
 
-@media (min-width: 900px) {
-  .nx .cx-residue li { grid-template-columns: 26ch 1fr; gap: 40px; align-items: start; }
+/* the hero card uses its full width: claim left, explanation right */
+@media (min-width: 901px) {
+  .nx .shelf-card.own {
+    display: grid; grid-template-columns: 1.05fr 1fr;
+    column-gap: clamp(32px, 4vw, 72px); align-items: start;
+  }
+  .nx .shelf-card.own .shelf-tag { grid-column: 1 / -1; }
+  .nx .shelf-card.own h3 { margin-top: 24px; margin-bottom: 0; }
+  .nx .shelf-card.own p { margin-top: 30px; }
 }
-/* Below 900px the label gets its own full-width row — a label never competes for horizontal
-   space with anything (checklist rules 8 and 22). */
 
-@media (prefers-reduced-motion: reduce) {
-  .nx .cx-exhibit, .nx .cx-exhibit p { transition: none; }
+@media (max-width: 900px) {
+  .nx .shelf { grid-template-columns: 1fr; }
+  .nx .shelf-card { min-height: 0; }
+  .nx .shelf-card h3 { margin-top: 18px; }
+  .nx .shelf-card p, .nx .shelf-card.own h3 { max-width: none; }
 }
