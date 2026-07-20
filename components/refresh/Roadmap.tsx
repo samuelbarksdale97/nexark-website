@@ -174,13 +174,13 @@ export function Roadmap() {
     <section className="hiw" data-nav="light" id="roadmap">
       <div className="wrap">
         <div className="sec-head wide reveal">
-          <span className="eyebrow">How it works</span>
           {/* Plain statement, one weight, no emphasis span. Two headlines were rejected here
               for the same reason: "weeks, not quarters" promised a schedule nobody had scoped,
               and "what you were told wasn't possible" is unfalsifiable — someone can always ask
               for a time machine. This one is a claim we can actually stand behind. Styling that
-              glorifies the copy is a sign the copy is not carrying itself. */}
-          <h2>We build software that fits how your business already works.</h2>
+              glorifies the copy is a sign the copy is not carrying itself.
+ */}
+          <h2>We build software that fits how your business works.</h2>
         </div>
 
         <div className="hiw-deck" ref={ref} style={{ ["--p" as string]: p.toFixed(3) }}>
