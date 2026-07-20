@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     "digital transformation",
   ],
   authors: [{ name: "Samuel Barksdale" }],
+  // Without metadataBase, Next resolves og:image against localhost — the unfurl would ship
+  // pointing at a machine nobody else can reach. Scrapers require an absolute URL.
+  metadataBase: new URL("https://www.nexark.ai"),
   openGraph: {
     title: "Nexark | Success is not an accident, it's engineered.",
     description:
@@ -46,7 +49,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Nexark",
-    images: ["/og-image.png"],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Nexark — Success Engineered" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -55,8 +58,12 @@ export const metadata: Metadata = {
       "We build custom software and AI systems around how your business actually works.",
     images: ["/og-image.png"],
   },
+  // app/icon.png and app/apple-icon.png are picked up automatically by Next's file
+  // convention and OVERRIDE anything declared here — declared explicitly anyway so the
+  // intent is readable.
   icons: {
     icon: "/icon.png",
+    apple: "/apple-icon.png",
   },
 };
 
