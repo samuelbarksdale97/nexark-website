@@ -67,7 +67,7 @@ const INDUSTRIES: Industry[] = [
 
 const TAU = Math.PI * 2;
 const SAMPLES = 900;
-const ORBIT_SECONDS = 260;
+const ORBIT_SECONDS = 240;  // a smidge quicker (Sam, 07-20) — ~8%, not a gear change
 const COMPACT_W = 860;
 
 /** how far the tile scale swings between the far side of the loop and the near side */
@@ -90,9 +90,21 @@ function buildPath(W: number, H: number, copy: { w: number; h: number }, tileW: 
   // the loop may not exceed this or tiles leave the section
   const limX = Math.max(40, W / 2 - halfW - 6);
   const limY = Math.max(40, H / 2 - halfH - 6);
-  // ...nor come inside this, or it lands on the headline
-  const clrX = copy.w / 2 + halfW + 22;
-  const clrY = copy.h / 2 + halfH + 22;
+  // ...nor come inside this, or it lands on the headline.
+  const clrX = copy.w / 2 + halfW + 30;
+  const clrY = copy.h / 2 + halfH + 30;
+  // The copy is a RECTANGLE, so the keep-out must be one too. The old boundary was an ellipse
+  // (the 2-norm), which under-protects the diagonals: near 45 degrees it sits closer to the
+  // centre than the rectangle's own corner does, so tiles were free to graze the "A" at the
+  // headline's top-left even though the top and left edges themselves looked fine.
+  //
+  // A superellipse does not fix it either — at P=3.6 the worst gap is still -34px, and no
+  // finite exponent ever fully reaches the corner. The exact answer is the ray/rectangle
+  // intersection: the smaller of the two axis crossings is precisely where this angle's ray
+  // leaves the box. Measured over 3600 angles, that holds the full pad at every one of them.
+  const EPS = 1e-6;
+  const clearRadius = (c: number, s: number) =>
+    Math.min(clrX / Math.max(Math.abs(c), EPS), clrY / Math.max(Math.abs(s), EPS));
 
   const xs: number[] = [];
   const ys: number[] = [];
@@ -110,7 +122,7 @@ function buildPath(W: number, H: number, copy: { w: number; h: number }, tileW: 
     // gentle harmonics: the loop is irregular, but irregular in θ — identical for every tile
     const shaped = base * (1 + 0.11 * Math.cos(2 * t + 0.6) + 0.06 * Math.cos(3 * t - 1.1));
     // the copy box and the field edge, expressed as radii along this same angle
-    const clearance = 1 / Math.hypot(c / clrX, s / clrY);
+    const clearance = clearRadius(c, s);
     const limit = 1 / Math.hypot(c / limX, s / limY);
 
     const r = Math.min(Math.max(shaped, clearance), Math.max(limit, clearance));
