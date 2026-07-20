@@ -40,7 +40,7 @@
   -webkit-font-smoothing: antialiased;
 }
 .nx ::selection { background: rgba(255, 181, 82, 0.28); color: var(--ivory); }
-.nx h1, .nx h2, .nx h3 { font-family: var(--serif); color: var(--ivory); font-weight: 700; letter-spacing: -0.025em; line-height: 1.06; overflow-wrap: break-word; }
+.nx h1, .nx h2, .nx h3 { font-family: var(--serif); color: var(--ivory); font-weight: 500; letter-spacing: -0.022em; line-height: 1.1; overflow-wrap: break-word; }
 .nx em { font-style: italic; }
 .nx a { color: inherit; text-decoration: none; }
 .nx .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(24px, 4vw, 56px); }
@@ -51,7 +51,7 @@
 }
 .nx .eyebrow::before { content: "✦"; color: var(--amber); font-size: 11px; }
 .nx .eyebrow.muted { color: var(--muted); }
-.nx .eyebrow.muted::before { color: var(--purple); }
+.nx .eyebrow.muted::before { color: var(--amber); }
 .nx .eyebrow.center { justify-content: center; }
 .nx .btn {
   display: inline-flex; align-items: center; gap: 12px;
@@ -94,7 +94,7 @@
 .nx header .nav-links a:hover, .nx header .nav-links a.active { color: var(--nav-ink); }
 .nx header .menu-btn { color: var(--nav-ink); }
 .nx header.nav-light .btn-ghost { color: #17120e; border-color: rgba(23,18,14,0.2); background: rgba(255,255,255,0.5); }
-.nx header.nav-light .btn-ghost:hover { color: #fff; background: var(--purple-deep); border-color: var(--purple-deep); }
+.nx header.nav-light .btn-ghost:hover { color: #fff; background: #17120c; border-color: #17120c; }
 /* the mark is a purple gradient — it reads on both grounds, but the glow only suits the dark one */
 .nx header.nav-light .brand img { filter: none; }
 .nx .nav { display: flex; align-items: center; justify-content: space-between; }
@@ -129,13 +129,13 @@
 .nx .hero-home .hero-copy { max-width: 660px; }
 .nx .hero-home h1 { font-size: clamp(46px, 6.4vw, 92px); margin: 26px 0 30px; }
 .nx .hero-page h1 { font-size: clamp(38px, 5vw, 72px); margin: 22px 0 26px; max-width: 15ch; }
-.nx .hero h1 em { color: var(--purple); font-weight: 300; }
+.nx .hero h1 em { color: var(--amber-hi); font-weight: 300; }
 .nx .hero p.lede { font-size: clamp(17px, 1.35vw, 20px); color: var(--body); max-width: 480px; margin-bottom: 40px; }
 .nx .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 .nx .rail { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); z-index: 6; display: flex; flex-direction: column; gap: 26px; text-align: right; }
 .nx .rail div { font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 12px; justify-content: flex-end; }
 .nx .rail div::after { content: "✦"; font-size: 8px; color: var(--amber); }
-.nx .rail div:nth-child(2)::after { color: var(--purple); }
+.nx .rail div:nth-child(2)::after { color: var(--amber); }
 .nx .scroll-cue { position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%); z-index: 6; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--muted); font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; }
 .nx .scroll-cue span { width: 1px; height: 40px; background: linear-gradient(var(--amber), transparent); animation: cue 2.4s ease-in-out infinite; }
 @keyframes cue { 0%,100% { opacity: .3; transform: scaleY(.6); } 50% { opacity: 1; transform: scaleY(1); } }
@@ -146,7 +146,7 @@
 .nx .sec-head { margin-bottom: 64px; }
 .nx .sec-head.wide { max-width: 720px; }
 .nx .sec-head h2 { font-size: clamp(34px, 4vw, 58px); margin-top: 20px; }
-.nx .sec-head h2 em, .nx .lead-para em { color: var(--purple); font-weight: 300; }
+.nx .sec-head h2 em, .nx .lead-para em { color: var(--amber-hi); font-weight: 300; }
 .nx .lead-para { font-size: clamp(18px, 1.5vw, 22px); color: var(--body); line-height: 1.7; }
 .nx .lead-para + .lead-para { margin-top: 26px; }
 .nx .lead-para strong { color: var(--ivory); font-weight: 400; }
@@ -166,7 +166,7 @@
 .nx .case::after { content: ""; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(255,181,82,0.12), transparent 68%); opacity: 0; transition: opacity 0.5s; }
 .nx .case:hover { transform: translateY(-6px); border-color: var(--hair-strong); }
 .nx .case:hover::after { opacity: 1; }
-.nx .case .tag { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple); font-weight: 500; }
+.nx .case .tag { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); font-weight: 500; }
 .nx .case h3 { font-size: 26px; margin: 18px 0 18px; }
 .nx .case p { font-size: 15px; color: var(--body); line-height: 1.68; }
 .nx .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -177,7 +177,7 @@
 .nx .step .sub { color: var(--ivory); font-size: 15px; margin-bottom: 16px; font-weight: 500; font-family: var(--sans); }
 .nx .step p { font-size: 14.5px; color: var(--muted); line-height: 1.66; }
 .nx .learn { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-.nx .lesson { padding: 36px 34px; border-radius: 18px; border: 1px solid var(--hair); background: var(--panel); border-left: 2px solid var(--purple); transition: border-color 0.4s, transform 0.4s; }
+.nx .lesson { padding: 36px 34px; border-radius: 18px; border: 1px solid var(--hair); background: var(--panel); border-left: 2px solid var(--gold-line); transition: border-color 0.4s, transform 0.4s; }
 .nx .lesson:hover { transform: translateY(-4px); border-left-color: var(--amber); }
 .nx .lesson h3 { font-size: 22px; margin-bottom: 14px; }
 .nx .lesson p { font-size: 15px; color: var(--body); line-height: 1.68; }
@@ -191,7 +191,7 @@
 .nx .what-box h4 { font-family: var(--sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 18px; }
 .nx .what-box ul { list-style: none; }
 .nx .what-box li { font-size: 15px; color: var(--body); padding: 8px 0 8px 22px; position: relative; }
-.nx .what-box li::before { content: "✦"; position: absolute; left: 0; color: var(--purple); font-size: 10px; top: 12px; }
+.nx .what-box li::before { content: "✦"; position: absolute; left: 0; color: var(--amber); font-size: 10px; top: 12px; }
 .nx .price-line { margin-top: 26px; font-size: 16px; color: var(--ivory); }
 .nx .price-line span { color: var(--muted); }
 .nx .ptable { width: 100%; border-collapse: collapse; margin-top: 20px; }
@@ -227,7 +227,7 @@
 .nx .cta { text-align: center; padding: 150px 0 160px; position: relative; overflow: hidden; }
 .nx .cta::before { content: ""; position: absolute; left: 50%; top: 12%; transform: translateX(-50%); width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(255,170,70,0.14), transparent 62%); }
 .nx .cta h2 { font-size: clamp(40px, 5.4vw, 82px); position: relative; max-width: 900px; margin: 0 auto 20px; }
-.nx .cta h2 em { color: var(--purple); font-weight: 300; }
+.nx .cta h2 em { color: var(--amber-hi); font-weight: 300; }
 .nx .cta p { position: relative; font-size: 19px; color: var(--body); max-width: 520px; margin: 0 auto 44px; }
 .nx .cta .btn-primary { position: relative; }
 .nx footer { border-top: 1px solid var(--hair); padding: 80px 0 50px; }
@@ -646,7 +646,7 @@
 .nx .hiw-art { width: 100%; height: auto; max-height: 168px; overflow: visible; }
 
 .nx .hiw-panel h3 {
-  font-size: clamp(19px, 1.6vw, 23px); line-height: 1.3; color: var(--ink, #17120c);
+  font-weight: 600; font-size: clamp(18px, 1.45vw, 21px); line-height: 1.34; color: var(--ink, #17120c);
   margin-bottom: 16px; max-width: 24ch;
 }
 .nx .hiw-panel p {
@@ -711,11 +711,11 @@
   padding: clamp(76px, 10vh, 132px) 0;
 }
 .nx .lightband h2, .nx .lightband h3 { color: var(--ink); }
-.nx .lightband h2 em { color: var(--purple-deep); font-style: italic; }
-.nx .lightband .eyebrow { color: var(--purple-deep); }
-.nx .lightband .eyebrow::before { color: var(--purple-deep); }
+.nx .lightband h2 em { color: var(--gold-deep, #8f6519); font-style: italic; }
+.nx .lightband .eyebrow { color: var(--gold-deep, #8f6519); }
+.nx .lightband .eyebrow::before { color: var(--gold-deep, #8f6519); }
 .nx .btn-purple {
-  background: var(--purple-deep); color: #fff; border-color: var(--purple-deep);
+  background: #17120c; color: #fff; border-color: #17120c;
 }
 .nx .btn-purple:hover { background: #5411a8; border-color: #5411a8; }
 
@@ -833,7 +833,7 @@
      not shout. Ours ran ~64px over three lines, which is the display-type version of glorifying
      the copy. Sized to break at two lines. */
   color: var(--ink, #17120c);
-  font-size: clamp(27px, 3.05vw, 45px); line-height: 1.12; max-width: none;
+  font-size: clamp(23px, 2.5vw, 36px); line-height: 1.16; max-width: none;
 }
 /* The shared .sec-head caps at 720px, which is what squeezed the headline into the left
    third and forced it to wrap. This section states its line across the full grid. */

@@ -27,7 +27,6 @@ type Slide = { src: string; alt: string; label: string; key: string };
 
 type Props = {
   slides: Slide[];
-  eyebrow?: string;
   heading: string;
   em?: string;
   body?: string;
@@ -162,7 +161,7 @@ const PLANES = [
   { key: "p-front", x: "-15%", y: "9%", z: 230 },
 ];
 
-export function SystemStack({ slides, eyebrow, heading, em, body, cta }: Props) {
+export function SystemStack({ slides, heading, em, body, cta }: Props) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
   const mediaRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -403,7 +402,6 @@ export function SystemStack({ slides, eyebrow, heading, em, body, cta }: Props) 
         </div>
 
         <div className="lstack-copy reveal">
-          {eyebrow && <span className="eyebrow">{eyebrow}</span>}
           <h2>
             {heading} {em && <em>{em}</em>}
           </h2>

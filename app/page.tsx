@@ -20,7 +20,6 @@ export default function Home() {
           { key: "clip-ticketing", src: "/refresh/clips/clip-ticketing.jpg", alt: "A door host fastening a wristband", label: "Nightlife · door" },
           { key: "clip-yacht", src: "/refresh/clips/clip-yacht.jpg", alt: "A charter captain at the helm", label: "Charter · dispatch" },
         ]}
-        eyebrow="Under the hood"
         heading="Every calm moment has"
         em="layers underneath."
         body="A guest arrives and is recognized. The visit is recorded, the payment settles, the books reconcile, and the summary reaches you. One tap at the door, four systems agreeing behind it — and nobody standing over any of them."
@@ -35,7 +34,6 @@ export default function Home() {
         <span className="connector" />
         <div className="wrap">
           <div className="sec-head wide reveal">
-            <span className="eyebrow muted">The difference</span>
             <h2>
               A tool isn&apos;t the same as <em>an advantage.</em>
             </h2>
@@ -74,7 +72,6 @@ export default function Home() {
       <section className="band" data-nav="dark">
         <div className="wrap split">
           <div className="reveal">
-            <span className="eyebrow muted">Own it</span>
             <h2 style={{ fontSize: "clamp(30px,3.4vw,48px)", marginTop: 18 }}>
               Built around your business — <em>not the other way around.</em>
             </h2>
@@ -93,7 +90,6 @@ export default function Home() {
       <section className="band tint" data-nav="dark">
         <div className="wrap">
           <div className="sec-head wide reveal">
-            <span className="eyebrow">The work</span>
             <h2>
               Outcomes, <em>not dashboards.</em>
             </h2>
@@ -122,7 +118,6 @@ export default function Home() {
       <section className="band" data-nav="dark">
         <div className="wrap">
           <div className="sec-head wide reveal">
-            <span className="eyebrow muted">The choice</span>
             <h2>
               The old way, and <em>the Nexark way.</em>
             </h2>
@@ -154,7 +149,6 @@ export default function Home() {
       <section className="band tint" data-nav="dark">
         <div className="wrap">
           <div className="sec-head wide reveal" style={{ textAlign: "center", margin: "0 auto 56px" }}>
-            <span className="eyebrow center">Questions</span>
             <h2 style={{ marginTop: 18 }}>
               Got questions? <em>We&apos;ve got answers.</em>
             </h2>
@@ -183,7 +177,6 @@ export default function Home() {
       {/* CTA */}
       <section className="cta" data-nav="dark">
         <div className="wrap reveal">
-          <span className="eyebrow center">The spark that reignites possibility</span>
           <h2 style={{ marginTop: 26 }}>
             What&apos;s the next generation of <em>your business?</em>
           </h2>

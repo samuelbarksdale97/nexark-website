@@ -12,7 +12,6 @@ import { useEffect, useRef, useState } from "react";
  */
 
 type Panel = {
-  eyebrow?: string;
   head: string;
   em: string;
   sub?: string;
@@ -37,7 +36,6 @@ const PANELS: Panel[] = [
     ],
   },
   {
-    eyebrow: "Underneath",
     head: "Behind every calm room, a system is",
     em: "doing the work.",
     sub: "The check-in. The record. The reconciliation. None of it needs a person standing over it.",
@@ -48,7 +46,6 @@ const PANELS: Panel[] = [
     ],
   },
   {
-    eyebrow: "What it handles",
     head: "Reconciliation that took half a Saturday",
     em: "now takes seconds.",
     sub: "Twenty hours a week of compliance work became five. The busywork stopped being someone's job.",
@@ -59,7 +56,6 @@ const PANELS: Panel[] = [
     ],
   },
   {
-    eyebrow: "What's left",
     head: "So you can just",
     em: "be present.",
     sub: "The technology does its best work out of sight — so the people can do what only people can do.",
@@ -291,7 +287,6 @@ export function ScrollHero() {
         <div className="sh-inner">
           {PANELS.map((panel, i) => (
             <div key={panel.em} className={`sh-panel${i === active ? " on" : ""}`} aria-hidden={i !== active}>
-              {panel.eyebrow && <span className="eyebrow">{panel.eyebrow}</span>}
               <h1>
                 {panel.head} <em>{panel.em}</em>
               </h1>
