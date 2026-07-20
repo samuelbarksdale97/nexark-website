@@ -39,7 +39,7 @@ import { useEffect, useRef, useState } from "react";
 type Industry = { word: string; img: string; blurb: string; ink: string };
 
 const INDUSTRIES: Industry[] = [
-  { word: "Hospitality", img: "hero-venue", ink: "#6600CC",
+  { word: "Hospitality", img: "hero-venue", ink: "#8F6519",  // was #6600CC — purple is the logo only
     blurb: "Venues where the welcome has to feel personal every single time." },
   { word: "Construction", img: "construction", ink: "#8A5520",
     blurb: "Change orders, daily logs, and a schedule that stays honest." },
@@ -151,6 +151,11 @@ export function ArcWheel() {
   const rafRef = useRef(0);
   const [i, setI] = useState(0);
   const [pinned, setPinned] = useState<number | null>(null);
+  // hover is a PREVIEW: it pauses the orbit and shows that industry, but releasing must not
+  // snap back to whatever the autoplay had reached. On release we hand the autoplay the word
+  // the visitor was actually looking at and let it carry on from there.
+  const [hovered, setHovered] = useState<number | null>(null);
+  const hoverRef = useRef(false);
   const [reduced, setReduced] = useState(false);
   const [compact, setCompact] = useState(false);
 
@@ -211,7 +216,8 @@ export function ArcWheel() {
         el.style.left = `${(pt.x / W) * 100}%`;
         el.style.top = `${(pt.y / H) * 100}%`;
         el.style.setProperty("--s", scale.toFixed(3));
-        el.style.opacity = (0.55 + near * 0.45).toFixed(3);
+        // Uniform contrast the whole way round. Fading tiles by depth made the right-hand side
+        // read as blurred and out of focus; scale alone carries the depth.
         el.style.zIndex = String(Math.round(near * 40));
       }
     };
@@ -228,10 +234,17 @@ export function ArcWheel() {
       return () => ro.disconnect();
     }
 
+    // Hovering pauses the orbit. Rather than stopping the clock (which would jump when it
+    // restarted), we hold the elapsed time still while paused, so motion resumes exactly where
+    // it stopped.
     let start = 0;
+    let held = 0;
+    let last = 0;
     const step = (t: number) => {
-      if (!start) start = t;
-      render(((t - start) / (ORBIT_SECONDS * 1000)) % 1);
+      if (!start) { start = t; last = t; }
+      if (!hoverRef.current) held += t - last;
+      last = t;
+      render((held / (ORBIT_SECONDS * 1000)) % 1);
       rafRef.current = requestAnimationFrame(step);
     };
     rafRef.current = requestAnimationFrame(step);
@@ -242,12 +255,15 @@ export function ArcWheel() {
   }, [reduced]);
 
   useEffect(() => {
-    if (pinned !== null || reduced) return;
+    if (pinned !== null || hovered !== null || reduced) return;
     const id = window.setInterval(() => setI((n) => (n + 1) % INDUSTRIES.length), 5200);
     return () => window.clearInterval(id);
-  }, [pinned, reduced]);
+  }, [pinned, hovered, reduced]);
 
-  const active = pinned ?? i;
+  const enter = (n: number) => { hoverRef.current = true; setHovered(n); };
+  const leave = () => { hoverRef.current = false; setHovered((h) => { if (h !== null) setI(h); return null; }); };
+
+  const active = pinned ?? hovered ?? i;
   const ind = INDUSTRIES[active];
 
   /* THE ROTOR.
@@ -301,10 +317,10 @@ export function ArcWheel() {
               className={`arc-tile${n === active ? " lit" : ""}`}
               aria-label={`Show ${x.word}`}
               aria-pressed={n === active}
-              onMouseEnter={() => setPinned(n)}
-              onMouseLeave={() => setPinned(null)}
-              onFocus={() => setPinned(n)}
-              onBlur={() => setPinned(null)}
+              onMouseEnter={() => enter(n)}
+              onMouseLeave={leave}
+              onFocus={() => enter(n)}
+              onBlur={leave}
               onClick={() => setPinned(n)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -313,17 +329,18 @@ export function ArcWheel() {
           ))}
         </div>
 
-        {/* Measured once, never per frame. Same class as the live word so it inherits the
-            identical font, weight, tracking and size. */}
-        <div className="arc-measure" ref={measureRef} aria-hidden="true">
-          {INDUSTRIES.map((x) => (
-            <span key={x.word} className="arc-word">{x.word}</span>
-          ))}
-        </div>
-
         <div className="wrap arc-stage">
           <div className="arc-core" ref={coreRef}>
             <h2>
+              {/* The ruler MUST live inside this h2. Rendered as a sibling of the headline it
+                  inherited the section's base font-size instead of the headline's clamp(), so
+                  every word measured at ~16px type — the slot came out far too narrow and the
+                  word overflowed to the right of it. Measure where the type actually lives. */}
+              <span className="arc-measure" ref={measureRef} aria-hidden="true">
+                {INDUSTRIES.map((x) => (
+                  <span key={x.word} className="arc-word">{x.word}</span>
+                ))}
+              </span>
               <span className="arc-fixed">Artificial Intelligence</span>
               <span className="arc-rotor">
                 <span className="arc-real">Real</span>
@@ -331,6 +348,10 @@ export function ArcWheel() {
                   className="arc-slot"
                   style={widths[active] ? { width: `${widths[active]}px` } : undefined}
                 >
+                  {/* Only the OUTGOING word is absolutely positioned. The incoming one stays in
+                      flow so the slot inherits a real baseline — with both absolute, the slot's
+                      baseline fell to its bottom edge and the word sat visibly high beside
+                      "Real". */}
                   {prev !== null && (
                     <span key={`out-${prev}`} className="arc-word out" aria-hidden="true">
                       {INDUSTRIES[prev].word}
@@ -359,8 +380,8 @@ export function ArcWheel() {
                   className={n === active ? "on" : undefined}
                   style={n === active ? { background: x.ink, borderColor: x.ink } : undefined}
                   onClick={() => setPinned(n)}
-                  onFocus={() => setPinned(n)}
-                  onBlur={() => setPinned(null)}
+                  onFocus={() => enter(n)}
+                  onBlur={leave}
                 >
                   {x.word}
                 </button>

@@ -746,6 +746,8 @@
   --s: 1;
 }
 .nx .arc-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* full contrast the whole way round (scale.com does the same) — depth is carried by scale only */
+.nx .arc-tile { opacity: 1; }
 /* hover enlarges IN PLACE, relative to wherever the orbit has carried it */
 .nx .arc-tile:hover { transform: translate(-50%, -50%) scale(calc(var(--s, 1) * 1.16)); z-index: 60 !important; }
 .nx .arc-tile.lit { box-shadow: 0 16px 40px rgba(23,18,14,0.24), 0 0 0 2px var(--ink-accent); }
@@ -767,7 +769,6 @@
 .nx .arc-real { color: var(--ink); }
 .nx .arc-slot {
   position: relative; display: inline-block; text-align: left;
-  height: 1.1em; /* the words rotate through this box, so it must not collapse */
   transition: width 0.62s cubic-bezier(0.22, 0.72, 0.24, 1);
   transform-style: preserve-3d;
 }
@@ -776,7 +777,9 @@
   transform-origin: 50% 100%;
   backface-visibility: hidden;
 }
-.nx .arc-slot .arc-word { position: absolute; left: 0; top: 0; }
+/* only the outgoing word leaves the flow — the incoming one gives the slot its baseline */
+.nx .arc-slot .arc-word.out { position: absolute; left: 0; top: 0; }
+.nx .arc-slot .arc-word.in { position: relative; }
 .nx .arc-slot .arc-word.in { animation: arcRotateIn 0.52s cubic-bezier(0.22, 0.72, 0.24, 1) both; z-index: 1; }
 .nx .arc-slot .arc-word.out { animation: arcRotateOut 0.3s cubic-bezier(0.4, 0, 0.7, 0.3) both; z-index: 0; }
 @keyframes arcRotateIn {
@@ -790,9 +793,10 @@
   to   { opacity: 0; transform: translateY(-0.22em) rotateX(42deg); }
 }
 /* the hidden ruler: laid out for measurement, never painted, never read by AT */
+/* the ruler sits INSIDE the h2 so it measures at the headline's real size */
 .nx .arc-measure {
   position: absolute; visibility: hidden; pointer-events: none;
-  white-space: nowrap; height: 0; overflow: hidden;
+  white-space: nowrap; height: 0; overflow: hidden; display: block;
 }
 /* inline-block, NOT block: a block child of a shrink-to-fit box inherits that box's resolved
    width, so every word measured identically (104px each) and nothing had a reason to slide. */
