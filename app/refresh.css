@@ -462,7 +462,7 @@
   .nx .scroll-hero { height: 400vh; }
   .nx .sh-plate, .nx .sh-inner { inset: 76px 14px 14px 14px; }
   .nx .sh-cue { display: none; }
-  .nx .sh-progress { bottom: 30px; }
+  .nx .sh-progress { bottom: auto; top: calc(76px + min(calc(var(--app-vh, 100svh) - 104px), 620px) + 18px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .nx .sh-media, .nx .sh-panel { transition: none; }
@@ -482,21 +482,32 @@
    frame — the people fall out of shot entirely. Band the footage across the top instead and
    let the copy sit on solid ground beneath it. */
 @media (max-width: 700px) {
-  .nx .sh-media { height: 50%; top: 0; bottom: auto; }
+  /* The plate is a CARD, not a full-height panel. Stretching it to the whole viewport left a
+     large dead void between the footage band and the copy — the plate now sizes to its
+     content and sits on the light ground, which is also the reference's composition. */
+  .nx .sh-plate, .nx .sh-inner {
+    inset: 76px 14px auto 14px;
+    height: min(calc(var(--app-vh, 100svh) - 104px), 620px);
+  }
+  .nx .sh-media { height: 58%; top: 0; bottom: auto; }
   /* anchored under the footage band, NOT to the bottom of the plate — bottom anchoring put
      the copy behind the browser toolbar and ran it off the screen */
   /* Bottom-anchored, so if the copy ever exceeds its band it grows UPWARD into the footage
      (harmless) instead of downward off the screen (what Sam kept seeing). The stage is
      svh-sized and the inset respects the safe area, so "bottom" is above the browser bar. */
-  .nx .sh-inner { align-items: flex-end; padding-bottom: 52px; }
-  .nx .sh-panel { top: auto; bottom: 0; }
+  /* NOTE: padding-bottom on .sh-inner does NOT move an absolutely-positioned child with
+     `bottom: 0` — offsets resolve against the padding box, so the panel sat flush on the
+     plate's bottom edge, where the light page ground bleeds through the rounded corner.
+     The offset has to be on the panel itself. */
+  .nx .sh-inner { align-items: flex-end; padding-bottom: 0; }
+  .nx .sh-panel { top: auto; bottom: 34px; }
   .nx .sh-panel h1 { font-size: calc(clamp(24px, 6.6vw, 34px) * var(--fit, 1)); line-height: 1.1; }
   .nx .sh-panel p { font-size: calc(14.5px * var(--fit, 1)); margin-top: 12px; max-width: 34ch; }
   .nx .sh-panel .eyebrow { margin-bottom: 12px; font-size: 11px; }
   .nx .sh-panel .btn { margin-top: 18px; padding: 13px 22px; font-size: 12px; }
   .nx .sh-copybed {
     background: linear-gradient(180deg,
-      rgba(4,3,2,0) 24%, rgba(4,3,2,0.70) 38%, rgba(4,3,2,0.97) 50%, rgba(4,3,2,0.99) 100%);
+      rgba(4,3,2,0) 28%, rgba(4,3,2,0.72) 46%, rgba(4,3,2,0.97) 58%, rgba(4,3,2,0.99) 100%);
   }
   .nx .sh-veil { background: linear-gradient(180deg, rgba(10,8,6,0.34) 0%, rgba(10,8,6,0.06) 26%, rgba(10,8,6,0.30) 52%, rgba(10,8,6,0.80) 62%); }
   /* the viewBox slice leaves only one or two nodes on screen at this width — a fragment of
