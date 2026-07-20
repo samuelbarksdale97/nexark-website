@@ -21,27 +21,25 @@ import { useEffect, useRef, useState } from "react";
  * layer stack, the tilted deck, the orbit. Same vocabulary as the hero and the wheel, which is
  * what makes the page feel like one object rather than a sequence of tricks.
  *
- * The duration ("2 weeks") sits as a quiet stamp in the panel's top corner rather than a label
- * above the title — it still backs "weeks, not quarters" without announcing itself.
+ * NO TIMELINES: durations were removed 07-20 (Sam) — we do not know the shape of a job before
+ * we have seen the operation, and a number on a card is a promise. The phases carry the order;
+ * the schedule is a conversation, not a website claim.
  */
 
-type Step = { dur: string; title: string; body: string; out: string };
+type Step = { title: string; body: string; out: string };
 
 const STEPS: Step[] = [
   {
-    dur: "2 weeks",
     title: "Learn",
     body: "We sit inside the operation you already have and map how it actually runs — not how the org chart says it does.",
     out: "A plan you can read",
   },
   {
-    dur: "4 weeks",
     title: "Build",
     body: "Systems engineered around your real workflow. You see working software early and often, never a reveal at the end.",
     out: "Software that fits",
   },
   {
-    dur: "Ongoing",
     title: "Partner",
     body: "Your business keeps moving, so the system does too. We stay on to extend it, sharpen it, and keep it honest.",
     out: "It keeps earning",
@@ -173,14 +171,14 @@ export function Roadmap() {
       <div className="wrap">
         <div className="sec-head wide reveal">
           <span className="eyebrow">How it works</span>
-          {/* The claim, then the method as its receipts. "Weeks, not quarters" used to be the
-              headline and could not carry it — an assertion with nothing under it. The duration
-              now lives inside the panels as evidence, and the headline says the thing Sam's
-              business actually runs on: people do not believe this is possible. */}
+          {/* The claim, then the method beneath it. "Weeks, not quarters" used to be the
+              headline and could not carry it — a promise about schedule made before anyone has
+              seen the operation. The headline now says the thing Sam's business actually runs
+              on: people do not believe this is possible. */}
           <h2>
             We build what you were told <em>wasn&apos;t possible.</em>
           </h2>
-          <p className="hiw-deck-line">Usually in weeks. Here&apos;s how.</p>
+          <p className="hiw-deck-line">Three phases. Here&apos;s how it goes.</p>
         </div>
 
         <div className="hiw-deck" ref={ref} style={{ ["--p" as string]: p.toFixed(3) }}>
@@ -199,7 +197,6 @@ export function Roadmap() {
                     <span className="hiw-chip" aria-hidden="true">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="hiw-dur">{s.dur}</span>
                   </div>
 
                   <div className="hiw-void">

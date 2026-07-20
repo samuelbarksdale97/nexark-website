@@ -631,10 +631,6 @@
   color: var(--gold-deep, #9a6f22);
   box-shadow: 0 0 0 1px rgba(154, 111, 34, 0.22);
 }
-.nx .hiw-dur {
-  font-family: var(--sans); font-size: 11.5px; font-weight: 500;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3, #8a7d6c);
-}
 
 /* THE VOID — where a feature grid would put filler. It holds the artifact instead. */
 .nx .hiw-void {
@@ -666,10 +662,9 @@
 
 /* hover inversion is declared AFTER the .lit resting state — equal specificity, so
    source order decides which wins. */
-.nx .hiw-panel h3, .nx .hiw-panel p, .nx .hiw-dur, .nx .hiw-out { transition: color 0.42s ease 0.1s, background 0.42s ease 0.1s, box-shadow 0.42s ease; }
+.nx .hiw-panel h3, .nx .hiw-panel p, .nx .hiw-out { transition: color 0.42s ease 0.1s, background 0.42s ease 0.1s, box-shadow 0.42s ease; }
 .nx .hiw-panel:hover h3, .nx .hiw-panel:focus-within h3 { color: #f7f1e6; }
 .nx .hiw-panel:hover p, .nx .hiw-panel:focus-within p { color: #d5cbba; }
-.nx .hiw-panel:hover .hiw-dur, .nx .hiw-panel:focus-within .hiw-dur { color: var(--amber-hi); }
 .nx .hiw-panel:hover .hiw-chip, .nx .hiw-panel:focus-within .hiw-chip { color: #17120c; box-shadow: none; }
 /* the action inverts to solid, the way the reference flips its button on a filled card */
 .nx .hiw-panel:hover .hiw-out, .nx .hiw-panel:focus-within .hiw-out {
