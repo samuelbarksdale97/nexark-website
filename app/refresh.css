@@ -989,3 +989,82 @@
   .nx .hiw-art .s-box, .nx .hiw-art .s-wire, .nx .hiw-art .s-dot, .nx .hiw-art .s-label { transition: none; }
   .nx .hiw-art .a-orbit > g { animation: none; }
 }
+
+/* ============================================================
+   THE DIFFERENCE — "the strongest case against us" (argument).
+   Housing is the argument: the counterexample is the section's only card; the claim gets bare
+   ground. At the turn the card's surface leaves and the sentence stays put.
+   ============================================================ */
+.nx .cx-band { padding: clamp(88px, 13vh, 160px) 0; }
+.nx .cx { max-width: 1100px; }           /* hard-left spine — nothing here is centred */
+
+.nx .cx-eyebrow {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-line);
+  margin-bottom: 20px;
+}
+
+/* the ONLY housed object in the section */
+.nx .cx-exhibit {
+  max-width: 640px; padding: 34px 32px; border-radius: 22px;
+  background: #1a1611;
+  border: 1px solid rgba(201, 154, 87, 0.28);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+  /* Only paint transitions. Padding, width and position never change, so the surface reads as
+     LEAVING rather than as a box collapsing — zero layout shift, nothing reflows. */
+  transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+.nx .cx-exhibit p {
+  font-size: clamp(21px, 2.5vw, 33px); font-weight: 500; line-height: 1.28; color: #fff;
+  transition: color 0.5s ease;
+}
+.nx .cx-exhibit.dissolved {
+  background: transparent; border-color: transparent; box-shadow: none;
+}
+.nx .cx-exhibit.dissolved p { color: var(--body); }
+
+.nx .cx-rule {
+  display: block; width: 1px; height: 88px; margin: 4px 0 0;
+  background: linear-gradient(180deg, var(--gold-line), transparent);
+}
+.nx .cx-turn {
+  font-size: clamp(15px, 1.3vw, 18px); color: var(--body); max-width: 46ch; margin-top: 4px;
+}
+
+/* the claim: unhoused, on raw ground, LARGER than the sentence in the card */
+.nx .cx-claim {
+  margin-top: 38px;
+  font-size: clamp(32px, 4.4vw, 58px); font-weight: 500; line-height: 1.06;
+  max-width: 16ch; color: #fff;
+}
+.nx .cx-claim em { color: var(--gold-line); font-style: italic; }
+
+.nx .cx-lead {
+  margin-top: clamp(52px, 7vh, 84px); margin-bottom: 6px;
+  font-size: 13px; letter-spacing: 0.04em; color: var(--muted);
+}
+
+/* Residue, NOT peers: hairline rows, no cards, no icons, and deliberately unequal mass — the
+   first row is the one the counterexample is most vulnerable to. If these ever become equal
+   again the section has quietly reverted to the icon trinity it replaced. */
+.nx .cx-residue { list-style: none; }
+.nx .cx-residue li {
+  border-top: 1px solid var(--hair);
+  padding: 26px 0;
+  display: grid; gap: 10px;
+}
+.nx .cx-residue li h3 { font-size: 17px; font-weight: 500; color: var(--ivory); line-height: 1.3; }
+.nx .cx-residue li p { font-size: 15px; color: var(--body); line-height: 1.65; max-width: 62ch; }
+.nx .cx-residue li.lead { padding: 34px 0; }
+.nx .cx-residue li.lead h3 { font-size: clamp(20px, 2vw, 27px); }
+.nx .cx-residue li.lead p { font-size: 16.5px; }
+
+@media (min-width: 900px) {
+  .nx .cx-residue li { grid-template-columns: 26ch 1fr; gap: 40px; align-items: start; }
+}
+/* Below 900px the label gets its own full-width row — a label never competes for horizontal
+   space with anything (checklist rules 8 and 22). */
+
+@media (prefers-reduced-motion: reduce) {
+  .nx .cx-exhibit, .nx .cx-exhibit p { transition: none; }
+}

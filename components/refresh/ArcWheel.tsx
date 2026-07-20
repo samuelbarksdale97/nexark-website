@@ -71,10 +71,16 @@ const ORBIT_SECONDS = 240;  // a smidge quicker (Sam, 07-20) — ~8%, not a gear
 const COMPACT_W = 860;
 
 /** how far the tile scale swings between the far side of the loop and the near side */
-const SCALE_MIN = 0.42;
-const SCALE_MAX = 1.0;
+// The reference's tiles run from roughly 45px to 180px — a 4x spread, and that variance is what
+// reads as depth. Ours were 0.42-1.0 on a 172px base, which at a glance looked like one size.
+const SCALE_MIN = 0.26;
+const SCALE_MAX = 1.05;
+// The field runs on a diagonal rather than sitting square to the viewport: near at lower-left,
+// far at upper-right.
+const AXIS_DEG = -21;
+const AXIS = (AXIS_DEG * Math.PI) / 180;
 
-type Path = { xs: number[]; ys: number[]; cum: number[]; total: number; minX: number; maxX: number };
+type Path = { xs: number[]; ys: number[]; cum: number[]; total: number; minU: number; maxU: number };
 
 /**
  * Build the shared loop. Everything that shapes it is a function of θ alone — that is what
@@ -109,19 +115,27 @@ function buildPath(W: number, H: number, copy: { w: number; h: number }, tileW: 
   const xs: number[] = [];
   const ys: number[] = [];
   const cum: number[] = [0];
-  let minX = Infinity;
-  let maxX = -Infinity;
+  // extent along the DIAGONAL axis, which is what depth is measured against
+  let minU = Infinity;
+  let maxU = -Infinity;
 
   for (let k = 0; k <= SAMPLES; k++) {
     const t = (k / SAMPLES) * TAU;
-    const c = Math.cos(t);
-    const s = Math.sin(t);
+    // The SHAPE is evaluated in its own frame and the point is placed in the SCREEN frame one
+    // rotation later. Rotating the finished path instead would tilt the keep-out box with it and
+    // silently void the clearance guarantee — the copy is axis-aligned to the viewport, so the
+    // clearance and the field limit must both be evaluated at the on-screen angle.
+    const c0 = Math.cos(t);
+    const s0 = Math.sin(t);
+    const th = t + AXIS;
+    const c = Math.cos(th);
+    const s = Math.sin(th);
 
-    // base ellipse radius at this angle
-    const base = 1 / Math.hypot(c / rx, s / ry);
+    // base ellipse radius at this angle, in the shape's own frame
+    const base = 1 / Math.hypot(c0 / rx, s0 / ry);
     // gentle harmonics: the loop is irregular, but irregular in θ — identical for every tile
     const shaped = base * (1 + 0.11 * Math.cos(2 * t + 0.6) + 0.06 * Math.cos(3 * t - 1.1));
-    // the copy box and the field edge, expressed as radii along this same angle
+    // the copy box and the field edge, expressed as radii along the SCREEN angle
     const clearance = clearRadius(c, s);
     const limit = 1 / Math.hypot(c / limX, s / limY);
 
@@ -130,13 +144,14 @@ function buildPath(W: number, H: number, copy: { w: number; h: number }, tileW: 
     const y = cy + s * r;
     xs.push(x);
     ys.push(y);
-    if (x < minX) minX = x;
-    if (x > maxX) maxX = x;
+    const u = (x - cx) * Math.cos(AXIS) + (y - cy) * Math.sin(AXIS);
+    if (u < minU) minU = u;
+    if (u > maxU) maxU = u;
     if (k > 0) {
       cum.push(cum[k - 1] + Math.hypot(x - xs[k - 1], y - ys[k - 1]));
     }
   }
-  return { xs, ys, cum, total: cum[SAMPLES], minX, maxX };
+  return { xs, ys, cum, total: cum[SAMPLES], minU, maxU };
 }
 
 /** point at a given distance along the loop — binary search, no allocation */
@@ -218,11 +233,12 @@ export function ArcWheel() {
 
     const render = (turn: number) => {
       if (!path) return;
-      const span = path.maxX - path.minX || 1;
+      const span = path.maxU - path.minU || 1;
       for (let n = 0; n < nodes.length; n++) {
         const pt = atLength(path, (n / nodes.length + turn) * path.total);
-        // depth reads off horizontal position — left is near, right is far
-        const near = 1 - (pt.x - path.minX) / span;
+        // depth reads along the diagonal axis — lower-left is near, upper-right is far
+        const u = (pt.x - W / 2) * Math.cos(AXIS) + (pt.y - H / 2) * Math.sin(AXIS);
+        const near = 1 - (u - path.minU) / span;
         const scale = SCALE_MIN + near * (SCALE_MAX - SCALE_MIN);
         const el = nodes[n];
         el.style.left = `${(pt.x / W) * 100}%`;
@@ -392,8 +408,11 @@ export function ArcWheel() {
                 </span>
               </span>
             </h2>
-            <p className="arc-blurb" aria-live="polite">{ind.blurb}</p>
+            {/* the blurb is gone (Sam, 07-20): headline, then one small action. The reference
+                states the claim and stops — a paragraph under it turns the clearing into a
+                content block and the field into decoration around it. */}
             <a href="/start" className="btn arc-cta">Get Started <span className="arw">→</span></a>
+            <span className="sr-only" aria-live="polite">{ind.word}</span>
           </div>
         </div>
       </div>

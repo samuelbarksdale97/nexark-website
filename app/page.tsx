@@ -4,6 +4,7 @@ import { ScrollHero } from "@/components/refresh/ScrollHero";
 import { SystemStack } from "@/components/refresh/SystemStack";
 import { ArcWheel } from "@/components/refresh/ArcWheel";
 import { Roadmap } from "@/components/refresh/Roadmap";
+import { Difference } from "@/components/refresh/Difference";
 
 export default function Home() {
   return (
@@ -29,40 +30,8 @@ export default function Home() {
       {/* LIGHT — Nex·ARK → your next ARC: the industries riding a literal arc */}
       <ArcWheel />
 
-      {/* THESIS + 3 CARDS */}
-      <section className="band" data-nav="dark">
-        <span className="connector" />
-        <div className="wrap">
-          <div className="sec-head wide reveal">
-            <h2>
-              A tool isn&apos;t the same as <em>an advantage.</em>
-            </h2>
-          </div>
-          <div className="benefits">
-            <div className="bcard reveal">
-              <div className="ic">
-                <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" /></svg>
-              </div>
-              <h3>Runs without you</h3>
-              <p>The busywork handles itself, so your team does the work only they can do.</p>
-            </div>
-            <div className="bcard reveal d1">
-              <div className="ic">
-                <svg viewBox="0 0 24 24"><path d="M12 3 3 7.5 12 12l9-4.5L12 3Z" /><path d="M3 12l9 4.5L21 12M3 16.5 12 21l9-4.5" /></svg>
-              </div>
-              <h3>One source of truth</h3>
-              <p>Every tool agrees. Everything your business knows, in one place.</p>
-            </div>
-            <div className="bcard reveal d2">
-              <div className="ic">
-                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-              </div>
-              <h3>Answers in seconds</h3>
-              <p>Ask your business a question. Get an answer from your real data.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* THE DIFFERENCE — an argument, not a feature grid. See Difference.tsx. */}
+      <Difference />
 
       {/* ROADMAP */}
       {/* HOW IT WORKS — a sequence, rendered as one */}
