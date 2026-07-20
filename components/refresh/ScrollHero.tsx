@@ -293,7 +293,7 @@ export function ScrollHero() {
               {panel.sub && <p>{panel.sub}</p>}
               {panel.cta && (
                 <Link href="/start" className="btn btn-primary">
-                  Book a Free Audit <span className="arw">→</span>
+                  Start your journey <span className="arw">→</span>
                 </Link>
               )}
             </div>

@@ -90,7 +90,7 @@ export function RefreshShell({ active, children }: Props) {
               </Link>
             ))}
           </nav>
-          <Link href="/start" className="btn btn-ghost nav-cta">
+          <Link href="/start" className="btn btn-primary nav-cta">
             Start Your Journey <span className="arw">→</span>
           </Link>
           <button className="menu-btn" aria-label="Menu" onClick={() => setMenuOpen((v) => !v)}>
