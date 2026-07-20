@@ -28,21 +28,25 @@ import { useEffect, useRef, useState } from "react";
 
 type Step = { title: string; body: string; out: string };
 
+/* The reference's card headline is a full declarative SENTENCE, and the body explains it.
+   Ours were one-word labels ("Learn") with the sentence demoted to body copy — which is why
+   the section needed decoration to feel like anything. The number chip carries the order, so
+   the headline is free to make the claim. */
 const STEPS: Step[] = [
   {
-    title: "Learn",
-    body: "We sit inside the operation you already have and map how it actually runs — not how the org chart says it does.",
+    title: "We start inside the operation you already have.",
+    body: "Before anything gets built, we map how the work actually moves — the steps your team really takes, not the ones written on the org chart.",
     out: "A plan you can read",
   },
   {
-    title: "Build",
-    body: "Systems engineered around your real workflow. You see working software early and often, never a reveal at the end.",
+    title: "You see it working long before it's finished.",
+    body: "Everything is built around your real workflow, and you use it early and often. Nothing is a reveal at the end.",
     out: "Software that fits",
   },
   {
-    title: "Partner",
-    body: "Your business keeps moving, so the system does too. We stay on to extend it, sharpen it, and keep it honest.",
-    out: "It keeps earning",
+    title: "It keeps changing, because your business does.",
+    body: "We stay on after launch to extend the system, sharpen it, and keep it honest as the operation grows.",
+    out: "A system that keeps earning",
   },
 ];
 
@@ -171,14 +175,12 @@ export function Roadmap() {
       <div className="wrap">
         <div className="sec-head wide reveal">
           <span className="eyebrow">How it works</span>
-          {/* The claim, then the method beneath it. "Weeks, not quarters" used to be the
-              headline and could not carry it — a promise about schedule made before anyone has
-              seen the operation. The headline now says the thing Sam's business actually runs
-              on: people do not believe this is possible. */}
-          <h2>
-            We build what you were told <em>wasn&apos;t possible.</em>
-          </h2>
-          <p className="hiw-deck-line">Three phases. Here&apos;s how it goes.</p>
+          {/* Plain statement, one weight, no emphasis span. Two headlines were rejected here
+              for the same reason: "weeks, not quarters" promised a schedule nobody had scoped,
+              and "what you were told wasn't possible" is unfalsifiable — someone can always ask
+              for a time machine. This one is a claim we can actually stand behind. Styling that
+              glorifies the copy is a sign the copy is not carrying itself. */}
+          <h2>We build software that fits how your business already works.</h2>
         </div>
 
         <div className="hiw-deck" ref={ref} style={{ ["--p" as string]: p.toFixed(3) }}>
