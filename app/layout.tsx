@@ -30,11 +30,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Nexark | Success is not an accident, it's engineered.",
   description:
-    "We build custom software and AI systems around how your business actually works, and where you're trying to take it.",
+    "Nexark builds custom software for real businesses — we rebuild how your operation runs, or build the app, platform, or product you have in mind. Two doors, one team.",
   keywords: [
     "custom software",
+    "app development",
     "AI systems",
     "business automation",
+    "product development",
     "reality engineering",
     "digital transformation",
   ],
@@ -62,9 +64,29 @@ export const metadata: Metadata = {
   // convention and OVERRIDE anything declared here — declared explicitly anyway so the
   // intent is readable.
   icons: {
-    icon: "/icon.png",
+    // favicon.ico FIRST and at the root is what Google's search-result favicon crawler fetches;
+    // its absence (a 404) is why Google was falling back to the Vercel default mark. icon.png
+    // covers modern browsers that prefer PNG.
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
     apple: "/apple-icon.png",
+    shortcut: "/favicon.ico",
   },
+};
+
+// Organization structured data — the strongest signal for Google to attach Nexark's own logo to
+// the brand in search / the knowledge panel, rather than guessing from the favicon alone.
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Nexark",
+  url: "https://www.nexark.ai",
+  logo: "https://www.nexark.ai/icon.png",
+  description:
+    "Nexark builds custom software for real businesses — rebuilding how an operation runs, or building the app, platform, or product a founder has in mind.",
+  slogan: "Success is not an accident. It's engineered.",
 };
 
 export default function RootLayout({
@@ -74,6 +96,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.variable} ${fraunces.variable} ${inter.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+      </head>
       <body className="min-h-screen text-white antialiased relative selection:bg-purple-500/30" style={{ backgroundColor: '#050508' }}>
         <NextArcVisual />
         <SmoothScroll>{children}</SmoothScroll>
