@@ -1,0 +1,439 @@
+{
+  "corpus": "The Reality Engineering Canon",
+  "version": "0.1",
+  "date": "2026-08-07",
+  "author": "Sam Barksdale / Nexark",
+  "entry_route": "/reality-engineering",
+  "document_count": 43,
+  "total_word_count": 68915,
+  "documents": [
+    {
+      "path": "FOUNDERS_NOTE.md",
+      "type": "support",
+      "title": "Why I Started Calling It Reality Engineering",
+      "route": "/reality-engineering/from-sam",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Founder note",
+      "word_count": 1498
+    },
+    {
+      "path": "QA_REPORT.md",
+      "type": "support",
+      "title": "Reality Engineering Canon v0.1 QA Report",
+      "route": "/reality-engineering/evidence/qa",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "PASS",
+      "word_count": 129
+    },
+    {
+      "path": "README.md",
+      "type": "start",
+      "title": "The Reality Engineering Canon",
+      "route": "/reality-engineering/start",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 1405
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "release",
+      "title": "Reality Engineering Canon v0.1 Release Notes",
+      "route": "/reality-engineering/release/v0-1",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 371
+    },
+    {
+      "path": "assets/diagram_specifications.md",
+      "type": "implementation",
+      "title": "Reality Engineering Diagram Specifications",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 842
+    },
+    {
+      "path": "canon/01_constitution.md",
+      "type": "canon",
+      "title": "The Constitution of Reality Engineering",
+      "route": "/reality-engineering/constitution",
+      "id": "RE-C01",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 2045
+    },
+    {
+      "path": "canon/02_foundations.md",
+      "type": "canon",
+      "title": "Foundations of Reality Engineering",
+      "route": "/reality-engineering/foundations",
+      "id": "RE-C02",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 3898
+    },
+    {
+      "path": "canon/03_method_specification.md",
+      "type": "canon",
+      "title": "The Reality Engineering Method Specification",
+      "route": "/reality-engineering/method",
+      "id": "RE-C03",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 3377
+    },
+    {
+      "path": "canon/04_goodness_and_stewardship.md",
+      "type": "canon",
+      "title": "The Goodness Constraint",
+      "route": "/reality-engineering/good",
+      "id": "RE-C04",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 2214
+    },
+    {
+      "path": "canon/05_hope.md",
+      "type": "canon",
+      "title": "On Hope",
+      "route": "/reality-engineering/hope",
+      "id": "RE-C05",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 1532
+    },
+    {
+      "path": "canon/06_why_now.md",
+      "type": "canon",
+      "title": "Why Now",
+      "route": "/reality-engineering/why-now",
+      "id": "RE-C06",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 2038
+    },
+    {
+      "path": "canon/07_conscious_reality_and_success.md",
+      "type": "canon",
+      "title": "Conscious Reality and the Meaning of Success",
+      "route": "/reality-engineering/conscious-reality",
+      "id": "RE-C07",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 2193
+    },
+    {
+      "path": "canon/08_ai_amplifier_cost_responsibility.md",
+      "type": "canon",
+      "title": "AI as Amplifier",
+      "route": "/reality-engineering/ai",
+      "id": "RE-C08",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 2192
+    },
+    {
+      "path": "canon/09_echo_of_god_theological_companion.md",
+      "type": "canon",
+      "title": "The Echo of God",
+      "route": "/reality-engineering/echo-of-god",
+      "id": "RE-C09",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Founder theological hypothesis",
+      "word_count": 2240
+    },
+    {
+      "path": "canon/10_applications_and_casebook.md",
+      "type": "canon",
+      "title": "Applications and the Reality Engineering Casebook",
+      "route": "/reality-engineering/applications",
+      "id": "RE-C10",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 1720
+    },
+    {
+      "path": "canon/11_evidence_standard.md",
+      "type": "canon",
+      "title": "The Reality Engineering Evidence Standard",
+      "route": "/reality-engineering/evidence/standard",
+      "id": "RE-C11",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 1780
+    },
+    {
+      "path": "canon/12_glossary_and_ontology.md",
+      "type": "canon",
+      "title": "Reality Engineering Glossary and Ontology",
+      "route": "/reality-engineering/glossary",
+      "id": "RE-C12",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Foundational public draft",
+      "word_count": 2245
+    },
+    {
+      "path": "evidence/case_study_template.md",
+      "type": "evidence",
+      "title": "Reality Engineering Case Study Standard",
+      "route": "/reality-engineering/evidence/case-standard",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Canonical template",
+      "word_count": 1193
+    },
+    {
+      "path": "evidence/cases/RE-CASE-001_ai_enhanced_promotional_film.md",
+      "type": "case",
+      "title": "AI-Enhanced Promotional Film: From Human Footage to an Engineered World",
+      "route": "/reality-engineering/cases/ai-enhanced-promotional-film",
+      "id": "RE-CASE-001",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Publishable with final subject/client approval and public asset link",
+      "word_count": 929
+    },
+    {
+      "path": "evidence/cases/README.md",
+      "type": "case_index",
+      "title": "Reality Engineering Casebook",
+      "route": "/reality-engineering/cases",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 169
+    },
+    {
+      "path": "evidence/claim_ledger.md",
+      "type": "evidence",
+      "title": "Reality Engineering Claims Ledger",
+      "route": "/reality-engineering/evidence/claims",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Active",
+      "word_count": 1328
+    },
+    {
+      "path": "evidence/legacy_draft_audit.md",
+      "type": "evidence",
+      "title": "Legacy Reality Engineering Draft Audit",
+      "route": "/reality-engineering/evidence/legacy-audit",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Internal-public provenance and evidence audit",
+      "word_count": 2696
+    },
+    {
+      "path": "evidence/source_register.md",
+      "type": "evidence",
+      "title": "Reality Engineering Evidence Register",
+      "route": "/reality-engineering/evidence/sources",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Verified source register",
+      "word_count": 1925
+    },
+    {
+      "path": "evidence/verification_report.md",
+      "type": "evidence",
+      "title": "Reality Engineering Canon v0.1 Fact-Verification Report",
+      "route": "/reality-engineering/evidence/verification",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Completed for public-draft claims",
+      "word_count": 1268
+    },
+    {
+      "path": "federalist/01_on_reality_engineering.md",
+      "type": "federalist_paper",
+      "title": "On Reality Engineering",
+      "route": "/reality-engineering/papers/on-reality-engineering",
+      "id": "RE-F01",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1553
+    },
+    {
+      "path": "federalist/02_on_the_genesis_moment.md",
+      "type": "federalist_paper",
+      "title": "On the Genesis Moment",
+      "route": "/reality-engineering/papers/on-the-genesis-moment",
+      "id": "RE-F02",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1665
+    },
+    {
+      "path": "federalist/03_on_the_goodness_constraint.md",
+      "type": "federalist_paper",
+      "title": "On the Goodness Constraint",
+      "route": "/reality-engineering/papers/on-the-goodness-constraint",
+      "id": "RE-F03",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1813
+    },
+    {
+      "path": "federalist/04_on_hope.md",
+      "type": "federalist_paper",
+      "title": "On Hope",
+      "route": "/reality-engineering/papers/on-hope",
+      "id": "RE-F04",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1734
+    },
+    {
+      "path": "federalist/05_on_conscious_reality.md",
+      "type": "federalist_paper",
+      "title": "On Conscious Reality",
+      "route": "/reality-engineering/papers/on-conscious-reality",
+      "id": "RE-F05",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1838
+    },
+    {
+      "path": "federalist/31_on_ai_as_amplifier.md",
+      "type": "federalist_paper",
+      "title": "On AI as Amplifier",
+      "route": "/reality-engineering/papers/on-ai-as-amplifier",
+      "id": "RE-F31",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1791
+    },
+    {
+      "path": "federalist/34_on_ai_filmmaking_as_reality_engineering.md",
+      "type": "federalist_paper",
+      "title": "On AI Filmmaking as Reality Engineering",
+      "route": "/reality-engineering/papers/on-ai-filmmaking-as-reality-engineering",
+      "id": "RE-F34",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1805
+    },
+    {
+      "path": "federalist/60_on_the_limits_of_engineering.md",
+      "type": "federalist_paper",
+      "title": "On the Limits of Engineering",
+      "route": "/reality-engineering/papers/on-the-limits-of-engineering",
+      "id": "RE-F60",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1649
+    },
+    {
+      "path": "federalist/61_on_the_thread_the_needle_moment.md",
+      "type": "federalist_paper",
+      "title": "On the Thread-the-Needle Moment",
+      "route": "/reality-engineering/papers/on-the-thread-the-needle-moment",
+      "id": "RE-F61",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1606
+    },
+    {
+      "path": "federalist/70_on_the_good_news.md",
+      "type": "federalist_paper",
+      "title": "On the Good News",
+      "route": "/reality-engineering/papers/on-the-good-news",
+      "id": "RE-F70",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1699
+    },
+    {
+      "path": "federalist/README.md",
+      "type": "paper_index",
+      "title": "The Federalist Papers of Reality Engineering",
+      "route": "/reality-engineering/papers",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Publication roadmap",
+      "word_count": 1968
+    },
+    {
+      "path": "provenance/CHANGELOG.md",
+      "type": "provenance",
+      "title": "Reality Engineering Canon Changelog",
+      "route": "/reality-engineering/changelog",
+      "word_count": 247
+    },
+    {
+      "path": "provenance/development_timeline.md",
+      "type": "provenance",
+      "title": "Development and Provenance of the Reality Engineering Discipline",
+      "route": "/reality-engineering/history",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Public provenance record",
+      "word_count": 1775
+    },
+    {
+      "path": "website/cross_reference_index.md",
+      "type": "implementation",
+      "title": "Reality Engineering Cross-Reference Index",
+      "route": "/reality-engineering/cross-references",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1190
+    },
+    {
+      "path": "website/faq.md",
+      "type": "implementation",
+      "title": "Reality Engineering FAQ",
+      "route": "/reality-engineering/faq",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1207
+    },
+    {
+      "path": "website/implementation_notes.md",
+      "type": "implementation",
+      "title": "Reality Engineering Website Implementation Notes",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 896
+    },
+    {
+      "path": "website/landing_page_copy.md",
+      "type": "implementation",
+      "title": "Reality Engineering Landing Page Copy",
+      "route": "/reality-engineering",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 1354
+    },
+    {
+      "path": "website/publication_map.md",
+      "type": "implementation",
+      "title": "Reality Engineering Website Publication Map",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "status": "Implementation-ready content architecture",
+      "word_count": 1212
+    },
+    {
+      "path": "website/seo_metadata.md",
+      "type": "implementation",
+      "title": "Reality Engineering SEO and Social Metadata",
+      "version": "0.1",
+      "date": "2026-08-07",
+      "word_count": 686
+    }
+  ]
+}

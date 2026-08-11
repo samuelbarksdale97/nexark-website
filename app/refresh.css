@@ -103,7 +103,11 @@
 .nx header.nav-light .btn-ghost:hover { color: #fff; background: #17120c; border-color: #17120c; }
 /* the mark is a purple gradient — it reads on both grounds, but the glow only suits the dark one */
 .nx header.nav-light .brand img { filter: none; }
-.nx .nav { display: flex; align-items: center; justify-content: space-between; }
+/* flex-wrap: at enlarged text (200% zoom) five links + the CTA can no longer share one row
+   at tablet width — without wrap the trailing controls are pushed clean off-viewport
+   (WCAG 1.4.4, caught by the gate). Wrapping drops them to a second row instead. */
+.nx .nav { display: flex; flex-wrap: wrap; row-gap: 8px; align-items: center; justify-content: space-between; }
+.nx .nav-links { flex-wrap: wrap; }
 .nx .brand { display: flex; align-items: center; gap: 12px; }
 .nx .brand img { width: 32px; height: 32px; display: block; filter: drop-shadow(0 1px 10px rgba(165,119,255,0.34)); }
 .nx .brand .wordmark { display: flex; flex-direction: column; line-height: 1; }

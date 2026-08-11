@@ -1,0 +1,429 @@
+/* ============================================================
+   REALITY ENGINEERING — the publication register
+   Scoped under .nx .re. The product pages sell; these pages PUBLISH.
+   Laws inherited from the refresh system:
+   - paper ground, ink does the reading; gold is hairline/large-display only on light
+     (gold body text fails 1.4.3 — measured in the hiw pass)
+   - every section declares data-nav
+   - rounded containers, no sharp corners
+   - one hero effect per screen: here, the bridge draws once on load
+   ============================================================ */
+
+.nx .re {
+  --re-paper: #faf7f2;
+  --re-card: #f1ece3;
+  --re-ink: #17120c;
+  --re-ink2: #554c40;
+  --re-ink3: #736858; /* 5.18:1 on paper — the floor for small text */
+  --re-hair: rgba(23, 18, 12, 0.14);
+  --re-hair-strong: rgba(23, 18, 12, 0.26);
+  --re-gold: #7f5a12; /* 5.8:1 on paper, 5.3:1 on card — the gate samples pixels, so
+                         antialiasing eats ~0.5; #8f6519 measured 4.42 and failed 1.4.3 */
+  --re-gold-rich: #8f6519; /* decorative fills only (the star), never text */
+  --re-gold-line: #c99a57;
+  --re-dark: #131008;
+  --re-dark-2: #1c1710;
+  --re-serif: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --re-sans: var(--font-primary), Montserrat, system-ui, sans-serif;
+  background: var(--re-paper);
+  color: var(--re-ink2);
+  font-family: var(--re-sans);
+}
+
+/* headings: the refresh system paints .nx h1-h3 ivory — repaint for the paper ground */
+.nx .re h1,
+.nx .re h2,
+.nx .re h3 {
+  font-family: var(--re-serif);
+  color: var(--re-ink);
+  font-weight: 420;
+  letter-spacing: -0.015em;
+}
+.nx .re .re-dark h2,
+.nx .re .re-dark h3 {
+  color: var(--ivory);
+}
+
+.nx .re a { text-decoration: none; }
+
+/* ---------- landing ---------- */
+
+.nx .re-hero {
+  padding: clamp(140px, 20vh, 220px) 0 clamp(60px, 9vh, 110px);
+  border-bottom: 1px solid var(--re-hair);
+}
+.nx .re-kicker,
+.nx .re .re-meta {
+  font-family: var(--re-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--re-ink3);
+}
+.nx .re-hero h1 {
+  max-width: 20ch;
+  margin: 26px 0 0;
+  font-size: clamp(38px, 5.6vw, 84px);
+  line-height: 1.06;
+}
+.nx .re-hero h1 em { font-style: italic; color: var(--re-ink); }
+
+/* THE moment: current → bridge → desired, drawn once */
+.nx .re-transit { margin: clamp(36px, 6vh, 64px) 0 0; }
+.nx .re-transit svg { display: block; width: min(940px, 100%); height: auto; overflow: visible; }
+.nx .re-transit .rt-now {
+  fill: none;
+  stroke: var(--re-ink2);
+  stroke-width: 1.5;
+}
+.nx .re-transit .rt-bridge {
+  fill: none;
+  stroke: var(--re-gold-line);
+  stroke-width: 1.5;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: re-draw 1.7s cubic-bezier(0.4, 0, 0.2, 1) 0.35s forwards;
+}
+.nx .re-transit .rt-star path {
+  fill: var(--re-gold-rich);
+  opacity: 0;
+  transform-origin: 890px 60px;
+  transform: scale(0.5);
+  animation: re-star 0.7s cubic-bezier(0.2, 0.8, 0.3, 1.3) 1.75s forwards;
+}
+@keyframes re-draw { to { stroke-dashoffset: 0; } }
+@keyframes re-star { to { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .nx .re-transit .rt-bridge { animation: none; stroke-dashoffset: 0; }
+  .nx .re-transit .rt-star path { animation: none; opacity: 1; transform: none; }
+}
+.nx .re-transit figcaption {
+  display: flex;
+  justify-content: space-between;
+  width: min(940px, 100%);
+  margin-top: 10px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--re-ink3);
+}
+.nx .re-transit .rt-goal { color: var(--re-gold); }
+@media (max-width: 560px) {
+  .nx .re-transit .rt-mid { display: none; } /* three labels can't clear 375px */
+}
+
+.nx .re-def {
+  max-width: 62ch;
+  margin: clamp(30px, 5vh, 48px) 0 0;
+  font-family: var(--re-serif);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.6;
+  color: var(--re-ink2);
+}
+.nx .re-line { margin: 22px 0 0; font-size: 15px; letter-spacing: 0.02em; color: var(--re-ink); }
+.nx .re-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: clamp(28px, 4vh, 40px); }
+
+/* buttons on paper */
+.nx .re .re-btn-ink { background: var(--re-ink); color: var(--re-paper); border: 1px solid var(--re-ink); }
+.nx .re .re-btn-ink:hover { background: #2a2318; }
+.nx .re .re-btn-quiet { color: var(--re-ink); border: 1px solid var(--re-hair-strong); background: transparent; }
+.nx .re .re-btn-quiet:hover { border-color: var(--re-ink); }
+/* buttons in the dark room */
+.nx .re .re-btn-gold { background: linear-gradient(120deg, var(--amber-hi), var(--amber)); color: #221703; border: 0; font-weight: 600; }
+.nx .re .re-btn-ghost { color: var(--ivory); border: 1px solid var(--hair-strong); }
+.nx .re .re-btn-ghost:hover { border-color: var(--amber); color: var(--amber-hi); }
+
+/* bands */
+.nx .re-band { padding: clamp(64px, 10vh, 130px) 0; border-bottom: 1px solid var(--re-hair); }
+.nx .re-band h2 { font-size: clamp(26px, 3vw, 42px); max-width: 24ch; }
+/* .re-narrow deliberately does NOT shrink the wrap: paragraph measures are capped per-element
+   (62ch body, 26ch questions), so every band shares one left grid edge instead of a centered
+   column that jumps against the wide sections. */
+.nx .re-band p { max-width: 62ch; }
+.nx .re-band .wrap > p { margin-top: 18px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.7; }
+.nx .re-dark {
+  background: linear-gradient(180deg, var(--re-dark-2), var(--re-dark) 30%);
+  color: var(--body);
+  border-bottom: 0;
+}
+.nx .re-dark .re-more a { color: var(--amber-hi); }
+
+.nx .re-triptych,
+.nx .re-apps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 1.6vw, 26px);
+  margin-top: clamp(30px, 5vh, 50px);
+}
+.nx .re-apps { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+@media (max-width: 900px) {
+  .nx .re-triptych { grid-template-columns: 1fr; }
+}
+.nx .re-card {
+  background: var(--re-card);
+  border: 1px solid var(--re-hair);
+  border-radius: 20px;
+  padding: clamp(22px, 2.2vw, 32px);
+  box-shadow: 0 1px 0 rgba(23, 18, 12, 0.03), 0 14px 34px -26px rgba(23, 18, 12, 0.35);
+}
+.nx .re-card b {
+  display: block;
+  font-family: var(--re-serif);
+  font-weight: 500;
+  font-size: clamp(19px, 1.6vw, 23px);
+  color: var(--re-ink);
+  margin-bottom: 10px;
+}
+.nx .re-card p { font-size: 15.5px; line-height: 1.65; color: var(--re-ink2); }
+.nx .re-card-bridge { border-color: var(--re-gold-line); box-shadow: 0 1px 0 rgba(143, 101, 25, 0.08), 0 18px 40px -26px rgba(143, 101, 25, 0.45); }
+
+.nx .re-beats { margin-top: clamp(26px, 4vh, 40px); }
+.nx .re-beats p {
+  font-family: var(--re-serif);
+  font-size: clamp(18px, 1.7vw, 23px);
+  line-height: 1.5;
+  color: var(--re-ink);
+  margin-top: 10px;
+}
+.nx .re-close {
+  margin-top: clamp(22px, 3.5vh, 34px) !important;
+  font-family: var(--re-serif);
+  font-size: clamp(19px, 1.9vw, 26px);
+  color: var(--re-ink);
+}
+.nx .re-dark .re-close { color: var(--ivory); }
+
+.nx .re-modelline,
+.nx .re-methodline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: baseline;
+  margin-top: 26px;
+  font-family: var(--re-serif);
+  font-size: clamp(20px, 2.4vw, 32px);
+  color: var(--re-ink);
+}
+.nx .re-arrow { color: var(--re-gold); font-family: var(--re-sans); }
+.nx .re-gold { color: var(--re-gold); }
+
+.nx .re-bigq {
+  margin-top: clamp(26px, 4vh, 40px) !important;
+  font-family: var(--re-serif);
+  font-size: clamp(24px, 3vw, 40px);
+  line-height: 1.25;
+  color: var(--re-ink);
+  max-width: 26ch;
+}
+.nx .re-bigq-gold { color: var(--amber-hi); }
+.nx .re-pull {
+  margin-top: 26px !important;
+  padding-left: 22px;
+  border-left: 2px solid var(--re-gold-line);
+  font-family: var(--re-serif);
+  font-size: clamp(19px, 1.9vw, 25px);
+  line-height: 1.5;
+  color: var(--re-ink);
+}
+.nx .re-more { margin-top: clamp(24px, 4vh, 36px) !important; display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.nx .re-more a {
+  font-family: var(--re-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--re-ink);
+  border-bottom: 1px solid var(--re-gold-line);
+  padding-bottom: 3px;
+}
+.nx .re-more a:hover { color: var(--re-gold); }
+
+.nx .re-notlist { margin-top: 26px; list-style: none; }
+.nx .re-notlist li {
+  padding: 16px 0 16px 26px;
+  border-bottom: 1px solid var(--re-hair);
+  position: relative;
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+.nx .re-notlist li::before { content: "—"; position: absolute; left: 0; color: var(--re-gold); }
+
+.nx .re-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(16px, 1.6vw, 26px); margin-top: clamp(30px, 5vh, 50px); }
+.nx .re-path { background: var(--re-card); border: 1px solid var(--re-hair); border-radius: 20px; padding: clamp(20px, 2vw, 30px); }
+.nx .re-path b { display: block; font-family: var(--re-serif); font-weight: 500; font-size: 19px; color: var(--re-ink); margin-bottom: 14px; }
+.nx .re-path ul { list-style: none; }
+.nx .re-path li { border-top: 1px solid var(--re-hair); }
+.nx .re-path a { display: block; padding: 10px 2px; font-size: 14.5px; color: var(--re-ink2); }
+.nx .re-path a:hover { color: var(--re-gold); }
+
+.nx .re-together {
+  margin-top: clamp(30px, 5vh, 46px) !important;
+  font-family: var(--re-serif);
+  font-style: italic;
+  font-size: clamp(24px, 2.8vw, 38px);
+  color: var(--ivory);
+}
+.nx .re-band-nexark .re-cta { margin-top: 26px; }
+.nx .re-closing { margin-top: clamp(64px, 10vh, 110px); border-top: 1px solid var(--hair); padding-top: clamp(40px, 6vh, 64px); }
+.nx .re-closing p {
+  font-family: var(--re-serif);
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.55;
+  color: var(--body);
+  margin-top: 12px;
+}
+
+/* ---------- document pages ---------- */
+
+.nx .re-doc { padding: clamp(120px, 16vh, 170px) 0 clamp(70px, 10vh, 120px); min-height: 100svh; }
+.nx .re-crumb { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12.5px; letter-spacing: 0.06em; color: var(--re-ink3); }
+.nx .re-crumb a { color: var(--re-ink3); border-bottom: 1px solid var(--re-hair-strong); }
+.nx .re-crumb a:hover { color: var(--re-ink); }
+.nx .re-crumb [aria-current] { color: var(--re-ink2); }
+
+.nx .re-dochead { margin-top: clamp(26px, 4vh, 44px); padding-bottom: clamp(26px, 4vh, 40px); border-bottom: 1px solid var(--re-hair); }
+.nx .re-dochead .re-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+.nx .re-id { color: var(--re-gold); }
+.nx .re-status {
+  border: 1px solid var(--re-hair-strong);
+  border-radius: 999px;
+  padding: 4px 12px;
+  letter-spacing: 0.14em;
+}
+.nx .re-status-theo { border-color: var(--re-gold-line); color: var(--re-gold); }
+.nx .re-dochead h1 { margin-top: 20px; font-size: clamp(32px, 4.2vw, 60px); line-height: 1.1; max-width: 22ch; }
+.nx .re-subtitle {
+  margin-top: 14px;
+  font-family: var(--re-serif);
+  font-style: italic;
+  font-size: clamp(17px, 1.5vw, 21px);
+  color: var(--re-ink3);
+  max-width: 56ch;
+}
+
+.nx .re-docgrid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: clamp(30px, 4vh, 48px); }
+@media (min-width: 1080px) {
+  .nx .re-docgrid { grid-template-columns: 264px minmax(0, 1fr); gap: clamp(40px, 4vw, 84px); }
+  .nx .re-toc { position: sticky; top: 110px; align-self: start; }
+}
+.nx .re-toc-inner summary {
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--re-ink3);
+  list-style: none;
+}
+.nx .re-toc-inner summary::-webkit-details-marker { display: none; }
+.nx .re-toc-inner summary::after { content: " +"; color: var(--re-gold); }
+.nx .re-toc-inner[open] summary::after { content: ""; }
+.nx .re-toc-inner ol { list-style: none; margin-top: 14px; border-left: 1px solid var(--re-hair); }
+.nx .re-toc-inner li a {
+  display: block;
+  padding: 7px 0 7px 16px;
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--re-ink2);
+}
+.nx .re-toc-inner li a:hover { color: var(--re-ink); border-left-color: var(--re-gold-line); }
+
+.nx .re-body { min-width: 0; max-width: 760px; }
+
+/* prose — the corpus itself */
+.nx .re-prose { font-family: var(--re-serif); font-size: clamp(16.5px, 1.3vw, 18.5px); line-height: 1.75; color: var(--re-ink2); }
+/* the source register carries bare URLs — unbreakable strings overflow every viewport
+   without this (WCAG 1.4.10, caught by the gate at 320–1440) */
+.nx .re-prose p, .nx .re-prose li, .nx .re-prose a, .nx .re-prose code { overflow-wrap: anywhere; }
+.nx .re-prose h2 { margin: clamp(40px, 6vh, 60px) 0 18px; font-size: clamp(23px, 2.2vw, 31px); line-height: 1.2; }
+.nx .re-prose h3 { margin: 34px 0 14px; font-size: clamp(18px, 1.6vw, 22px); }
+.nx .re-prose p { margin: 16px 0; }
+.nx .re-prose ul, .nx .re-prose ol { margin: 16px 0 16px 24px; }
+.nx .re-prose li { margin: 8px 0; }
+.nx .re-prose li::marker { color: var(--re-gold); }
+.nx .re-prose a { color: var(--re-ink); border-bottom: 1px solid var(--re-gold-line); }
+.nx .re-prose a:hover { color: var(--re-gold); }
+.nx .re-prose strong { color: var(--re-ink); font-weight: 600; }
+.nx .re-prose blockquote {
+  margin: 28px 0;
+  padding: 4px 0 4px 24px;
+  border-left: 2px solid var(--re-gold-line);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.55;
+  color: var(--re-ink);
+}
+.nx .re-prose blockquote p { margin: 10px 0; }
+.nx .re-prose hr { border: 0; border-top: 1px solid var(--re-hair); margin: clamp(36px, 5vh, 54px) 0; }
+.nx .re-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: var(--re-card);
+  border: 1px solid var(--re-hair);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+.nx .re-tablewrap { overflow-x: auto; margin: 24px 0; border: 1px solid var(--re-hair); border-radius: 14px; }
+.nx .re-prose table { border-collapse: collapse; width: 100%; min-width: 560px; font-family: var(--font-inter), var(--re-sans); font-size: 14px; line-height: 1.5; }
+.nx .re-prose th, .nx .re-prose td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--re-hair); vertical-align: top; }
+.nx .re-prose th { font-weight: 600; color: var(--re-ink); background: var(--re-card); font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+.nx .re-prose tr:last-child td { border-bottom: 0; }
+.nx .re-echip {
+  font-family: var(--re-sans);
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  vertical-align: 0.14em;
+  border: 1px solid var(--re-gold-line) !important;
+  border-radius: 999px;
+  padding: 1px 8px;
+  color: var(--re-gold) !important;
+}
+
+.nx .re-related { margin-top: clamp(44px, 7vh, 70px); border-top: 1px solid var(--re-hair); padding-top: 28px; }
+.nx .re-related h2 { font-size: 13px; font-family: var(--re-sans); font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--re-ink3); }
+.nx .re-related ul { list-style: none; margin-top: 14px; }
+.nx .re-related li { border-bottom: 1px solid var(--re-hair); }
+.nx .re-related a { display: block; padding: 12px 2px; font-family: var(--re-serif); font-size: 17px; color: var(--re-ink); }
+.nx .re-related a:hover { color: var(--re-gold); }
+
+.nx .re-docfoot { margin-top: clamp(44px, 7vh, 70px); }
+.nx .re-correct { font-size: 13px; color: var(--re-ink3); }
+.nx .re-correct a { color: var(--re-ink2); border-bottom: 1px solid var(--re-hair-strong); }
+.nx .re-correct a:hover { color: var(--re-ink); }
+.nx .re-pn { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+@media (max-width: 640px) { .nx .re-pn { grid-template-columns: 1fr; } }
+.nx .re-pn-a {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--re-card);
+  border: 1px solid var(--re-hair);
+  border-radius: 16px;
+  padding: 18px 20px;
+  min-height: 44px;
+}
+.nx .re-pn-a:hover { border-color: var(--re-gold-line); }
+.nx .re-pn-next { text-align: right; align-items: flex-end; }
+.nx .re-pn-a span { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--re-ink3); }
+.nx .re-pn-a b { font-family: var(--re-serif); font-weight: 500; font-size: 16.5px; color: var(--re-ink); line-height: 1.35; }
+
+/* evidence hub */
+.nx .re-shelves { list-style: none; margin-top: clamp(30px, 4vh, 48px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: clamp(16px, 1.6vw, 24px); }
+.nx .re-shelf {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  background: var(--re-card);
+  border: 1px solid var(--re-hair);
+  border-radius: 20px;
+  padding: clamp(20px, 2vw, 28px);
+}
+.nx .re-shelf:hover { border-color: var(--re-gold-line); }
+.nx .re-shelf b { font-family: var(--re-serif); font-weight: 500; font-size: 19px; color: var(--re-ink); }
+.nx .re-shelf span { font-size: 14.5px; line-height: 1.6; color: var(--re-ink2); }

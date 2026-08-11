@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 type Props = {
-  active?: "home" | "solutions" | "methodology" | "work" | "about" | "start";
+  active?: "home" | "solutions" | "methodology" | "re" | "work" | "about" | "start";
   children: React.ReactNode;
 };
 
 const NAV = [
   { href: "/solutions", label: "Solutions", key: "solutions" },
   { href: "/methodology", label: "Methodology", key: "methodology" },
+  { href: "/reality-engineering", label: "Reality Engineering", key: "re" },
   { href: "/#work", label: "Work", key: "work" },
   { href: "/#about", label: "About", key: "about" },
 ];
@@ -133,6 +134,7 @@ export function RefreshShell({ active, children }: Props) {
             <div className="foot-col">
               <h4>Company</h4>
               <Link href="/methodology">Methodology</Link>
+              <Link href="/reality-engineering">Reality Engineering</Link>
               <Link href="/#work">Work</Link>
               <Link href="/#about">About</Link>
             </div>
